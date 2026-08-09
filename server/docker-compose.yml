@@ -1,0 +1,24 @@
+# Local PostgreSQL for development.
+#   docker compose up -d
+# Then: cp .env.example .env && npm run prisma:migrate && npm run db:seed && npm run dev
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: medpro-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: medpro
+      POSTGRES_PASSWORD: medpro
+      POSTGRES_DB: medpro
+    ports:
+      - '5432:5432'
+    volumes:
+      - medpro-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U medpro -d medpro']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  medpro-db-data:

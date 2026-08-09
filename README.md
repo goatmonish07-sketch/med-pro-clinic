@@ -43,10 +43,28 @@ command-center layout, command palette, and clinical copilot. Light + dark theme
 - **Website (CMS)** — live editor with a booking-enabled marketing site preview
 - **Settings** — automation toggles (WhatsApp/SMS reminders), users & roles (RBAC)
 
-**All 16 modules are live routed pages.** Data is served from `src/data/mock.js`;
-swapping it for a real API is the remaining back-end work.
+**All 16 modules are live routed pages.**
+
+**Back end — REST API + PostgreSQL** ✅ (`server/`)
+
+- **Express + Prisma + PostgreSQL**, JWT auth with role-based access control
+- 13-model schema covering the whole domain; committed migrations + demo seed
+- Full REST surface for every module (patients, appointments, queue, EMR,
+  prescriptions, lab, pharmacy, billing, payments, inventory, reports, users)
+- Server-side GST/invoice maths, transactional payments, atomic stock dispensing,
+  aggregated analytics — verified end-to-end against a live database
+- Frontend API client ready in `src/lib/api.js` (response shapes match the mock
+  data, so wiring a page to live data is a localized change)
+
+See [`server/README.md`](server/README.md) to run the API.
+
+Remaining to fully productionize: wire each page from mock data to `src/lib/api.js`,
+and connect the external integrations the model is designed for (payment gateway,
+WhatsApp/SMS, video SDK).
 
 ## Getting started
+
+**Front end** (this folder):
 
 ```bash
 npm install
@@ -55,7 +73,11 @@ npm run build    # production build to dist/
 npm run preview  # preview the production build
 ```
 
-Node 18+ recommended.
+**Back end** (`server/`): see [`server/README.md`](server/README.md) —
+`docker compose up -d && npm install && npm run prisma:migrate && npm run db:seed && npm run dev`.
+
+Node 18+ recommended. The front end runs standalone on mock data; start the API
+to go live.
 
 ## Project structure
 

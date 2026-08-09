@@ -1,0 +1,267 @@
+// MED-PRO Clinic OS — data model
+// Postgres + Prisma. Mirrors the domain the front end already renders.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DOCTOR
+  FRONT_DESK
+  PHARMACIST
+}
+
+enum UserStatus {
+  ACTIVE
+  INVITED
+  DISABLED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AppointmentType {
+  CONSULTATION
+  FOLLOW_UP
+  TELE
+}
+
+enum AppointmentStatus {
+  BOOKED
+  WAITING
+  IN_ROOM
+  DONE
+  CANCELLED
+  NO_SHOW
+}
+
+enum QueueStatus {
+  WAITING
+  CALLED
+  SERVING
+  DONE
+  OVERDUE
+}
+
+enum LabStatus {
+  ORDERED
+  SAMPLE_TAKEN
+  PROCESSING
+  READY
+  DELIVERED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  UNPAID
+  PARTIAL
+  PAID
+}
+
+enum PaymentMethod {
+  UPI
+  CARD
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  role         Role       @default(FRONT_DESK)
+  branch       String     @default("Main")
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  patients      Patient[]      @relation("PatientDoctor")
+  appointments  Appointment[]  @relation("AppointmentDoctor")
+  consultations Consultation[] @relation("ConsultationDoctor")
+}
+
+model Patient {
+  id         String   @id @default(cuid())
+  code       String   @unique // e.g. P1001
+  name       String
+  age        Int?
+  gender     Gender?
+  phone      String?
+  email      String?
+  bloodGroup String?
+  allergies  String[] @default([])
+  tags       String[] @default([])
+  doctorId   String?
+  doctor     User?    @relation("PatientDoctor", fields: [doctorId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  appointments  Appointment[]
+  queueTokens   QueueToken[]
+  consultations Consultation[]
+  prescriptions Prescription[]
+  labOrders     LabOrder[]
+  invoices      Invoice[]
+  payments      Payment[]
+
+  @@index([name])
+  @@index([phone])
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  patientId   String
+  patient     Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId    String
+  doctor      User              @relation("AppointmentDoctor", fields: [doctorId], references: [id])
+  type        AppointmentType   @default(CONSULTATION)
+  status      AppointmentStatus @default(BOOKED)
+  scheduledAt DateTime
+  room        String?
+  notes       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  queueToken   QueueToken?
+  consultation Consultation?
+
+  @@index([scheduledAt])
+  @@index([doctorId, scheduledAt])
+}
+
+model QueueToken {
+  id            String      @id @default(cuid())
+  number        Int
+  patientId     String
+  patient       Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  appointmentId String?     @unique
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id])
+  doctorName    String?
+  type          String?
+  room          String?
+  status        QueueStatus @default(WAITING)
+  enqueuedAt    DateTime    @default(now())
+  calledAt      DateTime?
+
+  @@index([status])
+}
+
+model Consultation {
+  id            String       @id @default(cuid())
+  patientId     String
+  patient       Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId      String
+  doctor        User         @relation("ConsultationDoctor", fields: [doctorId], references: [id])
+  appointmentId String?      @unique
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id])
+  complaint     String?
+  hpi           String?
+  diagnosis     String?
+  advice        String?
+  vitals        Json?
+  signedAt      DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  prescription Prescription?
+}
+
+model Prescription {
+  id             String             @id @default(cuid())
+  patientId      String
+  patient        Patient            @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  consultationId String?            @unique
+  consultation   Consultation?      @relation(fields: [consultationId], references: [id])
+  doctorName     String?
+  date           DateTime           @default(now())
+  items          PrescriptionItem[]
+}
+
+model PrescriptionItem {
+  id             String       @id @default(cuid())
+  prescriptionId String
+  prescription   Prescription @relation(fields: [prescriptionId], references: [id], onDelete: Cascade)
+  drug           String
+  dosage         String?
+  frequency      String?
+  duration       String?
+  notes          String?
+}
+
+model LabOrder {
+  id        String    @id @default(cuid())
+  code      String    @unique // e.g. L-2201
+  patientId String
+  patient   Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  tests     String
+  sample    String?
+  orderedBy String?
+  status    LabStatus @default(ORDERED)
+  orderedAt DateTime  @default(now())
+  resultAt  DateTime?
+  result    Json?
+}
+
+model Invoice {
+  id        String        @id @default(cuid())
+  number    String        @unique // e.g. INV-2026-0451
+  patientId String
+  patient   Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  lines     Json // [{ description, amount }]
+  subtotal  Decimal       @db.Decimal(10, 2)
+  tax       Decimal       @default(0) @db.Decimal(10, 2)
+  discount  Decimal       @default(0) @db.Decimal(10, 2)
+  total     Decimal       @db.Decimal(10, 2)
+  status    InvoiceStatus @default(UNPAID)
+  createdAt DateTime      @default(now())
+
+  payments Payment[]
+
+  @@index([status])
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  reference String        @unique // e.g. TXN-9921
+  invoiceId String?
+  invoice   Invoice?      @relation(fields: [invoiceId], references: [id])
+  patientId String
+  patient   Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  method    PaymentMethod
+  amount    Decimal       @db.Decimal(10, 2)
+  status    PaymentStatus @default(PAID)
+  createdAt DateTime      @default(now())
+
+  @@index([status])
+}
+
+model InventoryItem {
+  id           String    @id @default(cuid())
+  name         String
+  category     String?
+  batch        String    @unique
+  stock        Int       @default(0)
+  reorderLevel Int       @default(0)
+  expiry       DateTime?
+  supplier     String?
+  unitRate     Decimal   @default(0) @db.Decimal(10, 2)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([name])
+}
