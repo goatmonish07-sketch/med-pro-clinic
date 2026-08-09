@@ -71,7 +71,7 @@
     var due=r[8]==='0'?'<span class="muted2 num">₹0</span>':'<span class="num" style="color:var(--amber);font-weight:600">₹'+r[8]+'</span>';
     var st=r[11]==='Active'?'<span class="badge-pill b-green"><span class="bdot"></span>Active</span>':'<span class="badge-pill b-gray"><span class="bdot"></span>Inactive</span>';
     return '<tr>'
-      +'<td><div class="who"><span class="av-sm">'+r[0]+'</span><div><div class="cell-strong">'+r[1]+'</div><div class="cell-sub num">'+r[2]+'</div></div></div></td>'
+      +'<td><div class="who"><span class="av-sm">'+r[0]+'</span><div><a class="cell-strong link" href="supplier-details.html" style="color:var(--ink)">'+r[1]+'</a><div class="cell-sub num">'+r[2]+'</div></div></div></td>'
       +'<td><div class="cell-strong" style="font-weight:500">'+r[3]+'</div><div class="cell-sub num">'+r[4]+'</div></td>'
       +'<td class="muted">'+r[5]+'</td>'
       +'<td class="t-right num">'+r[6]+'</td>'

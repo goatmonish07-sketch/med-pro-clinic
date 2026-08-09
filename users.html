@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users &amp; Roles · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .role .rt{display:flex;align-items:center;gap:11px}
+  .role .ri{width:36px;height:36px;border-radius:10px;background:var(--surface-3);color:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .role .ri svg{width:18px;height:18px}
+  .role .rn{font-size:14.5px;font-weight:600;color:var(--ink)}
+  .role .ru{font-size:11.5px;color:var(--muted-2)}
+  .role .rd{font-size:12.5px;color:var(--muted);margin:12px 0 12px;line-height:1.45}
+  .role .re{font-size:12.5px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+  .acc{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+  .acc svg{width:14px;height:14px}
+  .acc.full{color:var(--ink)}
+  .acc.limited{color:var(--amber)}
+  .acc.view{color:var(--muted)}
+  .acc.no{color:var(--red)}
+  @media (max-width:1100px){.roles{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="settings">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title">
+        <div class="crumb"><a href="settings.html">Settings</a><span class="sep">›</span>Users &amp; Roles</div>
+        <h1 style="margin-top:2px">Users &amp; Roles</h1>
+      </div>
+      <div class="tb-right">
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Audit Log</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add User</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="roles">
+        <div class="card card-pad role"><div class="rt"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span><div><div class="rn">Admin / Owner</div><div class="ru">1 user</div></div></div><div class="rd">Full control including settings, roles, pricing and data export</div><span class="re">Edit permissions <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span></div>
+        <div class="card card-pad role"><div class="rt"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="9.5" width="17" height="5" rx="2.5" transform="rotate(45 12 12)"/></svg></span><div><div class="rn">Pharmacist</div><div class="ru">2 users</div></div></div><div class="rd">Billing, prescriptions, inventory and returns. Cannot change pricing or settings</div><span class="re">Edit permissions <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span></div>
+        <div class="card card-pad role"><div class="rt"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><div><div class="rn">Billing Staff</div><div class="ru">3 users</div></div></div><div class="rd">Counter billing and customer lookup only. No cost prices, no reports</div><span class="re">Edit permissions <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span></div>
+        <div class="card card-pad role"><div class="rt"><span class="ri" style="background:var(--amber-bg);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg></span><div><div class="rn">Store Manager</div><div class="ru">1 user</div></div></div><div class="rd">Purchases, stock, suppliers and expiry. No billing, no customer credit</div><span class="re">Edit permissions <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span></div>
+      </div>
+
+      <div class="card mt18">
+        <div class="card-head"><div><h3>Staff Accounts</h3><div class="sub">7 users · sessions expire after 30 minutes of inactivity at the counter</div></div></div>
+        <div class="tbl-wrap mt16">
+          <table class="tbl">
+            <thead><tr><th>User</th><th>Role</th><th>Branch</th><th>Last Active</th><th class="t-right">Bills Today</th><th class="t-center">2FA</th><th>Status</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mt18">
+        <div class="card-head"><div><h3>Role-Based Access Matrix</h3><div class="sub">What each role can do in every module — changes apply immediately to all users with that role</div></div></div>
+        <div class="tbl-wrap mt16">
+          <table class="tbl">
+            <thead><tr><th>Module</th><th>Admin / Owner</th><th>Pharmacist</th><th>Billing Staff</th><th>Store Manager</th></tr></thead>
+            <tbody id="matrix-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var U=[
+    ['RK','Rajesh Kumar','rajesh@svmedicals.in','Admin / Owner','amber-no','All branches','Now · Counter 1','42','On','Active'],
+    ['LS','Lakshmi Sundaram','lakshmi@svmedicals.in','Pharmacist','','Main — T. Nagar','2 min ago · Counter 2','44','On','Active'],
+    ['AP','Arun Prasad','arun@svmedicals.in','Pharmacist','','Main — T. Nagar','Yesterday, 9:40 PM','0','On','Active'],
+    ['DR','Divya Ramanathan','divya@svmedicals.in','Billing Staff','','Main — T. Nagar','18 min ago · Counter 3','0','Off','Active'],
+    ['NK','Naveen Kumar','naveen@svmedicals.in','Billing Staff','','Branch — Ashok Nagar','1 hr ago','28','Off','Active'],
+    ['SI','Suresh Iyer','suresh@svmedicals.in','Store Manager','amber','All branches','35 min ago','0','On','Active'],
+    ['KR','Kavitha Rani','kavitha@svmedicals.in','Billing Staff','','Main — T. Nagar','12 Jun 2026','0','Off','Inactive']
+  ];
+  var acts='<div class="row-acts"><button title="Edit">'+MB.svg('<path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/>')+'</button><button title="Permissions">'+MB.svg('<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>')+'</button><button title="More">'+MB.svg('<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>')+'</button></div>';
+  document.getElementById('users-body').innerHTML=U.map(function(r){
+    var roleTag=r[3]==='Store Manager'?'tag-credit':'tag-retail';
+    var twofa=r[8]==='On'?'<span class="badge-pill b-green">On</span>':'<span class="badge-pill b-gray">Off</span>';
+    var st=r[9]==='Active'?'<span class="badge-pill b-green"><span class="bdot"></span>Active</span>':'<span class="badge-pill b-gray"><span class="bdot"></span>Inactive</span>';
+    return '<tr>'
+      +'<td><div class="who"><span class="av-sm">'+r[0]+'</span><div><div class="cell-strong" style="font-weight:500">'+r[1]+'</div><div class="cell-sub">'+r[2]+'</div></div></div></td>'
+      +'<td><span class="tag '+roleTag+'">'+r[3]+'</span></td>'
+      +'<td class="muted">'+r[5]+'</td>'
+      +'<td class="muted">'+r[6]+'</td>'
+      +'<td class="t-right num">'+r[7]+'</td>'
+      +'<td class="t-center">'+twofa+'</td>'
+      +'<td>'+st+'</td>'
+      +'<td>'+acts+'</td></tr>';
+  }).join('');
+
+  function cell(kind){
+    var map={full:['acc full','M5 12l5 5 9-11','Full access'],edit:['acc full','M5 12l5 5 9-11','Create & edit'],view:['acc view','M5 12l5 5 9-11','View only'],limited:['acc limited','M5 12l5 5 9-11','Limited'],no:['acc no','M6 6l12 12M18 6L6 18','No access']};
+    var m=map[kind];
+    return '<td><span class="'+m[0]+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="'+m[1]+'"/></svg>'+m[2]+'</span></td>';
+  }
+  var MOD=[
+    ['dashboard','Dashboard','Sales, stock and expiry overview','full','full','limited','view'],
+    ['billing','Billing / POS','Create bills, apply discount, collect payment','full','full','edit','no'],
+    ['sales','Sales History','View past bills, reprint, cancel','full','full','limited','view'],
+    ['purchases','Purchases','Record purchases, update stock, pay suppliers','full','view','no','full']
+  ];
+  document.getElementById('matrix-body').innerHTML=MOD.map(function(r){
+    return '<tr><td><div class="flex gap12" style="align-items:center"><span class="row-acts" style="pointer-events:none"><button>'+MB.svg(MB.icon[r[0]])+'</button></span><div><div class="cell-strong">'+r[1]+'</div><div class="cell-sub">'+r[2]+'</div></div></div></td>'+cell(r[3])+cell(r[4])+cell(r[5])+cell(r[6])+'</tr>';
+  }).join('');
+</script>
+</body>
+</html>

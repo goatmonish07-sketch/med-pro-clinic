@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermal Receipt · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  body{background:#e9eaec}
+  .inv-toolbar{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:12px 22px}
+  .inv-toolbar .sp{flex:1}
+  .roll{width:302px;max-width:94vw;margin:26px auto;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.14);padding:18px 16px;color:#111;font-family:'Courier New',ui-monospace,monospace;font-size:11.5px;line-height:1.5}
+  .roll .ctr{text-align:center}
+  .roll .big{font-size:13px;font-weight:700;letter-spacing:.02em}
+  .roll .mut{color:#555}
+  .dash{border:0;border-top:1px dashed #bbb;margin:9px 0}
+  .roll .rowf{display:flex;justify-content:space-between;gap:8px}
+  .roll table{width:100%;border-collapse:collapse}
+  .roll th{text-align:left;font-weight:700;font-size:10.5px;border-bottom:1px solid #333;padding:4px 0}
+  .roll th.r,.roll td.r{text-align:right;padding-left:9px;white-space:nowrap}
+  .roll td{padding:6px 0;vertical-align:top}
+  .roll .it{font-weight:700}
+  .roll .sub{color:#666;font-size:10px}
+  .grandbar{background:#111;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:4px;margin:6px 0;font-weight:700}
+  .grandbar .g2{font-size:15px}
+  .saved{text-align:center;background:#ecfdf3;color:#15803d;border-radius:5px;padding:6px;font-weight:700;font-size:10.5px;margin:8px 0}
+  .barcode{height:44px;background:repeating-linear-gradient(90deg,#111 0 2px,#fff 2px 4px,#111 4px 5px,#fff 5px 8px);margin:6px auto 4px;width:80%}
+  @media print{
+    body{background:#fff}
+    .inv-toolbar{display:none}
+    .roll{box-shadow:none;margin:0;width:80mm;padding:0}
+    @page{size:80mm auto;margin:4mm}
+  }
+</style>
+</head>
+<body>
+  <div class="inv-toolbar">
+    <a class="btn btn-light btn-sm" href="billing.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>Back to Billing</a>
+    <a class="btn btn-light btn-sm" href="invoice.html">A4 Tax Invoice</a>
+    <div class="sp"></div>
+    <span class="muted2" style="font-size:13px">80mm Thermal · INV-2026-08-1174</span>
+    <button class="btn btn-dark btn-sm" onclick="window.print()"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/></svg>Print Receipt</button>
+  </div>
+
+  <div class="roll">
+    <div class="ctr big">SRI VENKATESWARA MEDICALS</div>
+    <div class="ctr mut">No. 18, Thanikachalam Road,<br>T. Nagar, Chennai — 600017<br>Phone: 044 2834 5511</div>
+    <div class="ctr" style="margin-top:4px">GSTIN: 33AAGCS7781M1ZV<br>DL No: TN/CHN/20B-4471, 21B-4472</div>
+    <hr class="dash">
+    <div class="ctr big">TAX INVOICE</div>
+    <hr class="dash">
+    <div class="rowf"><span>Bill No: INV-2026-08-1174</span></div>
+    <div class="rowf"><span>Date: 08/08/2026</span><span>Time: 11:42 AM</span></div>
+    <div class="rowf"><span>Customer: Priya Ramesh</span></div>
+    <div class="rowf"><span>Mobile: +91 98410 22456</span></div>
+    <div class="rowf"><span>Dr. S. Venkatesan (RX-2026-0871)</span></div>
+    <div class="rowf"><span>Counter 1 · Rajesh Kumar</span></div>
+    <hr class="dash">
+    <table>
+      <thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amt</th></tr></thead>
+      <tbody>
+        <tr><td><div class="it">Dolo 650 Tablet</div><div class="sub">DOL2456 · Exp 12/27 · GST 12%</div></td><td class="r">2</td><td class="r">35.00</td><td class="r">70.00</td></tr>
+        <tr><td><div class="it">Azithromycin 500 Tab</div><div class="sub">AZI7812 · Exp 09/26 · GST 12% [H]</div></td><td class="r">1</td><td class="r">114.00</td><td class="r">114.00</td></tr>
+        <tr><td><div class="it">Pantop 40 Tablet</div><div class="sub">PAN9182 · Exp 03/28 · GST 12%</div></td><td class="r">3</td><td class="r">142.00</td><td class="r">426.00</td></tr>
+        <tr><td><div class="it">ORS Orange Sachet</div><div class="sub">ORS1180 · Exp 01/27 · GST 5%</div></td><td class="r">4</td><td class="r">22.00</td><td class="r">88.00</td></tr>
+      </tbody>
+    </table>
+    <hr class="dash">
+    <div class="rowf"><span>Items: 4</span><span>Qty: 10</span></div>
+    <div class="rowf"><span>Gross Amount</span><span>704.00</span></div>
+    <div class="rowf"><span>Discount</span><span>−6.00</span></div>
+    <div class="rowf"><span>Taxable Value</span><span>628.45</span></div>
+    <div class="rowf"><span>CGST</span><span>34.78</span></div>
+    <div class="rowf"><span>SGST</span><span>34.77</span></div>
+    <div class="rowf"><span>Round Off</span><span>0.00</span></div>
+    <div class="grandbar"><span>GRAND TOTAL</span><span class="g2">Rs. 698.00</span></div>
+    <div class="rowf"><span>Paid by UPI</span><span>698.00</span></div>
+    <div class="mut">svmedicals@okhdfcbank<br>UTR: 442110983321</div>
+    <div class="saved">You saved Rs. 6.00 on this bill</div>
+    <div class="ctr mut" style="font-size:10px">Medicines once sold are taken back only within 7 days with this bill, if sealed and unexpired. Verify batch &amp; expiry at the counter. Schedule H sold against prescription.</div>
+    <div class="barcode"></div>
+    <div class="ctr" style="font-size:10px">INV-2026-08-1174</div>
+    <hr class="dash">
+    <div class="ctr big">Thank you — get well soon!</div>
+    <div class="ctr mut" style="font-size:9.5px;margin-top:5px">Powered by MediBill Pro</div>
+  </div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

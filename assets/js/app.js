@@ -56,7 +56,7 @@
       });
     });
     h += '</nav>';
-    h += '<div class="side-user"><div class="av">RK</div><div style="flex:1"><div class="u-name">Rajesh Kumar</div><div class="u-role">Pharmacist · D.Pharm</div></div><span class="logout" title="Sign out" onclick="location.href=\'index.html\'">'+svg(ICON.logout)+'</span></div>';
+    h += '<div class="side-user"><div class="av">RK</div><div style="flex:1"><div class="u-name">Rajesh Kumar</div><div class="u-role">Pharmacist · D.Pharm</div></div><span class="logout" title="Sign out" onclick="location.href=\'login.html\'">'+svg(ICON.logout)+'</span></div>';
     return h;
   }
 

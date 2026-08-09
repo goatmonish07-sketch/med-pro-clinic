@@ -11,14 +11,32 @@ files in a browser or serve the folder.
 
 | File | Screen |
 |------|--------|
-| `index.html` | Sign in (brand panel + login form) |
+| `index.html` | **Landing page** — marketing front door with live-demo CTA |
+| `login.html` | Sign in (brand panel + login form) |
 | `dashboard.html` | Dashboard — KPIs, sales/purchase chart, top sellers, low-stock & expiry alerts |
 | `billing.html` | Billing / POS — counter sale with batch search, cart, GST split & payment |
 | `invoice.html` | GST **Tax Invoice** (A4) — printable / Save-as-PDF |
+| `receipt.html` | **80mm thermal** receipt — printable |
+| `sales.html` | Sales History — every counter bill, payment & status |
 | `inventory.html` | Medicine Inventory — batch-wise stock table |
+| `medicine-details.html` | Medicine detail — info, pricing, batches, stock level, performance |
+| `expiry.html` | Expiry Management — near-expiry batches, supplier-return workflow |
+| `returns.html` | Returns — sales-return flow with refund summary |
+| `purchases.html` | Purchases — supplier invoices & payment status |
+| `new-purchase.html` | New Purchase Entry — goods-inward form |
+| `suppliers.html` | Suppliers directory |
+| `supplier-details.html` | Supplier detail — purchase history, payment ledger, ageing |
 | `customers.html` | Customers directory — credit / retail / institution |
+| `customer-details.html` | Customer detail — bills, credit, prescriptions, profile |
+| `prescriptions.html` | Prescriptions register (Schedule H / H1) |
 | `reports.html` | Reports & Analytics — sales vs purchases, payment mix, stock health |
+| `settings.html` | Settings — pharmacy profile, billing & tax defaults |
+| `users.html` | Users & Roles — staff accounts + role-based access matrix |
 | `iptv-legacy.html` | Unrelated file that previously lived at `index.html`, preserved untouched |
+
+Row names in the Inventory, Customers and Suppliers tables link through to their
+detail pages; the sidebar links every module; and the A4 invoice / thermal
+receipt cross-link.
 
 ## Design system
 

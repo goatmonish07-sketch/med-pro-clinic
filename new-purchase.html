@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Purchase Entry · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .np{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}
+  .np-field label{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:6px}
+  .np-field label .req{color:var(--red)}
+  .np-field .in{width:100%;height:42px;padding:0 12px;border:1px solid var(--line);border-radius:9px;font-size:13px;color:var(--ink);background:var(--surface);outline:0;display:flex;align-items:center;justify-content:space-between}
+  .np-field .hint{font-size:11px;color:var(--muted-2);margin-top:5px}
+  .npf-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:14px;margin-top:16px}
+  .cell-in{width:100%;height:30px;border:1px solid var(--line);border-radius:7px;text-align:center;font-size:12.5px;color:var(--ink);outline:0;font-variant-numeric:tabular-nums;background:var(--surface)}
+  .cell-in:focus{border-color:var(--teal)}
+  .np-search{display:flex;align-items:center;gap:10px;border:2px solid var(--teal);border-radius:10px;padding:10px 13px;margin-top:14px;box-shadow:0 0 0 4px rgba(92,129,123,.10)}
+  .np-search input{flex:1;border:0;outline:0;font-size:14px;color:var(--ink);background:transparent}
+  .sumrow{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--text)}
+  .sumrow .v{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+  .rmode{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+  .rmode .p{border:1px solid var(--line);border-radius:10px;padding:11px 6px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+  .rmode .p svg{width:18px;height:18px;display:block;margin:0 auto 6px;stroke:var(--muted)}
+  .rmode .p.on{border:1.5px solid var(--ink);color:var(--ink)}.rmode .p.on svg{stroke:var(--ink)}
+  .impact li{font-size:12.5px;color:var(--text);margin:7px 0;list-style:none;padding-left:16px;position:relative}
+  .impact li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+  @media (max-width:1100px){.np{grid-template-columns:1fr}.npf-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body data-page="purchases">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <a class="back-btn" href="purchases.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <div class="tb-title">
+        <h1>New Purchase Entry</h1>
+        <div class="crumb" style="margin-top:3px"><a href="purchases.html">Purchases</a><span class="sep">›</span>PI-2026-0419 · Draft auto-saved 2 min ago</div>
+      </div>
+      <div class="tb-right">
+        <span class="badge-pill b-green" style="height:34px;padding:0 12px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-11"/></svg>Intra-state · CGST + SGST</span>
+        <button class="btn btn-light">Cancel</button>
+        <button class="btn btn-light">Save as Draft</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5zM7 3v6h8V3M9 21v-6h6v6"/></svg>Save &amp; Update Stock</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="np">
+        <div class="grid" style="gap:18px">
+          <div class="card card-pad">
+            <h3>Supplier &amp; Invoice Details</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">Purchase number is generated automatically</div>
+            <div class="npf-grid">
+              <div class="np-field"><label>Supplier <span class="req">*</span></label><div class="in">MedPlus Distributors <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--muted-2)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="hint">GSTIN 33AABCM1234F1Z5</div></div>
+              <div class="np-field"><label>Supplier Invoice No. <span class="req">*</span></label><input class="in" value="MP/4412" style="display:block"><div class="hint">As printed on the supplier bill</div></div>
+              <div class="np-field"><label>Invoice Date <span class="req">*</span></label><div class="in">08 / 08 / 2026 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--muted-2)" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/></svg></div><div class="hint">Goods received date</div></div>
+              <div class="np-field"><label>Purchase No.</label><input class="in" value="PI-2026-0419" readonly style="display:block;background:var(--surface-2)"><div class="hint">Auto-generated</div></div>
+              <div class="np-field"><label>Payment Terms</label><div class="in">Credit — 15 days <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--muted-2)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="hint">Due on 23 Aug 2026</div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="between"><div><h3>Items Received</h3><div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">5 line items · 144 strips · scan barcode or start typing to add a row</div></div><div class="res-hint" style="font-size:12px;color:var(--muted-2)">Tab to move · Enter to add row</div></div>
+            <div class="np-search"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="var(--muted-2)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input value="Pantop"><span class="res-hint" style="font-size:12px;color:var(--muted-2)">4 matches</span></div>
+            <div class="tbl-wrap mt16">
+              <table class="tbl">
+                <thead><tr><th>#</th><th>Medicine</th><th>Batch</th><th>Expiry</th><th class="t-center">Qty</th><th class="t-center">Free</th><th class="t-right">Rate</th><th class="t-right">MRP</th><th class="t-center">Disc %</th><th class="t-center">GST</th><th class="t-right">Amount</th><th></th></tr></thead>
+                <tbody id="np-body"></tbody>
+              </table>
+            </div>
+            <div class="flex gap12 mt16" style="align-items:center"><button class="btn btn-sm btn-light"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add Row</button><span class="res-hint" style="font-size:12px;color:var(--muted-2)">Free goods are added to stock at zero cost and reduce the effective purchase rate</span></div>
+          </div>
+        </div>
+
+        <div class="grid" style="gap:14px;align-content:start">
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Purchase Summary</h3>
+            <div class="mt10">
+              <div class="sumrow"><span>Gross Amount</span><span class="v">₹9,320.40</span></div>
+              <div class="sumrow"><span>Item Discount</span><span class="v" style="color:var(--amber)">− ₹186.12</span></div>
+              <div class="sumrow"><span>Taxable Value</span><span class="v">₹8,153.82</span></div>
+              <div class="sumrow"><span>CGST</span><span class="v">₹489.23</span></div>
+              <div class="sumrow"><span>SGST</span><span class="v">₹489.23</span></div>
+              <div class="sumrow"><span>Round Off</span><span class="v">+ ₹0.28</span></div>
+            </div>
+            <div class="between" style="background:var(--surface-2);border-radius:11px;padding:13px 15px;margin-top:12px">
+              <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Grand Total</div><div class="cell-sub">Incl. GST · 5 items</div></div>
+              <div style="font-size:22px;font-weight:700;color:var(--ink)">₹9,133.00</div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Payment</h3>
+            <div class="rmode">
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Cash</div>
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/></svg>UPI</div>
+              <div class="p on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Credit</div>
+            </div>
+            <div style="margin-top:12px"><label style="font-size:11.5px;color:var(--muted);font-weight:500">Paid Now</label><div class="in" style="margin-top:6px;display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:9px 11px"><span class="muted">₹</span><input value="4,000.00" style="border:0;outline:0;font-weight:600;color:var(--ink);width:100%"></div></div>
+            <div class="badge-pill b-amber mt10" style="width:100%;justify-content:space-between;padding:9px 12px"><span>Balance payable by 23 Aug 2026</span><b>₹5,133.00</b></div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="flex gap8" style="align-items:center"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--green)" stroke-width="2.2"><path d="M5 12l5 5 9-11"/></svg><b style="color:var(--ink);font-size:14px">Stock will be updated automatically</b></div>
+            <ul class="impact" style="margin:10px 0 0;padding:0">
+              <li>5 new batches added to inventory</li>
+              <li>144 strips (10 free) added to stock</li>
+              <li>Expiry alerts scheduled for each batch</li>
+              <li>Supplier ledger updated with ₹5,133.00 due</li>
+            </ul>
+            <button class="btn btn-dark btn-block mt16"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5zM7 3v6h8V3M9 21v-6h6v6"/></svg>Save &amp; Update Stock</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var I=[
+    ['1','Dolo 650 Tablet','Micro Labs · Strip of 15','DOL2891','06 / 2028','60','5','24.10','35.00','0','12%','1,446.00'],
+    ['2','Azithromycin 500 Tablet','Cipla · Strip of 3','AZI7940','04 / 2028','24','2','84.00','120.00','2','12%','1,975.68'],
+    ['3','Pantop 40 Tablet','Sun Pharma · Strip of 15','PAN9182','09 / 2028','30','3','98.40','142.00','0','12%','2,952.00'],
+    ['4','Augmentin 625 Duo','GSK · Strip of 10','AUG6120','02 / 2028','18','0','142.00','196.00','5','12%','2,428.20'],
+    ['5','ORS Orange Sachet','FDC Ltd. · 21.8g','ORS1244','11 / 2027','12','0','14.20','22.00','0','5%','170.40']
+  ];
+  document.getElementById('np-body').innerHTML=I.map(function(r){
+    return '<tr>'
+      +'<td class="muted2">'+r[0]+'</td>'
+      +'<td><div class="cell-strong">'+r[1]+'</div><div class="cell-sub">'+r[2]+'</div></td>'
+      +'<td><input class="cell-in" style="width:74px" value="'+r[3]+'"></td>'
+      +'<td><input class="cell-in" style="width:66px" value="'+r[4]+'"></td>'
+      +'<td class="t-center"><input class="cell-in" style="width:44px" value="'+r[5]+'"></td>'
+      +'<td class="t-center"><input class="cell-in" style="width:40px" value="'+r[6]+'"></td>'
+      +'<td class="t-right"><input class="cell-in" style="width:56px;text-align:right" value="'+r[7]+'"></td>'
+      +'<td class="t-right num muted">'+r[8]+'</td>'
+      +'<td class="t-center"><input class="cell-in" style="width:40px" value="'+r[9]+'"></td>'
+      +'<td class="t-center muted">'+r[10]+'</td>'
+      +'<td class="t-right amt">₹'+r[11]+'</td>'
+      +'<td class="t-right"><button class="del" style="width:26px;height:26px;border:0;background:transparent;color:var(--muted-3);cursor:pointer">✕</button></td>'
+      +'</tr>';
+  }).join('');
+</script>
+</body>
+</html>

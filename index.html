@@ -3,130 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign in · MediBill Pro</title>
-<meta name="description" content="MediBill Pro — Indian pharmacy management & billing system.">
+<title>MediBill Pro — Pharmacy Billing &amp; Management Software</title>
+<meta name="description" content="MediBill Pro is billing, GST, batch-wise stock and expiry management built for the way Indian pharmacies actually work.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
 <link rel="stylesheet" href="assets/css/app.css">
 <style>
-  .login{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100vh}
-  .lp{background:var(--sidebar);color:#e7e8ea;padding:56px 64px;display:flex;flex-direction:column}
-  .lp .brand-l{display:flex;align-items:center;gap:14px}
-  .lp .logo-l{width:46px;height:46px;border-radius:12px;background:#fff;color:#0f1113;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center}
-  .lp .brand-l .n{font-size:17px;font-weight:600;color:#fff}
-  .lp .brand-l .s{font-size:12.5px;color:#8a8f98;margin-top:2px}
-  .lp .hero{margin-top:auto}
-  .lp h1{font-size:44px;line-height:1.08;color:#fff;letter-spacing:-.02em;max-width:12ch}
-  .lp .lead{margin:20px 0 34px;font-size:15px;color:#b6b9bf;max-width:44ch;line-height:1.5}
-  .feat{display:flex;gap:14px;margin:20px 0}
-  .feat .fi{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .feat .fi svg{width:19px;height:19px;stroke:#cfe3df}
-  .feat .ft{font-size:14.5px;font-weight:600;color:#fff}
-  .feat .fd{font-size:13px;color:#8a8f98;margin-top:2px;line-height:1.4}
-  .lp .trust{margin-top:auto;padding-top:34px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:9px;font-size:12.5px;color:#8a8f98}
-  .lp .trust svg{width:15px;height:15px;stroke:#5c817b}
+  body{background:#fff}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
 
-  .rp{display:flex;align-items:center;justify-content:center;padding:40px}
-  .form{width:100%;max-width:390px}
-  .form h2{font-size:30px;letter-spacing:-.02em}
-  .form .welcome-sub{color:var(--muted);font-size:14px;margin:8px 0 28px}
-  .divider{display:flex;align-items:center;gap:14px;color:var(--muted-3);font-size:11.5px;font-weight:600;letter-spacing:.06em;margin:20px 0}
-  .divider::before,.divider::after{content:"";height:1px;background:var(--line);flex:1}
-  .checkline{display:flex;align-items:center;justify-content:space-between;margin:4px 0 20px}
-  .check{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text);cursor:pointer}
-  .check input{width:17px;height:17px;accent-color:var(--ink)}
-  .support{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px;display:flex;align-items:center;justify-content:center;gap:6px}
-  .support svg{width:14px;height:14px;stroke:var(--muted-2)}
-  .license{text-align:center;font-size:11.5px;color:var(--muted-3);margin-top:12px;line-height:1.5}
-  @media (max-width:880px){.login{grid-template-columns:1fr}.lp{display:none}}
+  /* Nav */
+  .lnav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.82);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line-2)}
+  .lnav .row{display:flex;align-items:center;gap:22px;height:66px}
+  .lnav .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(160deg,#9fd3c9,#5c817b);color:#0c2a25;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .lnav .bn{font-weight:600;color:var(--ink);font-size:15px}
+  .lnav nav{margin-left:14px;display:flex;gap:24px}
+  .lnav nav a{font-size:14px;color:var(--muted);font-weight:500}
+  .lnav nav a:hover{color:var(--ink)}
+  .lnav .cta{margin-left:auto;display:flex;align-items:center;gap:10px}
+  @media (max-width:760px){.lnav nav{display:none}}
+
+  /* Hero */
+  .hero{padding:72px 0 30px;text-align:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--teal-deep);background:var(--teal-tint);border:1px solid var(--teal-softer);padding:6px 13px;border-radius:999px}
+  .eyebrow .d{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05;letter-spacing:-.03em;margin:22px auto 0;max-width:16ch}
+  .hero p.sub{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:60ch;margin:20px auto 0;line-height:1.55}
+  .hero .btns{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .hero .trust{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:26px;color:var(--muted-2);font-size:13px}
+  .hero .trust span{display:inline-flex;align-items:center;gap:7px}
+  .hero .trust svg{width:15px;height:15px;stroke:var(--teal)}
+
+  /* Browser frame */
+  .frame{max-width:1000px;margin:44px auto 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(15,17,19,.14);background:#fff}
+  .frame .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--line-2)}
+  .frame .bar i{width:11px;height:11px;border-radius:50%;background:#dfe1e5;display:inline-block}
+  .frame .bar .url{margin-left:12px;font-size:12px;color:var(--muted-2);background:#fff;border:1px solid var(--line-2);border-radius:7px;padding:4px 12px}
+  .frame img{display:block;width:100%;height:auto}
+
+  /* Section */
+  .sec{padding:64px 0}
+  .sec-head{text-align:center;max-width:60ch;margin:0 auto 40px}
+  .sec-head .k{font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--teal);text-transform:uppercase}
+  .sec-head h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-.02em;margin-top:12px}
+  .sec-head p{color:var(--muted);font-size:16px;margin-top:12px;line-height:1.55}
+
+  /* Features */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .fcard{border:1px solid var(--line-2);border-radius:14px;padding:24px;background:var(--surface)}
+  .fcard .fi{width:44px;height:44px;border-radius:11px;background:var(--teal-tint);color:var(--teal-deep);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .fcard .fi svg{width:22px;height:22px}
+  .fcard h3{font-size:17px}
+  .fcard p{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.55}
+  @media (max-width:860px){.feat-grid{grid-template-columns:1fr}}
+
+  /* Screens */
+  .screens{background:var(--surface-2);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+  .shot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .shot{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s}
+  .shot:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(15,17,19,.12)}
+  .shot img{display:block;width:100%;height:auto}
+  .shot .cap{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--line-2)}
+  .shot .cap b{color:var(--ink);font-size:14.5px}
+  .shot .cap span{color:var(--muted);font-size:12.5px}
+  .shot .cap .go{color:var(--teal-deep);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:5px}
+  @media (max-width:760px){.shot-grid{grid-template-columns:1fr}}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+  .stat .n{font-size:clamp(26px,3.4vw,36px);font-weight:700;color:var(--ink);letter-spacing:-.02em}
+  .stat .l{color:var(--muted);font-size:13.5px;margin-top:6px}
+  @media (max-width:760px){.stats{grid-template-columns:repeat(2,1fr);gap:26px 16px}}
+
+  /* CTA band */
+  .cta-band{background:var(--sidebar);border-radius:22px;padding:56px 40px;text-align:center;color:#fff;margin:16px 0}
+  .cta-band h2{color:#fff;font-size:clamp(26px,3.6vw,36px);letter-spacing:-.02em}
+  .cta-band p{color:#b6b9bf;font-size:16px;margin:14px auto 0;max-width:52ch;line-height:1.55}
+  .cta-band .btns{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+  /* Footer */
+  footer.lf{border-top:1px solid var(--line-2);padding:34px 0;color:var(--muted-2);font-size:13px}
+  footer.lf .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  footer.lf .row .sp{flex:1}
 </style>
 </head>
 <body>
-<div class="login">
-  <!-- Brand panel -->
-  <section class="lp">
-    <div class="brand-l">
-      <div class="logo-l">M+</div>
-      <div><div class="n">MediBill Pro</div><div class="s">Pharmacy Management System</div></div>
-    </div>
-
-    <div class="hero">
-      <h1>Run your medical store without the paperwork.</h1>
-      <p class="lead">Billing, GST, batch-wise stock and expiry tracking — built for the way Indian pharmacies actually work.</p>
-
-      <div class="feat">
-        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg></div>
-        <div><div class="ft">8-second counter billing</div><div class="fd">Scan barcode, pick batch, print. GST split automatically.</div></div>
-      </div>
-      <div class="feat">
-        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
-        <div><div class="ft">Never lose money to expiry</div><div class="fd">Alerts at 90, 60 and 30 days with supplier return workflow.</div></div>
-      </div>
-      <div class="feat">
-        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div>
-        <div><div class="ft">Credit &amp; khata tracking</div><div class="fd">Know exactly who owes you and how long it has been pending.</div></div>
+  <!-- Nav -->
+  <header class="lnav">
+    <div class="wrap row">
+      <span class="logo">M+</span><span class="bn">MediBill Pro</span>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#screens">Screens</a>
+        <a href="invoice.html">Invoice</a>
+      </nav>
+      <div class="cta">
+        <a class="btn btn-light btn-sm" href="login.html">Sign in</a>
+        <a class="btn btn-dark btn-sm" href="dashboard.html">Launch Demo</a>
       </div>
     </div>
+  </header>
 
+  <!-- Hero -->
+  <section class="hero wrap">
+    <span class="eyebrow"><span class="d"></span>Built for Indian pharmacies</span>
+    <h1>Run your medical store without the paperwork.</h1>
+    <p class="sub">Billing, GST, batch-wise stock and expiry tracking in one fast counter system — designed for the way Indian pharmacies actually work.</p>
+    <div class="btns">
+      <a class="btn btn-dark btn-lg" href="dashboard.html"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>View Live Demo</a>
+      <a class="btn btn-light btn-lg" href="billing.html">Try the billing counter</a>
+    </div>
     <div class="trust">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
-      Trusted by 1,200+ medical stores · Data stored in India · Daily encrypted backup
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>1,200+ medical stores</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>GST &amp; Schedule-H ready</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Data stored in India</span>
+    </div>
+
+    <div class="frame">
+      <div class="bar"><i></i><i></i><i></i><span class="url">app.medibillpro.in/dashboard</span></div>
+      <a href="dashboard.html"><img src="assets/img/dashboard.png" alt="MediBill Pro dashboard" loading="lazy"></a>
     </div>
   </section>
 
-  <!-- Form -->
-  <section class="rp">
-    <form class="form" onsubmit="location.href='dashboard.html';return false;">
-      <h2>Welcome back</h2>
-      <p class="welcome-sub">Sign in to continue to Sri Venkateswara Medicals</p>
-
-      <div class="field">
-        <label>Branch</label>
-        <div class="input-wrap">
-          <select class="input" style="appearance:none">
-            <option>Main Branch — T. Nagar, Chennai</option>
-            <option>Branch 2 — Anna Nagar, Chennai</option>
-          </select>
-          <span class="suf"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Email or Username</label>
-        <input class="input" type="text" value="rajesh@svmedicals.in" autocomplete="username">
-      </div>
-
-      <div class="field">
-        <label>Password</label>
-        <div class="input-wrap">
-          <input class="input" id="pw" type="password" value="pharmacy123" autocomplete="current-password">
-          <span class="suf" data-toggle-pw="pw" title="Show password">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
-          </span>
-        </div>
-      </div>
-
-      <div class="checkline">
-        <label class="check"><input type="checkbox" checked> Keep me signed in on this counter PC</label>
-        <span class="link">Forgot password?</span>
-      </div>
-
-      <button class="btn btn-dark btn-block btn-lg" type="submit">Sign In</button>
-
-      <div class="divider">OR</div>
-
-      <button class="btn btn-light btn-block btn-lg" type="button">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg>
-        Sign in with staff barcode card
-      </button>
-
-      <div class="support">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
-        Trouble signing in? Call support on 1800 419 2200
-      </div>
-      <div class="license">MediBill Pro v3.4.1 · Licensed to Sri Venkateswara Medicals, Chennai · DL No. TN/CHN/20B-4471</div>
-    </form>
+  <!-- Features -->
+  <section class="sec wrap" id="features">
+    <div class="sec-head">
+      <div class="k">Everything the counter needs</div>
+      <h2>One system, from billing to books</h2>
+      <p>Replace the register, the spreadsheet and the sticky notes with a single screen your staff can learn in an afternoon.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg></div><h3>8-second counter billing</h3><p>Scan the barcode, pick the batch and print. GST splits into CGST/SGST automatically on every bill.</p></div>
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div><h3>Never lose money to expiry</h3><p>Alerts at 90, 60 and 30 days, batch-wise, with a supplier return workflow to claim your credit back.</p></div>
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div><h3>Credit &amp; khata tracking</h3><p>Know exactly who owes you, how much and how long it's been pending — with one-tap due reminders.</p></div>
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></div><h3>Batch-wise inventory</h3><p>Every SKU tracked by batch, rack, MRP and purchase cost — with live low-stock and reorder levels.</p></div>
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h6M9 16h4"/></svg></div><h3>GST tax invoices</h3><p>HSN-wise GST summary, amount in words and a clean A4 or 80mm thermal print, ready for the tax man.</p></div>
+      <div class="fcard"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Reports that decide for you</h3><p>Daily sales vs purchases, payment mix, gross profit, stock health and top movers — at a glance.</p></div>
+    </div>
   </section>
-</div>
+
+  <!-- Screens -->
+  <section class="sec screens" id="screens">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="k">Take the tour</div>
+        <h2>See the real screens</h2>
+        <p>Every screen below is live in the demo — click any one to open it and click around.</p>
+      </div>
+      <div class="shot-grid">
+        <a class="shot" href="dashboard.html"><img src="assets/img/dashboard.png" alt="Dashboard" loading="lazy"><div class="cap"><div><b>Dashboard</b> &nbsp;<span>Sales, stock value, expiry &amp; credit at a glance</span></div><span class="go">Open →</span></div></a>
+        <a class="shot" href="billing.html"><img src="assets/img/billing.png" alt="Billing / POS" loading="lazy"><div class="cap"><div><b>Billing / POS</b> &nbsp;<span>Counter sale with batch search &amp; GST</span></div><span class="go">Open →</span></div></a>
+        <a class="shot" href="invoice.html"><img src="assets/img/invoice.png" alt="Tax invoice" loading="lazy"><div class="cap"><div><b>Tax Invoice</b> &nbsp;<span>Printable A4 GST bill</span></div><span class="go">Open →</span></div></a>
+        <a class="shot" href="reports.html"><img src="assets/img/reports.png" alt="Reports" loading="lazy"><div class="cap"><div><b>Reports &amp; Analytics</b> &nbsp;<span>Profit, payment mix &amp; stock health</span></div><span class="go">Open →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="sec wrap">
+    <div class="stats">
+      <div class="stat"><div class="n">1,284</div><div class="l">SKUs tracked by batch</div></div>
+      <div class="stat"><div class="n">₹8.4L</div><div class="l">Live stock value</div></div>
+      <div class="stat"><div class="n">62</div><div class="l">Bills a day, in seconds</div></div>
+      <div class="stat"><div class="n">1,842</div><div class="l">Customers &amp; khatas</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap">
+    <div class="cta-band">
+      <h2>Ready to see it in action?</h2>
+      <p>Open the full working demo — no signup, nothing to install. Walk your team through billing, inventory and reports right now.</p>
+      <div class="btns">
+        <a class="btn btn-lg" href="dashboard.html" style="background:#fff;color:var(--ink)"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>Launch Live Demo</a>
+        <a class="btn btn-lg btn-ghost" href="login.html" style="color:#fff;border-color:rgba(255,255,255,.3)">View the sign-in</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lf">
+    <div class="wrap row">
+      <span class="logo" style="width:30px;height:30px;border-radius:8px;background:linear-gradient(160deg,#9fd3c9,#5c817b);color:#0c2a25;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:12px">M+</span>
+      <b style="color:var(--ink)">MediBill Pro</b>
+      <span class="sp"></span>
+      <span>Pharmacy Management System · UI demo</span>
+    </div>
+  </footer>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

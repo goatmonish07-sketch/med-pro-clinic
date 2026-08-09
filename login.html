@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in · MediBill Pro</title>
+<meta name="description" content="MediBill Pro — Indian pharmacy management & billing system.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .login{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100vh}
+  .lp{background:var(--sidebar);color:#e7e8ea;padding:56px 64px;display:flex;flex-direction:column}
+  .lp .brand-l{display:flex;align-items:center;gap:14px}
+  .lp .logo-l{width:46px;height:46px;border-radius:12px;background:#fff;color:#0f1113;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .lp .brand-l .n{font-size:17px;font-weight:600;color:#fff}
+  .lp .brand-l .s{font-size:12.5px;color:#8a8f98;margin-top:2px}
+  .lp .hero{margin-top:auto}
+  .lp h1{font-size:44px;line-height:1.08;color:#fff;letter-spacing:-.02em;max-width:12ch}
+  .lp .lead{margin:20px 0 34px;font-size:15px;color:#b6b9bf;max-width:44ch;line-height:1.5}
+  .feat{display:flex;gap:14px;margin:20px 0}
+  .feat .fi{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .feat .fi svg{width:19px;height:19px;stroke:#cfe3df}
+  .feat .ft{font-size:14.5px;font-weight:600;color:#fff}
+  .feat .fd{font-size:13px;color:#8a8f98;margin-top:2px;line-height:1.4}
+  .lp .trust{margin-top:auto;padding-top:34px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:9px;font-size:12.5px;color:#8a8f98}
+  .lp .trust svg{width:15px;height:15px;stroke:#5c817b}
+
+  .rp{display:flex;align-items:center;justify-content:center;padding:40px}
+  .form{width:100%;max-width:390px}
+  .form h2{font-size:30px;letter-spacing:-.02em}
+  .form .welcome-sub{color:var(--muted);font-size:14px;margin:8px 0 28px}
+  .divider{display:flex;align-items:center;gap:14px;color:var(--muted-3);font-size:11.5px;font-weight:600;letter-spacing:.06em;margin:20px 0}
+  .divider::before,.divider::after{content:"";height:1px;background:var(--line);flex:1}
+  .checkline{display:flex;align-items:center;justify-content:space-between;margin:4px 0 20px}
+  .check{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text);cursor:pointer}
+  .check input{width:17px;height:17px;accent-color:var(--ink)}
+  .support{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px;display:flex;align-items:center;justify-content:center;gap:6px}
+  .support svg{width:14px;height:14px;stroke:var(--muted-2)}
+  .license{text-align:center;font-size:11.5px;color:var(--muted-3);margin-top:12px;line-height:1.5}
+  @media (max-width:880px){.login{grid-template-columns:1fr}.lp{display:none}}
+</style>
+</head>
+<body>
+<div class="login">
+  <!-- Brand panel -->
+  <section class="lp">
+    <div class="brand-l">
+      <div class="logo-l">M+</div>
+      <div><div class="n">MediBill Pro</div><div class="s">Pharmacy Management System</div></div>
+    </div>
+
+    <div class="hero">
+      <h1>Run your medical store without the paperwork.</h1>
+      <p class="lead">Billing, GST, batch-wise stock and expiry tracking — built for the way Indian pharmacies actually work.</p>
+
+      <div class="feat">
+        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg></div>
+        <div><div class="ft">8-second counter billing</div><div class="fd">Scan barcode, pick batch, print. GST split automatically.</div></div>
+      </div>
+      <div class="feat">
+        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
+        <div><div class="ft">Never lose money to expiry</div><div class="fd">Alerts at 90, 60 and 30 days with supplier return workflow.</div></div>
+      </div>
+      <div class="feat">
+        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></div>
+        <div><div class="ft">Credit &amp; khata tracking</div><div class="fd">Know exactly who owes you and how long it has been pending.</div></div>
+      </div>
+    </div>
+
+    <div class="trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
+      Trusted by 1,200+ medical stores · Data stored in India · Daily encrypted backup
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="rp">
+    <form class="form" onsubmit="location.href='dashboard.html';return false;">
+      <h2>Welcome back</h2>
+      <p class="welcome-sub">Sign in to continue to Sri Venkateswara Medicals</p>
+
+      <div class="field">
+        <label>Branch</label>
+        <div class="input-wrap">
+          <select class="input" style="appearance:none">
+            <option>Main Branch — T. Nagar, Chennai</option>
+            <option>Branch 2 — Anna Nagar, Chennai</option>
+          </select>
+          <span class="suf"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email or Username</label>
+        <input class="input" type="text" value="rajesh@svmedicals.in" autocomplete="username">
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <div class="input-wrap">
+          <input class="input" id="pw" type="password" value="pharmacy123" autocomplete="current-password">
+          <span class="suf" data-toggle-pw="pw" title="Show password">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label class="check"><input type="checkbox" checked> Keep me signed in on this counter PC</label>
+        <span class="link">Forgot password?</span>
+      </div>
+
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Sign In</button>
+
+      <div class="divider">OR</div>
+
+      <button class="btn btn-light btn-block btn-lg" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg>
+        Sign in with staff barcode card
+      </button>
+
+      <div class="support">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        Trouble signing in? Call support on 1800 419 2200
+      </div>
+      <div class="license">MediBill Pro v3.4.1 · Licensed to Sri Venkateswara Medicals, Chennai · DL No. TN/CHN/20B-4471</div>
+    </form>
+  </section>
+</div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

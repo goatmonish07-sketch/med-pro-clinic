@@ -97,7 +97,7 @@
     var stColor = r[10]==='amber'?'color:var(--amber);font-weight:600':r[10]==='red'?'color:var(--red);font-weight:600':'font-weight:600;color:var(--ink)';
     var badge = r[13]==='green'?'b-green':r[13]==='red'?'b-red':'b-amber';
     return '<tr>'
-      + '<td><div class="cell-strong">'+r[0]+'</div><div class="cell-sub">'+r[1]+'</div></td>'
+      + '<td><a class="cell-strong link" href="medicine-details.html" style="color:var(--ink)">'+r[0]+'</a><div class="cell-sub">'+r[1]+'</div></td>'
       + '<td class="muted">'+r[2]+'</td>'
       + '<td class="num">'+r[3]+'</td>'
       + '<td class="num muted2">'+r[4]+'</td>'

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priya Ramesh · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-page="customers">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <a class="back-btn" href="customers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <div class="tb-title">
+        <div class="crumb"><a href="customers.html">Customers</a><span class="sep">›</span>Priya Ramesh</div>
+        <h1 style="margin-top:2px">Priya Ramesh</h1>
+      </div>
+      <div class="tb-right">
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/></svg>Statement</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Collect Due</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/></svg>Edit</button>
+        <a class="btn btn-dark" href="billing.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New Bill</a>
+      </div>
+    </header>
+    <div class="content">
+      <div class="dcard">
+        <div class="dhead">
+          <span class="dh-id">PR</span>
+          <div>
+            <div class="dh-name">Priya Ramesh <span class="badge-pill b-green"><span class="bdot"></span>Active</span> <span class="tag tag-credit">Credit Customer</span> <span class="tag tag-retail">Gold · 4,218 pts</span></div>
+            <div class="dh-sub">+91 98410 22456 · Female, 34 yrs · T. Nagar, Chennai — 600017 · CUST-001482 · Since Mar 2023</div>
+          </div>
+          <div class="dh-stats">
+            <div class="s"><div class="l">Total Purchases</div><div class="v">₹42,180</div></div>
+            <div class="s"><div class="l">Outstanding</div><div class="v" style="color:var(--amber)">₹1,850</div></div>
+            <div class="s"><div class="l">Bills</div><div class="v">48</div></div>
+            <div class="s"><div class="l">Last Visit</div><div class="v">08 Aug 2026</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs"><a class="on">Overview</a><a>Purchase History</a><a>Prescriptions</a><a>Credit &amp; Payments</a><a>Returns</a></div>
+
+      <div class="detail-2 mt18">
+        <div class="grid" style="gap:18px">
+          <div class="card card-pad">
+            <h3>Recent Bills</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">48 bills since Mar 2023 · showing last 6</div>
+            <div class="tbl-wrap mt10">
+              <table class="tbl">
+                <thead><tr><th>Invoice No.</th><th>Date</th><th class="t-right">Items</th><th class="t-right">Gross</th><th class="t-right">Discount</th><th class="t-right">GST</th><th class="t-right">Total</th><th>Payment</th><th>Status</th></tr></thead>
+                <tbody id="bills"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3>Prescriptions on File</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">Schedule H dispensing records retained as per Drugs &amp; Cosmetics Rules</div>
+            <div class="tbl-wrap mt10">
+              <table class="tbl">
+                <thead><tr><th>Rx No.</th><th>Date</th><th>Doctor</th><th>Medicines Dispensed</th><th>Valid Till</th><th>Status</th></tr></thead>
+                <tbody id="rxs"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" style="gap:14px;align-content:start">
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Credit &amp; Outstanding</h3>
+            <div class="rail-num" style="color:var(--amber);margin-top:10px">₹1,850 <span style="font-size:13px;font-weight:500;color:var(--muted)">due on 19 Aug</span></div>
+            <div class="bar amber mt10" style="height:7px"><span style="width:37%"></span></div>
+            <div class="between" style="font-size:11.5px;color:var(--muted-2);margin-top:7px"><span>Credit used ₹1,850</span><span>Limit ₹5,000</span></div>
+            <div class="mt10">
+              <div class="kv"><span class="k">Credit Limit</span><span class="v">₹5,000</span></div>
+              <div class="kv"><span class="k">Available Credit</span><span class="v" style="color:var(--green)">₹3,150</span></div>
+              <div class="kv"><span class="k">Oldest Due</span><span class="v">04 Aug 2026 · 4 days</span></div>
+              <div class="kv" style="border-bottom:0"><span class="k">Payment Behaviour</span><span class="v" style="color:var(--green)">On time (46/48 bills)</span></div>
+            </div>
+            <button class="btn btn-dark btn-block mt16"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Collect ₹1,850</button>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Profile</h3>
+            <div class="mt10">
+              <div class="kv"><span class="k">Customer ID</span><span class="v num">CUST-001482</span></div>
+              <div class="kv"><span class="k">Phone</span><span class="v num">+91 98410 22456</span></div>
+              <div class="kv"><span class="k">Alternate</span><span class="v num">+91 44 2815 6690</span></div>
+              <div class="kv"><span class="k">Date of Birth</span><span class="v">14 Feb 1992</span></div>
+              <div class="kv"><span class="k">Blood Group</span><span class="v">B+</span></div>
+              <div class="kv"><span class="k">Known Allergies</span><span class="v" style="color:var(--red)">Sulpha drugs</span></div>
+              <div class="kv"><span class="k">Preferred Doctor</span><span class="v">Dr. S. Venkatesan</span></div>
+              <div class="kv" style="border-bottom:0"><span class="k">GSTIN</span><span class="v muted2">—</span></div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Frequently Bought</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">Useful for quick re-billing at the counter</div>
+            <div class="perf"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="9.5" width="17" height="5" rx="2.5" transform="rotate(45 12 12)"/></svg></span><div><div class="cell-strong" style="font-size:13px">Pantop 40 Tablet</div><div class="cell-sub">Pantoprazole 40mg · last 08 Aug</div></div><span class="pv">18×</span></div>
+            <div class="perf"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="9.5" width="17" height="5" rx="2.5" transform="rotate(45 12 12)"/></svg></span><div><div class="cell-strong" style="font-size:13px">Dolo 650 Tablet</div><div class="cell-sub">Paracetamol 650mg · last 04 Aug</div></div><span class="pv">12×</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var B=[
+    ['INV-2026-08-1174','08 Aug 2026','4','704.00','6.00','69.55','698.00','UPI','Paid'],
+    ['INV-2026-08-1102','04 Aug 2026','6','1,284.00','24.00','126.80','1,260.00','Credit','Due'],
+    ['INV-2026-07-0988','29 Jul 2026','3','442.00','0.00','47.36','442.00','Cash','Paid'],
+    ['INV-2026-07-0871','21 Jul 2026','5','986.00','18.00','103.71','968.00','UPI','Paid'],
+    ['INV-2026-07-0740','12 Jul 2026','2','318.00','0.00','34.07','318.00','Card','Paid'],
+    ['INV-2026-06-0612','30 Jun 2026','7','1,542.00','32.00','161.79','1,510.00','Credit','Paid']
+  ];
+  var payIcon={UPI:'<rect x="6" y="2" width="12" height="20" rx="2"/>',Cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>',Card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h18"/>',Credit:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>'};
+  document.getElementById('bills').innerHTML=B.map(function(r){
+    var st=r[8]==='Paid'?'b-green':r[8]==='Due'?'b-red':'b-amber';
+    var pt='<span class="pay-tag'+(r[7]==='Credit'?' credit':'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">'+payIcon[r[7]]+'</svg>'+r[7]+'</span>';
+    return '<tr><td class="cell-strong num">'+r[0]+'</td><td class="num muted">'+r[1]+'</td><td class="t-right num">'+r[2]+'</td><td class="t-right num">₹'+r[3]+'</td><td class="t-right muted2">₹'+r[4]+'</td><td class="t-right num muted">₹'+r[5]+'</td><td class="t-right amt">₹'+r[6]+'</td><td>'+pt+'</td><td><span class="badge-pill '+st+'"><span class="bdot"></span>'+r[8]+'</span></td></tr>';
+  }).join('');
+  var RX=[
+    ['RX-2026-0871','08 Aug 2026','Dr. S. Venkatesan, MBBS','Azithromycin 500, Pantop 40','07 Sep 2026','Active'],
+    ['RX-2026-0744','04 Aug 2026','Dr. Meena Raghunathan','Augmentin 625 Duo, ORS','03 Sep 2026','Active'],
+    ['RX-2026-0512','21 Jul 2026','Dr. S. Venkatesan, MBBS','Pantop 40, Dolo 650','20 Aug 2026','Active'],
+    ['RX-2026-0318','30 Jun 2026','Dr. Arun Prakash, MD','Metformin 500 SR, Amlodipine 5','29 Jul 2026','Inactive']
+  ];
+  document.getElementById('rxs').innerHTML=RX.map(function(r){
+    var st=r[5]==='Active'?'b-green':'b-gray';
+    return '<tr><td class="cell-strong num">'+r[0]+'</td><td class="num muted">'+r[1]+'</td><td class="muted">'+r[2]+'</td><td>'+r[3]+'</td><td class="num muted">'+r[4]+'</td><td><span class="badge-pill '+st+'"><span class="bdot"></span>'+r[5]+'</span></td></tr>';
+  }).join('');
+</script>
+</body>
+</html>

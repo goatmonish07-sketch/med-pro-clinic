@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedPlus Distributors · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-page="suppliers">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <a class="back-btn" href="suppliers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <div class="tb-title">
+        <div class="crumb"><a href="suppliers.html">Suppliers</a><span class="sep">›</span>MedPlus Distributors</div>
+        <h1 style="margin-top:2px">MedPlus Distributors</h1>
+      </div>
+      <div class="tb-right">
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/></svg>Statement</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Record Payment</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/></svg>Edit</button>
+        <a class="btn btn-dark" href="purchases.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New Purchase</a>
+      </div>
+    </header>
+    <div class="content">
+      <div class="dcard">
+        <div class="dhead">
+          <span class="dh-id sq">MD</span>
+          <div>
+            <div class="dh-name">MedPlus Distributors <span class="badge-pill b-green"><span class="bdot"></span>Active</span> <span class="badge-pill b-green"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-11"/></svg>Preferred Supplier</span></div>
+            <div class="dh-sub">GSTIN 33AABCM1234F1Z5 · Drug Licence TN/CHN/21B-1180 · No. 42, Ranganathan Street, T. Nagar, Chennai</div>
+          </div>
+          <div class="dh-stats">
+            <div class="s"><div class="l">Total Purchases</div><div class="v">₹18,42,600</div></div>
+            <div class="s"><div class="l">Outstanding</div><div class="v" style="color:var(--amber)">₹18,420</div></div>
+            <div class="s"><div class="l">Medicines</div><div class="v">218</div></div>
+            <div class="s"><div class="l">Last Purchase</div><div class="v">08 Aug 2026</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs"><a class="on">Overview</a><a>Purchase History</a><a>Payments</a><a>Returns</a><a>Medicines Supplied</a></div>
+
+      <div class="detail-2 mt18">
+        <div class="grid" style="gap:18px">
+          <div class="card card-pad">
+            <h3>Recent Purchase History</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">176 purchases since Jan 2023 · showing last 6</div>
+            <div class="tbl-wrap mt10">
+              <table class="tbl">
+                <thead><tr><th>Purchase No.</th><th>Supplier Inv.</th><th>Date</th><th class="t-right">Items</th><th class="t-right">Taxable</th><th class="t-right">GST</th><th class="t-right">Total</th><th class="t-right">Paid</th><th class="t-right">Balance</th><th>Status</th></tr></thead>
+                <tbody id="ph"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3>Payment Ledger</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">Payments made against this supplier</div>
+            <div class="tbl-wrap mt10">
+              <table class="tbl">
+                <thead><tr><th>Date</th><th>Reference</th><th>Mode</th><th>Against</th><th class="t-right">Amount</th><th class="t-right">Balance After</th><th>Recorded By</th></tr></thead>
+                <tbody id="pl"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" style="gap:14px;align-content:start">
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Outstanding Payable</h3>
+            <div class="rail-num" style="color:var(--amber);margin-top:10px">₹18,420 <span style="font-size:13px;font-weight:500;color:var(--muted)">1 invoice</span></div>
+            <div class="side-label" style="margin-top:16px">Ageing</div>
+            <div style="margin-top:8px">
+              <div class="between" style="font-size:12.5px"><span>0 – 15 days</span><b>₹18,420</b></div>
+              <div class="bar green" style="margin:6px 0 12px"><span style="width:100%"></span></div>
+              <div class="between" style="font-size:12.5px"><span>16 – 30 days</span><b>₹0</b></div>
+              <div class="bar" style="margin:6px 0 12px"><span style="width:0"></span></div>
+              <div class="between" style="font-size:12.5px"><span>Over 30 days</span><b>₹0</b></div>
+              <div class="bar" style="margin:6px 0 4px"><span style="width:0"></span></div>
+            </div>
+            <button class="btn btn-dark btn-block mt16"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Record Payment</button>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Contact &amp; Bank Details</h3>
+            <div class="mt10">
+              <div class="kv"><span class="k">Contact Person</span><span class="v">Suresh Babu</span></div>
+              <div class="kv"><span class="k">Phone</span><span class="v num">+91 98404 21134</span></div>
+              <div class="kv"><span class="k">Alternate</span><span class="v num">+91 44 2834 5567</span></div>
+              <div class="kv"><span class="k">Email</span><span class="v">orders@medplusdist.in</span></div>
+              <div class="kv"><span class="k">Payment Terms</span><span class="v">Credit — 15 days</span></div>
+              <div class="kv"><span class="k">Bank</span><span class="v">HDFC Bank, T. Nagar</span></div>
+              <div class="kv"><span class="k">Account No.</span><span class="v num">5010 0284 41190</span></div>
+              <div class="kv" style="border-bottom:0"><span class="k">IFSC</span><span class="v num">HDFC0000521</span></div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Top Medicines Supplied</h3>
+            <div class="sub" style="color:var(--muted);font-size:12.5px;margin-top:3px">By purchase value · last 6 months</div>
+            <div class="sell" style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-3)"><div style="flex:1"><div class="cell-strong" style="font-size:13.5px">Dolo 650 Tablet</div><div class="cell-sub">Micro Labs</div><div class="bar mt6"><span style="width:100%"></span></div></div><span class="amt">₹1,42,600</span></div>
+            <div class="sell" style="display:flex;align-items:center;gap:12px;padding:13px 0"><div style="flex:1"><div class="cell-strong" style="font-size:13.5px">Pantop 40 Tablet</div><div class="cell-sub">Sun Pharma</div><div class="bar mt6"><span style="width:83%"></span></div></div><span class="amt">₹1,18,400</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var PH=[
+    ['PI-2026-0418','MP/4412','08 Aug 2026','24','42,180','5,062','47,242','47,242','0','Paid'],
+    ['PI-2026-0413','MP/4390','03 Aug 2026','27','46,700','5,604','52,304','30,000','22,304','Partial'],
+    ['PI-2026-0401','MP/4351','24 Jul 2026','19','33,240','3,989','37,229','37,229','0','Paid'],
+    ['PI-2026-0392','MP/4318','16 Jul 2026','22','38,910','4,669','43,579','43,579','0','Paid'],
+    ['PI-2026-0381','MP/4290','09 Jul 2026','30','51,620','6,194','57,814','57,814','0','Paid'],
+    ['PI-2026-0370','MP/4255','01 Jul 2026','17','28,450','3,414','31,864','31,864','0','Paid']
+  ];
+  document.getElementById('ph').innerHTML=PH.map(function(r){
+    var st=r[9]==='Paid'?'b-green':r[9]==='Partial'?'b-amber':'b-red';
+    var bal=r[8]==='0'?'<span class="muted2 num">₹0</span>':'<span class="num" style="color:var(--amber);font-weight:600">₹'+r[8]+'</span>';
+    return '<tr><td class="cell-strong num">'+r[0]+'</td><td class="num muted">'+r[1]+'</td><td class="num muted">'+r[2]+'</td><td class="t-right num">'+r[3]+'</td><td class="t-right num">₹'+r[4]+'</td><td class="t-right num muted">₹'+r[5]+'</td><td class="t-right amt">₹'+r[6]+'</td><td class="t-right num muted">₹'+r[7]+'</td><td class="t-right">'+bal+'</td><td><span class="badge-pill '+st+'"><span class="bdot"></span>'+r[9]+'</span></td></tr>';
+  }).join('');
+  var PL=[
+    ['08 Aug 2026','NEFT/HDFC/882140','Bank','PI-2026-0418','47,242','18,420','Rajesh Kumar'],
+    ['30 Jul 2026','UPI/4471209983','UPI','PI-2026-0413 (part)','30,000','65,662','Store Manager'],
+    ['24 Jul 2026','NEFT/HDFC/879004','Bank','PI-2026-0401','37,229','95,662','Rajesh Kumar'],
+    ['16 Jul 2026','CHQ 448201','Cheque','PI-2026-0392','43,579','1,32,891','Store Manager'],
+    ['09 Jul 2026','NEFT/HDFC/871336','Bank','PI-2026-0381','57,814','1,76,470','Rajesh Kumar']
+  ];
+  document.getElementById('pl').innerHTML=PL.map(function(r){
+    return '<tr><td class="cell-strong" style="font-weight:500">'+r[0]+'</td><td class="num muted">'+r[1]+'</td><td><span class="pay-tag">'+r[2]+'</span></td><td class="num muted">'+r[3]+'</td><td class="t-right amt">₹'+r[4]+'</td><td class="t-right num muted">₹'+r[5]+'</td><td class="muted">'+r[6]+'</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>
