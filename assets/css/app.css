@@ -393,10 +393,52 @@ table.tbl tbody tr:hover{background:var(--surface-2)}
 @media (max-width:1100px){.detail-2{grid-template-columns:1fr}.pill-stat{grid-template-columns:repeat(2,1fr)}.dh-stats{display:none}}
 @media (max-width:640px){.kv-grid{grid-template-columns:1fr}}
 
+/* ===== Overflow containment (let wide tables scroll, not the page) = */
+.card{min-width:0}
+.dash-2>*,.detail-2>*,.pos>*,.ret>*,.np>*,.rep-2>*,.grid>*,.main>*{min-width:0}
+.tbl-wrap{max-width:100%}
+
+/* ===== Mobile navigation drawer =================================== */
+.nav-toggle{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex-shrink:0;margin-right:2px;-webkit-tap-highlight-color:transparent}
+.nav-toggle svg{width:20px;height:20px}
+.nav-backdrop{position:fixed;inset:0;background:rgba(10,10,11,.45);z-index:55;opacity:0;visibility:hidden;transition:opacity .2s}
+body.nav-open .nav-backdrop{opacity:1;visibility:visible}
+
 @media (max-width:1180px){
-  .sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:.2s}
+  .sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:transform .22s ease}
   body.nav-open .sidebar{transform:none;box-shadow:var(--shadow-md)}
-  .content{padding:18px 18px 60px}
-  .topbar{padding:14px 18px}
-  .search{min-width:160px}
+  .nav-toggle{display:flex}
+  .content{padding:18px 16px 60px}
+  .topbar{padding:14px 16px}
+  .search{min-width:150px}
+}
+
+@media (max-width:1100px){
+  .dhead{flex-wrap:wrap}
+  .dh-stats{margin-left:0;width:100%;margin-top:8px;gap:22px 26px;flex-wrap:wrap;text-align:left}
+}
+
+@media (max-width:820px){
+  .between{flex-wrap:wrap}
+  .flex.gap8,.flex.gap12,.flex.gap16{flex-wrap:wrap}
+  .card-head{flex-wrap:wrap}
+  .topbar{flex-wrap:wrap;gap:10px 12px}
+  .topbar .tb-title{flex:1;min-width:0}
+  .topbar .tb-title h1{font-size:18px}
+  .topbar .tb-title p,.topbar .crumb{font-size:12px}
+  .tb-right{width:100%;margin-left:0;justify-content:flex-start;flex-wrap:wrap;gap:8px}
+  .topbar .search{display:none}
+  .seg{overflow-x:auto;max-width:100%}
+  .btn{height:38px;padding:0 13px}
+  .filters .select,.filters .btn{flex:0 0 auto}
+}
+
+@media (max-width:640px){
+  .content{padding:16px 12px 56px}
+  .card-pad{padding:16px}
+  .card-head{padding:16px 16px 0}
+  .inv-toolbar{flex-wrap:wrap;gap:8px}
+  .tb-right .btn .kbd{display:none}
+  .dh-name{font-size:19px}
+  .kpi .k-val,.kpi-row .kv{font-size:20px}
 }

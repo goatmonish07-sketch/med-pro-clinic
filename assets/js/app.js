@@ -68,6 +68,28 @@
     if (mount) {
       mount.className = 'sidebar';
       mount.innerHTML = buildSidebar(document.body.getAttribute('data-page'));
+
+      // Mobile: hamburger toggle + dismiss backdrop for the sidebar drawer
+      var topbar = document.querySelector('.topbar');
+      if (topbar) {
+        var burger = document.createElement('button');
+        burger.className = 'nav-toggle';
+        burger.setAttribute('aria-label', 'Open navigation menu');
+        burger.innerHTML = svg('<path d="M3 6h18M3 12h18M3 18h18"/>');
+        topbar.insertBefore(burger, topbar.firstChild);
+
+        var backdrop = document.createElement('div');
+        backdrop.className = 'nav-backdrop';
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(backdrop);
+
+        var close = function () { document.body.classList.remove('nav-open'); };
+        burger.addEventListener('click', function () { document.body.classList.toggle('nav-open'); });
+        backdrop.addEventListener('click', close);
+        // Close the drawer when a nav link is tapped or Esc is pressed
+        mount.addEventListener('click', function (e) { if (e.target.closest('a')) close(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      }
     }
 
     // Fill any [data-icon] placeholders

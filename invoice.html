@@ -63,7 +63,8 @@
     .sheet{box-shadow:none;margin:0;width:auto;padding:0}
     @page{size:A4;margin:14mm}
   }
-  @media (max-width:840px){.sheet{padding:26px 22px}.low,.terms,.parties{grid-template-columns:1fr}}
+  @media (max-width:840px){.sheet{padding:26px 22px;overflow-x:auto}.low,.terms,.parties{grid-template-columns:1fr}}
+  @media (max-width:560px){.inv-head{flex-direction:column}.inv-meta{text-align:left;min-width:0}.inv-meta .mrow{justify-content:flex-start}table.inv,table.gst{font-size:10.5px}table.inv th,table.gst th{font-size:9px}}
 </style>
 </head>
 <body>
