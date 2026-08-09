@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MED-PRO Clinic OS — advanced clinic CRM/CMS with EMR, billing, tele-consult and a clinical copilot." />
+    <meta name="theme-color" content="#101a3a" />
+    <title>MED-PRO Clinic OS</title>
+    <script>
+      // Apply saved theme before paint to avoid a flash.
+      try {
+        var t = localStorage.getItem('medpro-theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   MED-PRO Clinic OS — Design System tokens
+   Direction: "Aurora × Cortex" (light palette + dense command UI)
+   Light-first; dark theme is a fully-defined alternate.
+   ============================================================ */
+:root {
+  color-scheme: light dark;
+  --bg: #eef1f9;
+  --bg-2: #e8ecf7;
+  --panel: #ffffff;
+  --panel-2: #f5f7fc;
+  --panel-3: #edf1f9;
+  --rail: #101a3a;
+  --rail-2: #0b1330;
+  --rail-ink: #aeb9e0;
+  --rail-ink-2: #6f7db3;
+  --ink: #141b30;
+  --ink-2: #4b5470;
+  --ink-3: #858ea8;
+  --line: #e5e9f3;
+  --line-2: #d7dcec;
+  --brand: #3a56e0;
+  --brand-2: #5a72f0;
+  --brand-soft: #e9edfd;
+  --brand-glow: rgba(58, 86, 224, 0.28);
+  --cyan: #0d9aa0;
+  --cyan-soft: #dcf4f4;
+  --violet: #7c5cf0;
+  --violet-soft: #ece7fd;
+  --good: #12a150;
+  --good-soft: #dcf5e6;
+  --warn: #d98a00;
+  --warn-soft: #fbeed2;
+  --crit: #e0396b;
+  --crit-soft: #fce0e9;
+  --shadow-sm: 0 1px 2px rgba(20, 27, 48, 0.05), 0 4px 12px -6px rgba(20, 27, 48, 0.12);
+  --shadow: 0 2px 4px rgba(20, 27, 48, 0.05), 0 18px 38px -20px rgba(20, 27, 48, 0.26);
+  --glow: 0 0 0 1px rgba(58, 86, 224, 0.2), 0 12px 32px -14px var(--brand-glow);
+  --radius: 15px;
+  --radius-sm: 11px;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+/* System dark preference (only when the user hasn't forced light) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #080c1c;
+    --bg-2: #0b1022;
+    --panel: #101731;
+    --panel-2: #161f3d;
+    --panel-3: #1b2544;
+    --rail: #0b1330;
+    --rail-2: #070d24;
+    --rail-ink: #a9b4dc;
+    --rail-ink-2: #6c7aae;
+    --ink: #eef1fb;
+    --ink-2: #b0b9d6;
+    --ink-3: #7e88a8;
+    --line: #202a49;
+    --line-2: #2a3557;
+    --brand: #8296fa;
+    --brand-2: #9aabff;
+    --brand-soft: #1a2350;
+    --brand-glow: rgba(130, 150, 250, 0.3);
+    --cyan: #2dd4bf;
+    --cyan-soft: #0e3330;
+    --violet: #a48cff;
+    --violet-soft: #241d47;
+    --good: #48d17f;
+    --good-soft: #0f3320;
+    --warn: #f5b542;
+    --warn-soft: #3a2a08;
+    --crit: #fb6f9c;
+    --crit-soft: #3a1526;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px -6px rgba(0, 0, 0, 0.5);
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 22px 44px -22px rgba(0, 0, 0, 0.7);
+    --glow: 0 0 0 1px rgba(130, 150, 250, 0.25), 0 12px 36px -14px var(--brand-glow);
+  }
+}
+
+/* Explicit dark toggle wins in both directions */
+:root[data-theme="dark"] {
+  --bg: #080c1c;
+  --bg-2: #0b1022;
+  --panel: #101731;
+  --panel-2: #161f3d;
+  --panel-3: #1b2544;
+  --rail: #0b1330;
+  --rail-2: #070d24;
+  --rail-ink: #a9b4dc;
+  --rail-ink-2: #6c7aae;
+  --ink: #eef1fb;
+  --ink-2: #b0b9d6;
+  --ink-3: #7e88a8;
+  --line: #202a49;
+  --line-2: #2a3557;
+  --brand: #8296fa;
+  --brand-2: #9aabff;
+  --brand-soft: #1a2350;
+  --brand-glow: rgba(130, 150, 250, 0.3);
+  --cyan: #2dd4bf;
+  --cyan-soft: #0e3330;
+  --violet: #a48cff;
+  --violet-soft: #241d47;
+  --good: #48d17f;
+  --good-soft: #0f3320;
+  --warn: #f5b542;
+  --warn-soft: #3a2a08;
+  --crit: #fb6f9c;
+  --crit-soft: #3a1526;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px -6px rgba(0, 0, 0, 0.5);
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 22px 44px -22px rgba(0, 0, 0, 0.7);
+  --glow: 0 0 0 1px rgba(130, 150, 250, 0.25), 0 12px 36px -14px var(--brand-glow);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Reusable primitives that lean on the tokens above */
+  .card {
+    @apply rounded-card border border-line bg-panel shadow-card-sm;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-[10px] border border-line-2 bg-panel px-3.5 py-2 text-[12.5px] font-semibold text-ink cursor-pointer transition-colors;
+  }
+  .btn:hover {
+    @apply bg-panel-2;
+  }
+  .btn-primary {
+    @apply border-transparent text-white;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    box-shadow: 0 10px 24px -12px var(--brand-glow);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.03);
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-panel-2 px-2.5 py-1 text-[11px] font-semibold text-ink-2;
+  }
+  .field-input {
+    @apply w-full rounded-[9px] border border-line-2 bg-panel-2 px-3 py-2.5 text-[12.5px] text-ink outline-none;
+  }
+  .field-input:focus {
+    @apply border-transparent shadow-glow;
+  }
+}
