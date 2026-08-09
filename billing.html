@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billing / POS · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .pos{display:grid;grid-template-columns:minmax(0,1fr) 386px;gap:18px}
+  .pos-search{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--teal);border-radius:12px;padding:13px 16px;box-shadow:0 0 0 4px rgba(92,129,123,.10)}
+  .pos-search svg{width:18px;height:18px;stroke:var(--muted-2)}
+  .pos-search input{flex:1;border:0;outline:0;font-size:15px;color:var(--ink);background:transparent}
+  .scan{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--text);background:var(--surface-2);cursor:pointer;white-space:nowrap}
+  .scan .kbd{font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--muted-2);background:var(--surface)}
+  .res-hint{font-size:12px;color:var(--muted-2)}
+  .add-btn{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;background:var(--surface);cursor:pointer;color:var(--text)}
+  .add-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .stepper button{width:28px;height:30px;border:0;background:var(--surface-2);color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .stepper button:hover{background:var(--surface-3)}
+  .stepper .qv{min-width:30px;text-align:center;font-weight:600;font-size:13px;color:var(--ink)}
+  .del{width:26px;height:26px;border:0;background:transparent;color:var(--muted-3);cursor:pointer;border-radius:6px}
+  .del:hover{background:var(--red-bg);color:var(--red)}
+  .side-label{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--muted-2);text-transform:uppercase}
+  .mini3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+  .mini{border:1px solid var(--line-2);border-radius:10px;padding:9px 10px}
+  .mini .ml{font-size:10.5px;color:var(--muted-2);font-weight:500}
+  .mini .mv{font-size:14px;font-weight:600;color:var(--ink);margin-top:3px}
+  .mini.due{background:var(--amber-bg);border-color:var(--amber-line)}
+  .mini.due .ml{color:var(--amber)}.mini.due .mv{color:var(--amber)}
+  .sumrow{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--text)}
+  .sumrow .v{font-variant-numeric:tabular-nums;font-weight:500;color:var(--ink)}
+  .pay{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .pay .p{border:1px solid var(--line);border-radius:11px;padding:12px 6px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted)}
+  .pay .p svg{width:19px;height:19px;display:block;margin:0 auto 7px;stroke:var(--muted)}
+  .pay .p.on{border:1.5px solid var(--ink);color:var(--ink)}
+  .pay .p.on svg{stroke:var(--ink)}
+  .amt-in{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .amt-in label{font-size:11.5px;color:var(--muted);font-weight:500}
+  .amt-in .box{margin-top:6px;display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+  .amt-in .box input{border:0;outline:0;font-size:14px;font-weight:600;color:var(--ink);width:100%;font-variant-numeric:tabular-nums}
+  .warn-note{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--red);margin-top:10px}
+  .warn-note .d{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+  @media (max-width:1180px){.pos{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="billing">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title">
+        <h1>Billing / POS</h1>
+        <p>Bill No. INV-2026-08-1175 · Counter 1 · Rajesh Kumar</p>
+      </div>
+      <div class="tb-right">
+        <span class="badge-pill b-amber" style="height:34px;padding:0 12px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>2 bills on hold</span>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>08 Aug 2026 · 11:46 AM</div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="pos">
+        <!-- LEFT -->
+        <div>
+          <div class="pos-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input value="Dolo" autofocus>
+            <span class="scan"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg>Scan Barcode <span class="kbd">F2</span></span>
+          </div>
+
+          <!-- Results -->
+          <div class="card mt16">
+            <div class="between" style="padding:14px 18px;border-bottom:1px solid var(--line-2)">
+              <div class="cell-strong">4 batches found for “Dolo”</div>
+              <div class="res-hint">↑↓ navigate · Enter to add · Esc to close</div>
+            </div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>Medicine</th><th>Manufacturer</th><th>Batch</th><th>Expiry</th><th class="t-right">MRP</th><th class="t-right">Stock</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-strong">Dolo 650 Tablet</div><div class="cell-sub">Paracetamol 650mg</div></td><td class="muted">Micro Labs Ltd.</td><td class="num">DOL2456</td><td class="num">Dec 2027</td><td class="t-right amt">₹35.00</td><td class="t-right num" style="color:var(--amber);font-weight:600">8</td><td class="t-right"><button class="add-btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Add</button></td></tr>
+                  <tr><td><div class="cell-strong">Dolo 650 Tablet</div><div class="cell-sub">Paracetamol 650mg</div></td><td class="muted">Micro Labs Ltd.</td><td class="num">DOL2891</td><td class="num">Jun 2028</td><td class="t-right amt">₹35.00</td><td class="t-right num" style="color:var(--green);font-weight:600">240</td><td class="t-right"><button class="add-btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Add</button></td></tr>
+                  <tr><td><div class="cell-strong">Dolo 250 Suspension</div><div class="cell-sub">Paracetamol 250mg/5ml</div></td><td class="muted">Micro Labs Ltd.</td><td class="num">DOL1122</td><td class="num">Feb 2028</td><td class="t-right amt">₹48.50</td><td class="t-right num">36</td><td class="t-right"><button class="add-btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Add</button></td></tr>
+                  <tr><td><div class="cell-strong">Dolopar Tablet</div><div class="cell-sub">Paracetamol + Caffeine</div></td><td class="muted">Micro Labs Ltd.</td><td class="num">DPR7745</td><td class="num">Sep 2027</td><td class="t-right amt">₹42.00</td><td class="t-right num">64</td><td class="t-right"><button class="add-btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Add</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Current Bill -->
+          <div class="card mt16">
+            <div class="card-head"><div><h3>Current Bill</h3><div class="sub">4 items · 10 units</div></div><button class="btn btn-sm btn-light" style="color:var(--red)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Clear Cart</button></div>
+            <div class="tbl-wrap mt16">
+              <table class="tbl">
+                <thead><tr><th>Medicine</th><th>Batch / Exp</th><th class="t-center">Qty</th><th class="t-right">MRP</th><th class="t-right">Disc</th><th class="t-center">GST</th><th class="t-right">Amount</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-strong">Dolo 650 Tablet</div><div class="cell-sub">Micro Labs · Strip of 15</div></td><td><div class="num">DOL2456</div><div class="cell-sub">Dec 2027</div></td><td class="t-center"><span class="stepper"><button data-step="-1">−</button><span class="qv">2</span><button data-step="1">+</button></span></td><td class="t-right amt">₹35.00</td><td class="t-right muted2">₹0.00</td><td class="t-center muted">12%</td><td class="t-right amt">₹70.00</td><td class="t-right"><button class="del">✕</button></td></tr>
+                  <tr><td><div class="cell-strong">Azithromycin 500</div><div class="cell-sub">Cipla Ltd. · Strip of 3</div></td><td><div class="num">AZI7812</div><div class="cell-sub" style="color:var(--red);display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 16H3zM12 9v4M12 16h.01"/></svg>Sep 2026</div></td><td class="t-center"><span class="stepper"><button data-step="-1">−</button><span class="qv">1</span><button data-step="1">+</button></span></td><td class="t-right amt">₹120.00</td><td class="t-right" style="color:var(--green);font-weight:600">₹6.00</td><td class="t-center muted">12%</td><td class="t-right amt">₹114.00</td><td class="t-right"><button class="del">✕</button></td></tr>
+                  <tr><td><div class="cell-strong">Pantop 40 Tablet</div><div class="cell-sub">Sun Pharma · Strip of 15</div></td><td><div class="num">PAN9034</div><div class="cell-sub">Mar 2028</div></td><td class="t-center"><span class="stepper"><button data-step="-1">−</button><span class="qv">3</span><button data-step="1">+</button></span></td><td class="t-right amt">₹142.00</td><td class="t-right muted2">₹0.00</td><td class="t-center muted">12%</td><td class="t-right amt">₹426.00</td><td class="t-right"><button class="del">✕</button></td></tr>
+                  <tr><td><div class="cell-strong">ORS Orange Sachet</div><div class="cell-sub">FDC Ltd. · 21.8g sachet</div></td><td><div class="num">ORS1180</div><div class="cell-sub">Jan 2027</div></td><td class="t-center"><span class="stepper"><button data-step="-1">−</button><span class="qv">4</span><button data-step="1">+</button></span></td><td class="t-right amt">₹22.00</td><td class="t-right muted2">₹0.00</td><td class="t-center muted">5%</td><td class="t-right amt">₹88.00</td><td class="t-right"><button class="del">✕</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="between" style="padding:14px 18px;border-top:1px solid var(--line-2)">
+              <div class="flex gap8">
+                <button class="btn btn-sm btn-light"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>Hold Bill <span class="kbd" style="margin-left:2px">F4</span></button>
+                <button class="btn btn-sm btn-light"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5zM7 3v6h8V3M9 21v-6h6v6"/></svg>Save Draft <span class="kbd" style="margin-left:2px">F6</span></button>
+              </div>
+              <div class="res-hint">ⓘ Prices are MRP-inclusive of GST as per Indian pharmacy billing</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="grid" style="gap:14px;align-content:start">
+          <div class="card card-pad">
+            <div class="between"><span class="side-label">Customer / Patient</span><span class="link" style="font-size:12.5px">Change</span></div>
+            <div class="who mt10"><div class="av-sm">PR</div><div><div class="cell-strong" style="font-size:15px">Priya Ramesh</div><div class="cell-sub">+91 98404 12233 · ID CUS-0392</div></div></div>
+            <div class="mini3">
+              <div class="mini due"><div class="ml">Previous Due</div><div class="mv">₹1,850</div></div>
+              <div class="mini"><div class="ml">Lifetime</div><div class="mv">₹34,210</div></div>
+              <div class="mini"><div class="ml">Visits</div><div class="mv">27</div></div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="between"><span class="side-label">Doctor &amp; Prescription</span><span class="link" style="font-size:12.5px">View Rx</span></div>
+            <div class="who mt10" style="justify-content:space-between">
+              <div class="flex gap12" style="align-items:center">
+                <span class="av-sm" style="border-radius:9px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg></span>
+                <div><div class="cell-strong">Dr. S. Venkatesan, MBBS</div><div class="cell-sub">RX-2026-0871 · Attached 08 Aug 2026</div></div>
+              </div>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--green)" stroke-width="2.4"><path d="M5 12l5 5 9-11"/></svg>
+            </div>
+            <div class="warn-note"><span class="d"></span>1 item in this bill is Schedule H — prescription required</div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="side-label">Bill Summary</div>
+            <div class="mt10">
+              <div class="sumrow"><span>Gross Amount (MRP)</span><span class="v">₹704.00</span></div>
+              <div class="sumrow"><span>Item Discount</span><span class="v" style="color:var(--green)">− ₹6.00</span></div>
+              <div class="sumrow"><span>Taxable Value</span><span class="v">₹628.45</span></div>
+              <div class="sumrow"><span>CGST</span><span class="v">₹34.78</span></div>
+              <div class="sumrow"><span>SGST</span><span class="v">₹34.77</span></div>
+              <div class="sumrow"><span>Round Off</span><span class="v">+ ₹0.00</span></div>
+            </div>
+            <div class="between" style="border-top:1px solid var(--line-2);margin-top:8px;padding-top:14px">
+              <span style="font-size:15px;font-weight:600;color:var(--ink)">Grand Total</span>
+              <span style="font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.02em">₹698.00</span>
+            </div>
+            <div class="badge-pill b-green mt10" style="width:100%;justify-content:center;padding:8px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-11"/></svg>Customer saved ₹6.00 on this bill</div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="side-label">Payment Method</div>
+            <div class="pay">
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Cash</div>
+              <div class="p on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>UPI</div>
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Card</div>
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg>Credit</div>
+            </div>
+            <div class="flex gap12 mt16" style="align-items:center;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px">
+              <span style="width:34px;height:34px;border-radius:8px;background:var(--surface-3);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--ink)" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7M17 20h4"/></svg></span>
+              <div><div class="cell-strong" style="font-size:13px">svmedicals@okhdfcbank</div><div class="cell-sub">Show QR to customer · Awaiting confirmation</div></div>
+            </div>
+            <div class="amt-in">
+              <div><label>Amount Received</label><div class="box"><span class="muted">₹</span><input value="698.00"></div></div>
+              <div><label>Balance / Change</label><div class="box"><span class="muted">₹</span><input value="0.00" readonly></div></div>
+            </div>
+          </div>
+
+          <div class="flex gap12">
+            <a class="btn btn-light" style="flex:1" href="invoice.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/></svg>Print Invoice</a>
+            <button class="btn btn-light" style="flex:1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/></svg>Add Note</button>
+          </div>
+          <a class="btn btn-dark btn-lg" href="invoice.html" style="height:52px;font-size:15px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5 9-11"/></svg>Complete Sale · ₹698.00 <span class="kbd" style="margin-left:4px;border-color:rgba(255,255,255,.3);color:#d9dce0">F9</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

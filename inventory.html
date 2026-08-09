@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .inv-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi-row{display:flex;gap:13px;align-items:center}
+  .kpi-row .ki{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .kpi-row .ki svg{width:21px;height:21px}
+  .kpi-row .kl{font-size:12.5px;color:var(--muted);font-weight:500}
+  .kpi-row .kv{font-size:22px;font-weight:700;color:var(--ink);margin:2px 0 1px;letter-spacing:-.02em}
+  .kpi-row .ks{font-size:11.5px;color:var(--muted-2)}
+  .ic-box{background:var(--teal-tint);color:var(--teal-deep)}
+  .ic-amber{background:var(--amber-bg);color:var(--amber)}
+  .ic-clock{background:var(--red-bg);color:var(--red)}
+  .pager{display:flex;align-items:center;gap:6px}
+  .pager button{min-width:32px;height:32px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-size:12.5px;color:var(--text);cursor:pointer;font-weight:500}
+  .pager button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  @media (max-width:1100px){.inv-kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="inventory">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title">
+        <h1>Medicine Inventory</h1>
+        <p>1,284 medicines · 3,412 active batches · Stock value ₹8,42,650</p>
+      </div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search medicine, invoice, customer…"><span class="kbd">Ctrl K</span></div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add Medicine</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="inv-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></span><div><div class="kl">Total SKUs</div><div class="kv">1,284</div><div class="ks">across 3,412 batches</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h8a3 3 0 0 1 0 6H9l5 5M7 10h8"/></svg></span><div><div class="kl">Stock Value</div><div class="kv">₹8,42,650</div><div class="ks">at purchase cost</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><div><div class="kl">Low Stock</div><div class="kv">18</div><div class="ks">below reorder level</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-clock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span><div><div class="kl">Near Expiry</div><div class="kv">7</div><div class="ks">within 90 days</div></div></div></div>
+      </div>
+
+      <div class="filters">
+        <div class="search" style="min-width:280px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search by medicine name, generic name, batch or barcode…"></div>
+        <div class="select">All Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">All Manufacturers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">All Stock <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Expiry: Any <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Medicine</th><th>Manufacturer</th><th>Batch</th><th>Rack</th><th class="t-right">Purchase</th><th class="t-right">MRP</th><th class="t-right">Selling</th><th class="t-center">GST</th><th class="t-right">Stock</th><th>Expiry</th><th>Status</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="inv-body"></tbody>
+          </table>
+        </div>
+        <div class="between" style="padding:14px 20px;border-top:1px solid var(--line-2)">
+          <span class="muted2" style="font-size:13px">Showing 1–12 of 1,284 medicines</span>
+          <div class="pager">
+            <button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>52</button><button>›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var INV = [
+    ['Dolo 650 Tablet','Paracetamol 650mg','Micro Labs Ltd.','DOL2456','B-12','24.50','35.00','35.00','12%','8','amber','Dec 2027','Low Stock','amber'],
+    ['Azithromycin 500','Azithromycin','Cipla Ltd.','AZI7812','A-04','84.00','120.00','118.00','12%','18','','Sep 2026','Near Expiry','amber'],
+    ['Pantop 40 Tablet','Pantoprazole 40mg','Sun Pharma','PAN9034','C-07','98.40','142.00','142.00','12%','146','','Mar 2028','In Stock','green'],
+    ['Augmentin 625 Duo','Amoxicillin + Clav.','GSK Pharma','AUG5514','A-11','142.00','198.50','196.00','12%','62','','Oct 2026','Near Expiry','amber'],
+    ['Crocin Advance','Paracetamol 500mg','GSK Pharma','CRO8820','B-14','19.20','28.00','28.00','12%','210','','Jul 2028','In Stock','green'],
+    ['Cetirizine 10mg','Cetirizine HCl',"Dr. Reddy's",'CET3391','D-02','12.40','20.00','20.00','5%','12','amber','Aug 2027','Low Stock','amber'],
+    ['Metformin 500 SR','Metformin HCl','USV Pvt Ltd','MET5520','C-01','18.90','32.00','32.00','12%','15','amber','Nov 2027','Low Stock','amber'],
+    ['Amlodipine 5mg','Amlodipine Besylate','Torrent Pharma','AML4417','C-03','9.80','16.50','16.50','5%','320','','Jun 2028','In Stock','green'],
+    ['ORS Orange Sachet','Oral Rehydration Salt','FDC Ltd.','ORS1180','E-05','14.20','22.00','22.00','5%','0','red','Jan 2027','Out of Stock','red'],
+    ['Vitamin D3 60K','Cholecalciferol','Abbott India','VTD3390','D-08','68.00','103.00','99.00','12%','42','','Nov 2026','In Stock','green'],
+    ['Paracetamol 500','Paracetamol IP','Micro Labs Ltd.','PCM2210','B-10','11.00','18.00','18.00','12%','480','','Apr 2028','In Stock','green'],
+    ['Pan-D Capsule','Pantoprazole + Domp.','Alkem Labs','PND6612','C-08','112.00','165.00','162.00','12%','4','red','May 2026','Expired','red']
+  ];
+  var acts = '<div class="row-acts">'
+    + '<button title="View">'+MB.svg('<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>')+'</button>'
+    + '<button title="Edit">'+MB.svg('<path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/>')+'</button>'
+    + '<button title="More">'+MB.svg('<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>')+'</button></div>';
+  document.getElementById('inv-body').innerHTML = INV.map(function(r){
+    var stColor = r[10]==='amber'?'color:var(--amber);font-weight:600':r[10]==='red'?'color:var(--red);font-weight:600':'font-weight:600;color:var(--ink)';
+    var badge = r[13]==='green'?'b-green':r[13]==='red'?'b-red':'b-amber';
+    return '<tr>'
+      + '<td><div class="cell-strong">'+r[0]+'</div><div class="cell-sub">'+r[1]+'</div></td>'
+      + '<td class="muted">'+r[2]+'</td>'
+      + '<td class="num">'+r[3]+'</td>'
+      + '<td class="num muted2">'+r[4]+'</td>'
+      + '<td class="t-right num muted">₹'+r[5]+'</td>'
+      + '<td class="t-right amt">₹'+r[6]+'</td>'
+      + '<td class="t-right amt">₹'+r[7]+'</td>'
+      + '<td class="t-center muted">'+r[8]+'</td>'
+      + '<td class="t-right num" style="'+stColor+'">'+r[9]+'</td>'
+      + '<td class="num">'+r[11]+'</td>'
+      + '<td><span class="badge-pill '+badge+'"><span class="bdot"></span>'+r[12]+'</span></td>'
+      + '<td>'+acts+'</td>'
+      + '</tr>';
+  }).join('');
+</script>
+</body>
+</html>

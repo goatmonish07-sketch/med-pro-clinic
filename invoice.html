@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Invoice INV-2026-08-1174 · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  body{background:#e9eaec}
+  .inv-toolbar{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:12px 22px}
+  .inv-toolbar .sp{flex:1}
+  .sheet{width:794px;max-width:100%;margin:26px auto;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.12);padding:44px 46px;color:#1f2227;font-size:12px;line-height:1.5}
+  .sheet h1,.sheet h2,.sheet h3{color:#0f1113}
+  .inv-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:18px;border-bottom:2px solid #0f1113}
+  .co{display:flex;gap:14px}
+  .co .seal{width:46px;height:46px;border-radius:12px;background:#0f1113;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .co .seal svg{width:24px;height:24px}
+  .co h1{font-size:20px;letter-spacing:-.01em;text-transform:uppercase}
+  .co .adr{color:#5f6368;margin-top:5px;line-height:1.55}
+  .co .adr b{color:#1f2227}
+  .inv-meta{text-align:right;min-width:210px}
+  .inv-meta .ti{display:inline-block;border:1.5px solid #0f1113;border-radius:7px;padding:5px 12px;font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:10px}
+  .inv-meta .mrow{display:flex;justify-content:flex-end;gap:10px;margin:3px 0;color:#5f6368}
+  .inv-meta .mrow b{color:#0f1113;font-variant-numeric:tabular-nums;min-width:118px;text-align:right}
+  .parties{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:16px 0;border-bottom:1px solid #e5e7eb}
+  .lbl{font-size:10px;font-weight:700;letter-spacing:.08em;color:#8a8f98;text-transform:uppercase;margin-bottom:8px}
+  .party .pr{display:flex;gap:8px;margin:3px 0}
+  .party .pr .k{color:#8a8f98;min-width:74px}
+  .party .pr .v{color:#1f2227;font-weight:500}
+  table.inv{width:100%;border-collapse:collapse;margin-top:8px}
+  table.inv th{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a8f98;text-align:left;padding:9px 6px;border-bottom:1px solid #e5e7eb}
+  table.inv td{padding:10px 6px;border-bottom:1px solid #f0f1f2;vertical-align:top;font-variant-numeric:tabular-nums}
+  table.inv .r{text-align:right}.table-c{text-align:center}
+  .p-name{font-weight:600;color:#0f1113}
+  .p-sub{color:#8a8f98;font-size:10.5px;margin-top:2px}
+  .low{display:grid;grid-template-columns:1fr 300px;gap:26px;margin-top:20px}
+  table.gst{width:100%;border-collapse:collapse}
+  table.gst th{font-size:9.5px;text-transform:uppercase;color:#8a8f98;text-align:left;padding:7px 6px;border-bottom:1px solid #e5e7eb;letter-spacing:.03em}
+  table.gst td{padding:7px 6px;border-bottom:1px solid #f0f1f2;font-variant-numeric:tabular-nums}
+  table.gst tr:last-child td{border-bottom:0;font-weight:700;background:#f8f9fa}
+  .words{margin-top:12px;color:#5f6368}.words b{color:#1f2227}
+  .totrow{display:flex;justify-content:space-between;padding:7px 0;color:#5f6368}
+  .totrow b{color:#0f1113;font-variant-numeric:tabular-nums}
+  .grand{display:flex;justify-content:space-between;align-items:center;background:#f4f5f6;border-radius:10px;padding:14px 16px;margin-top:8px}
+  .grand .gl{font-size:12px;font-weight:700;letter-spacing:.03em;color:#0f1113}
+  .grand .gv{font-size:22px;font-weight:700;color:#0f1113;font-variant-numeric:tabular-nums}
+  .paid{display:flex;justify-content:space-between;margin-top:12px;color:#5f6368}
+  .pill-g{display:inline-flex;align-items:center;gap:6px;color:var(--green);background:var(--green-bg);border-radius:999px;padding:3px 10px;font-weight:600;font-size:11px}
+  .terms{display:grid;grid-template-columns:1fr 260px;gap:26px;margin-top:26px;padding-top:16px;border-top:1px solid #e5e7eb}
+  .terms ol{margin:8px 0 0;padding-left:16px;color:#5f6368;line-height:1.6}
+  .sign{text-align:right}
+  .sign .for{font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a8f98;text-transform:uppercase}
+  .sign .line{height:44px;border-bottom:1px solid #c9ccd1;margin:6px 0 6px}
+  .sign .role{color:#8a8f98;font-size:10.5px}
+  .sign .who{color:#1f2227;font-weight:600;margin-top:2px}
+  .foot{text-align:center;margin-top:24px}
+  .foot .ty{font-weight:600;color:#1f2227}
+  .foot .gen{color:#a9aeb6;font-size:10.5px;margin-top:6px}
+  @media print{
+    body{background:#fff}
+    .inv-toolbar{display:none}
+    .sheet{box-shadow:none;margin:0;width:auto;padding:0}
+    @page{size:A4;margin:14mm}
+  }
+  @media (max-width:840px){.sheet{padding:26px 22px}.low,.terms,.parties{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="inv-toolbar">
+    <a class="btn btn-light btn-sm" href="billing.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>Back to Billing</a>
+    <div class="sp"></div>
+    <span class="muted2" style="font-size:13px">Invoice INV-2026-08-1174</span>
+    <button class="btn btn-dark btn-sm" onclick="window.print()"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/></svg>Print / Save PDF</button>
+  </div>
+
+  <div class="sheet">
+    <!-- Header -->
+    <div class="inv-head">
+      <div class="co">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="9.5" width="17" height="5" rx="2.5" transform="rotate(45 12 12)"/><path d="M9.7 9.7l4.6 4.6"/></svg></div>
+        <div>
+          <h1>Sri Venkateswara Medicals</h1>
+          <div class="adr">
+            No. 18, Thanikachalam Road, T. Nagar, Chennai — 600017, Tamil Nadu<br>
+            Phone: 044 2834 5511 · +91 98410 55112 &nbsp;&nbsp; Email: billing@svmedicals.in<br>
+            <b>GSTIN: 33AAGCS7781M1ZV</b> &nbsp;&nbsp; <b>Drug Licence: TN/CHN/20B-4471, 21B-4472</b>
+          </div>
+        </div>
+      </div>
+      <div class="inv-meta">
+        <span class="ti">TAX INVOICE</span>
+        <div class="mrow">Invoice No. <b>INV-2026-08-1174</b></div>
+        <div class="mrow">Date <b>08 Aug 2026</b></div>
+        <div class="mrow">Time <b>11:42 AM</b></div>
+        <div class="mrow">Counter / Staff <b>C1 · Rajesh Kumar</b></div>
+      </div>
+    </div>
+
+    <!-- Parties -->
+    <div class="parties">
+      <div class="party">
+        <div class="lbl">Bill To</div>
+        <div class="pr"><span class="k">Name</span><span class="v">Priya Ramesh</span></div>
+        <div class="pr"><span class="k">Phone</span><span class="v">+91 98410 22456</span></div>
+        <div class="pr"><span class="k">Address</span><span class="v">12/4, Habibullah Road, T. Nagar, Chennai — 600017</span></div>
+        <div class="pr"><span class="k">GSTIN</span><span class="v">— (B2C)</span></div>
+      </div>
+      <div class="party">
+        <div class="lbl">Prescribed By</div>
+        <div class="pr"><span class="k">Doctor</span><span class="v">Dr. S. Venkatesan, MBBS, DNB</span></div>
+        <div class="pr"><span class="k">Reg. No.</span><span class="v">TN Reg. 68142</span></div>
+        <div class="pr"><span class="k">Prescription</span><span class="v">RX-2026-0871 dated 08 Aug 2026</span></div>
+        <div class="pr"><span class="k">Patient</span><span class="v">Priya Ramesh · 34 / F</span></div>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <table class="inv">
+      <thead><tr><th>#</th><th>Particulars</th><th>HSN</th><th>Batch</th><th>Exp</th><th class="r">Qty</th><th class="r">MRP</th><th class="r">Rate</th><th class="r">Dis%</th><th class="r">GST</th><th class="r">Amount</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><div class="p-name">Dolo 650 Tablet</div><div class="p-sub">Paracetamol 650mg · Micro Labs · Strip of 15</div></td><td>30049099</td><td>DOL2456</td><td>12/27</td><td class="r">2</td><td class="r">35.00</td><td class="r">35.00</td><td class="r">0</td><td class="r">12%</td><td class="r">70.00</td></tr>
+        <tr><td>2</td><td><div class="p-name">Azithromycin 500 Tablet</div><div class="p-sub">Azithromycin 500mg · Cipla · Strip of 3 · [Schedule H]</div></td><td>30042019</td><td>AZI7812</td><td>09/26</td><td class="r">1</td><td class="r">120.00</td><td class="r">114.00</td><td class="r">5</td><td class="r">12%</td><td class="r">114.00</td></tr>
+        <tr><td>3</td><td><div class="p-name">Pantop 40 Tablet</div><div class="p-sub">Pantoprazole 40mg · Sun Pharma · Strip of 15</div></td><td>30049099</td><td>PAN9034</td><td>03/28</td><td class="r">3</td><td class="r">142.00</td><td class="r">142.00</td><td class="r">0</td><td class="r">12%</td><td class="r">426.00</td></tr>
+        <tr><td>4</td><td><div class="p-name">ORS Orange Sachet</div><div class="p-sub">Oral Rehydration Salt · FDC Ltd. · 21.8g</div></td><td>30049099</td><td>ORS1180</td><td>01/27</td><td class="r">4</td><td class="r">22.00</td><td class="r">22.00</td><td class="r">0</td><td class="r">5%</td><td class="r">88.00</td></tr>
+      </tbody>
+    </table>
+
+    <!-- GST summary + totals -->
+    <div class="low">
+      <div>
+        <div class="lbl" style="margin-top:6px">GST Summary (HSN-wise)</div>
+        <table class="gst">
+          <thead><tr><th>HSN</th><th>Taxable</th><th>CGST %</th><th>CGST Amt</th><th>SGST %</th><th>SGST Amt</th><th>Total Tax</th></tr></thead>
+          <tbody>
+            <tr><td>30049099</td><td>460.71</td><td>6%</td><td>27.64</td><td>6%</td><td>27.64</td><td>55.28</td></tr>
+            <tr><td>30042019</td><td>101.79</td><td>6%</td><td>6.11</td><td>6%</td><td>6.11</td><td>12.22</td></tr>
+            <tr><td>30049099 (5%)</td><td>65.95</td><td>2.5%</td><td>1.03</td><td>2.5%</td><td>1.02</td><td>2.05</td></tr>
+            <tr><td>Total</td><td>628.45</td><td></td><td>34.78</td><td></td><td>34.77</td><td>69.55</td></tr>
+          </tbody>
+        </table>
+        <div class="words">Amount in words: <b>Rupees Six Hundred Ninety Eight Only</b></div>
+      </div>
+      <div>
+        <div class="totrow"><span>Gross Amount</span><b>₹704.00</b></div>
+        <div class="totrow"><span>Discount</span><b style="color:var(--green)">− ₹6.00</b></div>
+        <div class="totrow"><span>Taxable Value</span><b>₹628.45</b></div>
+        <div class="totrow"><span>CGST</span><b>₹34.78</b></div>
+        <div class="totrow"><span>SGST</span><b>₹34.77</b></div>
+        <div class="totrow"><span>Round Off</span><b>+ ₹0.00</b></div>
+        <div class="grand"><span class="gl">GRAND TOTAL</span><span class="gv">₹698.00</span></div>
+        <div class="paid"><span>Payment Mode</span><span class="pill-g"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/></svg>UPI · svmedicals@okhdfcbank</span></div>
+        <div class="paid"><span>You saved</span><b style="color:var(--green)">₹6.00 on this bill</b></div>
+      </div>
+    </div>
+
+    <!-- Terms + signature -->
+    <div class="terms">
+      <div>
+        <div class="lbl">Terms &amp; Conditions</div>
+        <ol>
+          <li>Medicines once sold will be taken back only within 7 days, with this bill, if the strip is sealed and unexpired.</li>
+          <li>Schedule H / H1 medicines are dispensed strictly against a valid prescription, a copy of which is retained by us.</li>
+          <li>Please verify the batch number and expiry date at the counter before leaving.</li>
+          <li>Goods are sold under the Drugs &amp; Cosmetics Act, 1940. E. &amp; O.E. · Subject to Chennai jurisdiction.</li>
+        </ol>
+      </div>
+      <div class="sign">
+        <div class="for">For Sri Venkateswara Medicals</div>
+        <div class="line"></div>
+        <div class="role">Authorised Signatory · Registered Pharmacist</div>
+        <div class="who">Rajesh Kumar · D.Pharm · TN/PH/14829</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="ty">Thank you for your visit — get well soon!</div>
+      <div class="gen">This is a computer-generated tax invoice. Generated by MediBill Pro on 08 Aug 2026 at 11:42 AM.</div>
+    </div>
+  </div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

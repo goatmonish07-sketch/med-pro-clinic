@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .dash-2{display:grid;grid-template-columns:1.62fr 1fr;gap:18px;margin-top:18px}
+  .rank{width:22px;height:22px;border-radius:6px;background:var(--surface-3);color:var(--muted);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .rank.one{background:var(--ink);color:#fff}
+  .sell{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-3)}
+  .sell:last-child{border-bottom:0;padding-bottom:2px}
+  .sell .nm{font-weight:600;color:var(--ink);font-size:13.5px}
+  .sell .mf{font-size:12px;color:var(--muted-2);margin-top:1px}
+  .exp{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-3)}
+  .exp:last-child{border-bottom:0;padding-bottom:2px}
+  .exp .ei{width:32px;height:32px;border-radius:9px;background:var(--amber-bg);color:var(--amber);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .exp .ei svg{width:16px;height:16px}
+  @media (max-width:1280px){.kpis{grid-template-columns:repeat(3,1fr)}.dash-2{grid-template-columns:1fr}}
+  @media (max-width:680px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="dashboard">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title">
+        <h1>Dashboard</h1>
+        <p>Sri Venkateswara Medicals · Main Branch, T. Nagar</p>
+      </div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search medicine, invoice, customer…"><span class="kbd">Ctrl K</span></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Sat, 08 Aug 2026</div>
+        <button class="icon-btn"><span class="dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <a class="btn btn-dark" href="billing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New Sale</a>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- KPIs -->
+      <div class="kpis">
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h8a3 3 0 0 1 0 6H9l5 5M7 10h8"/></svg></span>Today's Sales</div>
+          <div class="k-val">₹48,620</div>
+          <div class="k-foot"><span class="delta up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 15l6-6 6 6"/></svg>12.4%</span> 62 bills</div>
+        </div>
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>Today's Purchases</div>
+          <div class="k-val">₹21,450</div>
+          <div class="k-foot"><span class="delta up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 15l6-6 6 6"/></svg>3 GRNs</span> 4 suppliers</div>
+        </div>
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></span>Total Stock Value</div>
+          <div class="k-val">₹8,42,650</div>
+          <div class="k-foot"><span class="delta up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 15l6-6 6 6"/></svg>2.1%</span> 1,284 SKUs</div>
+        </div>
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span>Low Stock</div>
+          <div class="k-val">18</div>
+          <div class="k-foot"><span class="delta down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>5 new</span> needs reorder</div>
+        </div>
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span>Expiring Soon</div>
+          <div class="k-val">7</div>
+          <div class="k-foot"><span class="delta warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>30 days</span> ₹18,940</div>
+        </div>
+        <div class="kpi">
+          <div class="k-top"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></span>Outstanding Credit</div>
+          <div class="k-val">₹74,200</div>
+          <div class="k-foot"><span class="delta down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>9.2%</span> 23 customers</div>
+        </div>
+      </div>
+
+      <!-- Chart + Top selling -->
+      <div class="dash-2">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Sales &amp; Purchase Overview</h3><div class="sub">Last 7 days · Sales ₹3,46,860 · Purchases ₹1,08,450</div></div>
+            <div class="seg"><button class="on">7 Days</button><button>30 Days</button><button>Year</button></div>
+          </div>
+          <div class="card-pad">
+            <div class="chart-legend" style="margin-bottom:14px"><span><i style="background:var(--ink)"></i>Sales</span><span><i style="background:var(--teal-soft)"></i>Purchases</span></div>
+            <div style="display:flex;gap:6px">
+              <div class="chart-y"><span>₹64k</span><span>₹48k</span><span>₹32k</span><span>₹16k</span><span>₹0k</span></div>
+              <div class="chart" style="flex:1;--chart-h:230px">
+                <div class="col"><div class="bars"><div class="bar-a" style="height:59%"></div><div class="bar-b" style="height:25%"></div></div><span class="xl">Mon</span></div>
+                <div class="col"><div class="bars"><div class="bar-a" style="height:53%"></div><div class="bar-b" style="height:7%"></div></div><span class="xl">Tue</span></div>
+                <div class="col"><div class="bars"><div class="bar-a" style="height:78%"></div><div class="bar-b" style="height:31%"></div></div><span class="xl">Wed</span></div>
+                <div class="col"><div class="bars"><div class="bar-a" style="height:72%"></div><div class="bar-b" style="height:19%"></div></div><span class="xl">Thu</span></div>
+                <div class="col"><div class="bars"><div class="bar-a" style="height:88%"></div><div class="bar-b" style="height:6%"></div></div><span class="xl">Fri</span></div>
+                <div class="col"><div class="bars"><div class="bar-a" style="height:97%"></div><div class="bar-b" style="height:52%"></div></div><span class="xl">Sat</span></div>
+                <div class="col active"><div class="bars"><div class="bar-a" style="height:76%;position:relative"><span style="position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:3px 7px;border-radius:6px;white-space:nowrap">₹48,620</span></div><div class="bar-b" style="height:25%"></div></div><span class="xl">Today</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><div><h3>Top Selling Medicines</h3><div class="sub">This month · by revenue</div></div><span class="link">View all</span></div>
+          <div class="card-pad" style="padding-top:6px">
+            <div class="sell"><span class="rank one">1</span><div style="flex:1"><div class="nm">Dolo 650 Tablet</div><div class="mf">Micro Labs · 1,842 strips</div><div class="bar mt6"><span style="width:100%"></span></div></div><span class="amt">₹64,470</span></div>
+            <div class="sell"><span class="rank">2</span><div style="flex:1"><div class="nm">Pantop 40 Tablet</div><div class="mf">Sun Pharma · 624 strips</div><div class="bar mt6"><span style="width:66%"></span></div></div><span class="amt">₹42,830</span></div>
+            <div class="sell"><span class="rank">3</span><div style="flex:1"><div class="nm">Azithromycin 500</div><div class="mf">Cipla Ltd. · 388 strips</div><div class="bar mt6"><span style="width:48%"></span></div></div><span class="amt">₹31,240</span></div>
+            <div class="sell"><span class="rank">4</span><div style="flex:1"><div class="nm">Augmentin 625 Duo</div><div class="mf">GSK Pharma · 196 strips</div><div class="bar mt6"><span style="width:45%"></span></div></div><span class="amt">₹28,910</span></div>
+            <div class="sell"><span class="rank">5</span><div style="flex:1"><div class="nm">Cetirizine 10mg</div><div class="mf">Dr. Reddy's · 1,120 strips</div><div class="bar mt6"><span style="width:35%"></span></div></div><span class="amt">₹22,400</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Low stock + Expiry -->
+      <div class="dash-2">
+        <div class="card">
+          <div class="card-head"><div><h3>Low-Stock Medicines</h3><div class="sub">18 items below reorder level</div></div><span class="link">Create purchase order</span></div>
+          <div class="tbl-wrap mt16">
+            <table class="tbl">
+              <thead><tr><th>Medicine</th><th>Batch</th><th class="t-right">Stock</th><th class="t-right">Reorder</th><th>Expiry</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><div class="cell-strong">Dolo 650 Tablet</div><div class="cell-sub">Paracetamol 650mg</div></td><td class="num">DOL2456</td><td class="t-right num" style="color:var(--amber);font-weight:600">8</td><td class="t-right num muted2">20</td><td class="num">Dec 2027</td><td><span class="badge-pill b-amber"><span class="bdot"></span>Low Stock</span></td></tr>
+                <tr><td><div class="cell-strong">Cetirizine 10mg</div><div class="cell-sub">Cetirizine HCl</div></td><td class="num">CET3391</td><td class="t-right num" style="color:var(--amber);font-weight:600">12</td><td class="t-right num muted2">40</td><td class="num">Aug 2027</td><td><span class="badge-pill b-amber"><span class="bdot"></span>Low Stock</span></td></tr>
+                <tr><td><div class="cell-strong">ORS Orange Sachet</div><div class="cell-sub">Oral Rehydration Salt</div></td><td class="num">ORS1180</td><td class="t-right num" style="color:var(--red);font-weight:600">0</td><td class="t-right num muted2">60</td><td class="num">Jan 2027</td><td><span class="badge-pill b-red"><span class="bdot"></span>Out of Stock</span></td></tr>
+                <tr><td><div class="cell-strong">Metformin 500 SR</div><div class="cell-sub">Metformin HCl</div></td><td class="num">MET5520</td><td class="t-right num" style="color:var(--amber);font-weight:600">15</td><td class="t-right num muted2">50</td><td class="num">Nov 2027</td><td><span class="badge-pill b-amber"><span class="bdot"></span>Low Stock</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><div><h3>Expiry Alerts</h3><div class="sub">Next 90 days · ₹18,940 at risk</div></div><span class="link">Manage</span></div>
+          <div class="card-pad" style="padding-top:6px">
+            <div class="exp"><span class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg></span><div style="flex:1"><div class="nm cell-strong">Azithromycin 500</div><div class="mf muted2" style="font-size:12px">AZI7812 · 18 units · 15 Sep 2026</div></div><div class="right"><div style="color:var(--red);font-weight:600;font-size:12.5px">38 days</div><div class="amt" style="font-size:13px">₹2,160</div></div></div>
+            <div class="exp"><span class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg></span><div style="flex:1"><div class="nm cell-strong">Pantop 40 Tablet</div><div class="mf muted2" style="font-size:12px">PAN2207 · 24 strips · 28 Sep 2026</div></div><div class="right"><div style="color:var(--amber);font-weight:600;font-size:12.5px">51 days</div><div class="amt" style="font-size:13px">₹3,408</div></div></div>
+            <div class="exp"><span class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg></span><div style="flex:1"><div class="nm cell-strong">Augmentin 625 Duo</div><div class="mf muted2" style="font-size:12px">AUG5514 · 9 strips · 10 Oct 2026</div></div><div class="right"><div style="color:var(--amber);font-weight:600;font-size:12.5px">63 days</div><div class="amt" style="font-size:13px">₹1,890</div></div></div>
+            <div class="exp"><span class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg></span><div style="flex:1"><div class="nm cell-strong">Vitamin D3 60K</div><div class="mf muted2" style="font-size:12px">VTD3390 · 42 sachets · 02 Nov 2026</div></div><div class="right"><div class="muted2" style="font-weight:600;font-size:12.5px">86 days</div><div class="amt" style="font-size:13px">₹4,326</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

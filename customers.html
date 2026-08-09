@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customers · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .inv-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi-row{display:flex;gap:13px;align-items:center}
+  .kpi-row .ki{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .kpi-row .ki svg{width:21px;height:21px}
+  .kpi-row .kl{font-size:12.5px;color:var(--muted);font-weight:500}
+  .kpi-row .kv{font-size:22px;font-weight:700;color:var(--ink);margin:2px 0 1px;letter-spacing:-.02em}
+  .kpi-row .ks{font-size:11.5px;color:var(--muted-2)}
+  .ic-teal{background:var(--teal-tint);color:var(--teal-deep)}
+  .ic-amber{background:var(--amber-bg);color:var(--amber)}
+  .ic-green{background:var(--green-bg);color:var(--green)}
+  .pager{display:flex;align-items:center;gap:6px}
+  .pager button{min-width:32px;height:32px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-size:12.5px;color:var(--text);cursor:pointer;font-weight:500}
+  .pager button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  @media (max-width:1100px){.inv-kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="customers">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title">
+        <h1>Customers</h1>
+        <p>1,842 customers · ₹74,200 outstanding credit</p>
+      </div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search name or phone…"><span class="kbd">Ctrl K</span></div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Due Reminders</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add Customer</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="inv-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5.5M18 20a6 6 0 0 0-3-5"/></svg></span><div><div class="kl">Total Customers</div><div class="kv">1,842</div><div class="ks">1,684 retail · 158 credit</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></span><div><div class="kl">Outstanding Credit</div><div class="kv">₹74,200</div><div class="ks">across 41 customers</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div><div class="kl">New This Month</div><div class="kv">68</div><div class="ks" style="color:var(--green)">+18% vs last month</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l6-6 4 4 8-8M21 7v6M15 7h6"/></svg></span><div><div class="kl">Repeat Customers</div><div class="kv">62%</div><div class="ks">1,142 returned in 90 days</div></div></div></div>
+      </div>
+
+      <div class="filters">
+        <div class="search" style="min-width:280px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search by customer name, phone number or bill number…"></div>
+        <div class="select">All Types <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Outstanding: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Area: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Status: Active <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Customer</th><th>Type</th><th>Area</th><th class="t-right">Bills</th><th class="t-right">Total Purchases</th><th class="t-right">Outstanding</th><th>Last Purchase</th><th>Prefers</th><th>Status</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="cust-body"></tbody>
+          </table>
+        </div>
+        <div class="between" style="padding:14px 20px;border-top:1px solid var(--line-2)">
+          <span class="muted2" style="font-size:13px">Showing 1–10 of 1,842 customers</span>
+          <div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>62</button><button>›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var C = [
+    ['PR','Priya Ramesh','+91 98410 22456','Credit','T. Nagar','48','42,180','1,850','08 Aug 2026','UPI','Active'],
+    ['RS','Ramesh Subramanian','+91 94440 11208','Retail','Mambalam','32','28,940','0','08 Aug 2026','Cash','Active'],
+    ['LN','Lakshmi Narayanan','+91 90032 88147','Credit','Saidapet','61','68,320','4,280','07 Aug 2026','Credit','Active'],
+    ['AK','Anitha Krishnan','+91 98846 55012','Retail','Ashok Nagar','19','12,470','0','07 Aug 2026','UPI','Active'],
+    ['SK','Senthil Kumar','+91 89392 74410','Retail','Kodambakkam','27','19,860','0','06 Aug 2026','Card','Active'],
+    ['VR','Vasanthi Raghavan','+91 94441 30982','Credit','T. Nagar','74','91,240','8,640','06 Aug 2026','Credit','Active'],
+    ['SS','Sri Sai Old Age Home','+91 44 2431 7788','Institution','Nandanam','38','2,84,600','32,400','05 Aug 2026','Credit','Active'],
+    ['KM','Karthikeyan M.','+91 98404 62130','Retail','West Mambalam','14','8,920','0','04 Aug 2026','Cash','Active'],
+    ['DS','Deepa Sundaram','+91 90809 44127','Retail','Alwarpet','22','16,340','0','03 Aug 2026','UPI','Active'],
+    ['MI','Mohammed Ilyas','+91 99623 10874','Credit','Royapettah','9','6,480','2,120','28 Jul 2026','Credit','Inactive']
+  ];
+  var acts = '<div class="row-acts">'
+    + '<button title="View">'+MB.svg('<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>')+'</button>'
+    + '<button title="Bills">'+MB.svg('<path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/>')+'</button>'
+    + '<button title="More">'+MB.svg('<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>')+'</button></div>';
+  document.getElementById('cust-body').innerHTML = C.map(function(r){
+    var typeCls = r[3]==='Credit'?'tag-credit':r[3]==='Institution'?'tag-inst':'tag-retail';
+    var due = r[7]==='0' ? '<span class="muted2 num">₹0</span>' : '<span class="num" style="color:var(--amber);font-weight:600">₹'+r[7]+'</span>';
+    var st = r[10]==='Active'
+      ? '<span class="badge-pill b-green"><span class="bdot"></span>Active</span>'
+      : '<span class="badge-pill b-gray"><span class="bdot"></span>Inactive</span>';
+    return '<tr>'
+      + '<td><div class="who"><span class="av-sm">'+r[0]+'</span><div><div class="cell-strong">'+r[1]+'</div><div class="cell-sub num">'+r[2]+'</div></div></div></td>'
+      + '<td><span class="tag '+typeCls+'">'+r[3]+'</span></td>'
+      + '<td class="muted">'+r[4]+'</td>'
+      + '<td class="t-right num">'+r[5]+'</td>'
+      + '<td class="t-right amt">₹'+r[6]+'</td>'
+      + '<td class="t-right">'+due+'</td>'
+      + '<td class="num muted">'+r[8]+'</td>'
+      + '<td class="muted">'+r[9]+'</td>'
+      + '<td>'+st+'</td>'
+      + '<td>'+acts+'</td>'
+      + '</tr>';
+  }).join('');
+</script>
+</body>
+</html>
