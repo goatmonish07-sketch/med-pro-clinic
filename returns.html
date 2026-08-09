@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Returns · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .ret{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
+  .step-h{display:flex;align-items:flex-start;gap:12px}
+  .step-n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .step-h h3{font-size:15px}.step-h .s{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .ret-search{display:flex;align-items:center;gap:10px;border:2px solid var(--teal);border-radius:11px;padding:11px 14px;margin-top:14px;box-shadow:0 0 0 4px rgba(92,129,123,.10)}
+  .ret-search input{flex:1;border:0;outline:0;font-size:14px;color:var(--ink);background:transparent}
+  .foundbill{display:flex;align-items:center;gap:14px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:11px;padding:14px;margin-top:12px}
+  .fb-meta{display:flex;gap:22px;text-align:right}
+  .fb-meta .m .l{font-size:11px;color:var(--muted-2)}.fb-meta .m .v{font-size:13px;font-weight:600;color:var(--ink);margin-top:2px}
+  .cbx{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;background:#fff}
+  .cbx.on{background:var(--ink);border-color:var(--ink)}
+  .cbx svg{width:12px;height:12px;stroke:#fff;display:none}.cbx.on svg{display:block}
+  .qbox{width:52px;height:32px;border:1px solid var(--line);border-radius:8px;text-align:center;font-weight:600;font-size:13px;color:var(--ink);outline:0}
+  .rsel{border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;color:var(--text);display:flex;align-items:center;gap:6px;justify-content:space-between;min-width:120px}
+  .note-area{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font:inherit;font-size:13px;color:var(--ink);resize:vertical;min-height:74px;outline:0}
+  .amber-note{display:flex;gap:8px;align-items:flex-start;background:var(--amber-bg);border:1px solid var(--amber-line);border-radius:10px;padding:11px 13px;margin-top:12px;color:var(--amber);font-size:12.5px}
+  .srow{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--text)}
+  .srow .v{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+  .rmode{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+  .rmode .p{border:1px solid var(--line);border-radius:10px;padding:11px 6px;text-align:center;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+  .rmode .p svg{width:18px;height:18px;display:block;margin:0 auto 6px;stroke:var(--muted)}
+  .rmode .p.on{border:1.5px solid var(--ink);color:var(--ink)}.rmode .p.on svg{stroke:var(--ink)}
+  .impact li{font-size:12.5px;color:var(--text);margin:7px 0;list-style:none;padding-left:16px;position:relative}
+  .impact li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+  @media (max-width:1100px){.ret{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="returns">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title"><h1>Returns</h1><p>Sales returns go back to sellable stock only if the batch is intact and unexpired</p></div>
+      <div class="tb-right">
+        <div class="seg"><button class="on">Sales Returns</button><button>Purchase Returns</button></div>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/></svg>Returns History</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/></svg>New Sales Return</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="ret">
+        <!-- LEFT -->
+        <div class="grid" style="gap:16px">
+          <div class="card card-pad">
+            <div class="step-h"><span class="step-n">1</span><div><h3>Find the original bill</h3><div class="s">Search by invoice number, customer phone or scan the printed bill barcode</div></div></div>
+            <div class="ret-search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--muted-2)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+              <input value="INV-2026-08-1102">
+              <span class="badge-pill b-green"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-11"/></svg>Bill found</span>
+            </div>
+            <div class="foundbill">
+              <span class="av-sm">PR</span>
+              <div style="flex:1"><div class="cell-strong">Priya Ramesh &nbsp;·&nbsp; +91 98410 22456</div><div class="cell-sub">INV-2026-08-1102 · 04 Aug 2026, 18:22 · Billed by Lakshmi S. · Counter 2</div></div>
+              <div class="fb-meta">
+                <div class="m"><div class="l">Bill Total</div><div class="v">₹1,260.00</div></div>
+                <div class="m"><div class="l">Payment</div><div class="v" style="color:var(--amber)">Credit</div></div>
+                <div class="m"><div class="l">Items</div><div class="v">6</div></div>
+                <div class="m"><div class="l">Days Ago</div><div class="v">4</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="step-h"><span class="step-n">2</span><div><h3>Select items being returned</h3><div class="s">Enter the quantity coming back — partial returns are allowed</div></div></div>
+            <div class="tbl-wrap mt16">
+              <table class="tbl">
+                <thead><tr><th style="width:34px"></th><th>Medicine</th><th>Batch</th><th>Expiry</th><th class="t-right">Sold</th><th class="t-center">Return Qty</th><th class="t-right">Rate</th><th class="t-right">Amount</th><th>Reason</th></tr></thead>
+                <tbody id="ret-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="step-h"><span class="step-n">3</span><div><h3>Return reason &amp; pharmacist note</h3><div class="s">Recorded against the return note for audit</div></div></div>
+            <textarea class="note-area mt16">Patient developed a rash on day 2 and the doctor advised stopping the antibiotic. Strips are sealed, batch intact and well within expiry — returning to sellable stock after visual check.</textarea>
+            <div class="amber-note"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" style="flex-shrink:0"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg>Schedule H items cannot be returned to sellable stock once the strip is opened — they will be marked for destruction instead.</div>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="grid" style="gap:14px;align-content:start">
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Refund Summary</h3>
+            <div class="mt10">
+              <div class="srow"><span>Items Returned</span><span class="v">2 of 6</span></div>
+              <div class="srow"><span>Return Value</span><span class="v">₹534.00</span></div>
+              <div class="srow"><span>Discount Reversed</span><span class="v" style="color:var(--muted)">+ ₹8.00</span></div>
+              <div class="srow"><span>CGST Reversed</span><span class="v">− ₹28.61</span></div>
+              <div class="srow"><span>SGST Reversed</span><span class="v">− ₹28.61</span></div>
+              <div class="srow"><span>Restocking Fee</span><span class="v">₹0.00</span></div>
+            </div>
+            <div class="between" style="background:var(--surface-2);border-radius:11px;padding:13px 15px;margin-top:12px">
+              <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Net Refund</div><div class="cell-sub">Incl. GST reversal</div></div>
+              <div style="font-size:22px;font-weight:700;color:var(--ink)">₹526.00</div>
+            </div>
+          </div>
+
+          <div class="card card-pad">
+            <h3 style="font-size:15px">Refund Mode</h3>
+            <div class="rmode">
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Cash</div>
+              <div class="p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/></svg>UPI</div>
+              <div class="p on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Adjust Due</div>
+            </div>
+            <div class="srow" style="margin-top:12px"><span>Outstanding before</span><span class="v">₹1,850.00</span></div>
+            <div class="srow"><span class="cell-strong">Outstanding after refund</span><span class="v">₹1,324.00</span></div>
+          </div>
+
+          <div class="card card-pad">
+            <div class="flex gap8" style="align-items:center"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--teal-deep)" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg><b style="color:var(--ink);font-size:14px">Stock impact on save</b></div>
+            <ul class="impact" style="margin:10px 0 0;padding:0">
+              <li>Augmentin 625 Duo · AUG5514 → +2 strips</li>
+              <li>Pantop 40 Tablet · PAN9034 → +1 strip</li>
+              <li>Both batches return to sellable stock</li>
+              <li>Credit note CN-2026-0142 generated</li>
+            </ul>
+            <button class="btn btn-dark btn-block mt16"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/></svg>Process Return · ₹526.00</button>
+            <button class="btn btn-light btn-block" style="margin-top:10px"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/></svg>Process &amp; Print Credit Note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var R=[
+    [1,'Augmentin 625 Duo','Amoxicillin + Clav. · GSK','AUG5514','22 Sep 2026','2','2','196.00','392.00','Patient stopped course'],
+    [1,'Pantop 40 Tablet','Pantoprazole 40mg · Sun','PAN9034','30 Mar 2028','3','1','142.00','142.00','Duplicate purchase'],
+    [0,'Dolo 650 Tablet','Paracetamol 650mg · Micro','DOL2456','31 Dec 2027','2','0','35.00','0.00','Select reason'],
+    [0,'ORS Orange Sachet','Oral Rehydration Salt · FDC','ORS1180','02 Sep 2026','4','0','22.00','0.00','Select reason'],
+    [0,'Cetirizine 10mg Tablet',"Cetirizine HCl · Dr. Reddy's",'CET3391','18 Sep 2026','1','0','20.00','0.00','Select reason'],
+    [0,'Crocin Advance 500','Paracetamol 500mg · GSK','CRO8820','20 Sep 2026','2','0','28.00','0.00','Select reason']
+  ];
+  document.getElementById('ret-body').innerHTML=R.map(function(r){
+    var on=r[0]===1;
+    var amtStyle=on?'amt':'muted2';
+    return '<tr'+(on?' style="background:var(--surface-2)"':'')+'>'
+      +'<td><span class="cbx'+(on?' on':'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg></span></td>'
+      +'<td><div class="cell-strong">'+r[1]+'</div><div class="cell-sub">'+r[2]+'</div></td>'
+      +'<td class="num">'+r[3]+'</td>'
+      +'<td class="num">'+r[4]+'</td>'
+      +'<td class="t-right num">'+r[5]+'</td>'
+      +'<td class="t-center"><input class="qbox" value="'+r[6]+'"></td>'
+      +'<td class="t-right num">₹'+r[7]+'</td>'
+      +'<td class="t-right '+amtStyle+'">₹'+r[8]+'</td>'
+      +'<td><div class="rsel">'+r[9]+' <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="var(--muted-2)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div></td>'
+      +'</tr>';
+  }).join('');
+  document.addEventListener('click',function(e){var c=e.target.closest('.cbx');if(c)c.classList.toggle('on');});
+</script>
+</body>
+</html>

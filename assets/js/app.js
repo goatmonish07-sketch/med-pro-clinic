@@ -23,22 +23,22 @@
     ['MAIN', [
       ['dashboard','Dashboard','dashboard.html'],
       ['billing','Billing / POS','billing.html'],
-      ['sales','Sales','#'],
-      ['purchases','Purchases','#']
+      ['sales','Sales','sales.html'],
+      ['purchases','Purchases','purchases.html']
     ]],
     ['STOCK', [
       ['inventory','Inventory','inventory.html'],
-      ['expiry','Expiry Management','#',7],
-      ['returns','Returns','#']
+      ['expiry','Expiry Management','expiry.html',7],
+      ['returns','Returns','returns.html']
     ]],
     ['DIRECTORY', [
-      ['suppliers','Suppliers','#'],
+      ['suppliers','Suppliers','suppliers.html'],
       ['customers','Customers','customers.html'],
-      ['prescriptions','Prescriptions','#']
+      ['prescriptions','Prescriptions','prescriptions.html']
     ]],
     ['SYSTEM', [
       ['reports','Reports','reports.html'],
-      ['settings','Settings','#']
+      ['settings','Settings','settings.html']
     ]]
   ];
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prescriptions · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-page="prescriptions">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title"><h1>Prescriptions</h1><p>Dispensing register for Schedule H, H1 and X medicines</p></div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search Rx no., patient, doctor…"><span class="kbd">Ctrl K</span></div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg>Upload Scan</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Schedule H Register</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New Prescription</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="list-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h6M9 16h4"/></svg></span><div><div class="kl">Prescriptions This Month</div><div class="kv">486</div><div class="ks">Aug 2026 · 312 dispensed</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h4"/></svg></span><div><div class="kl">Pending Dispensing</div><div class="kv">12</div><div class="ks">partially filled or on hold</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span><div><div class="kl">Schedule H Records</div><div class="kv">214</div><div class="ks">retained for 2 years</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><div><div class="kl">Validity Expiring</div><div class="kv">8</div><div class="ks">within the next 7 days</div></div></div></div>
+      </div>
+
+      <div class="card card-pad between" style="flex-wrap:wrap;gap:12px;margin:16px 0">
+        <div class="seg">
+          <button class="on">All 486</button><button>Dispensed 312</button><button>Pending 12</button><button>Schedule H 214</button><button>Expired 38</button>
+        </div>
+        <div class="flex gap8">
+          <div class="select">All Doctors <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="select">Source: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="select">01 – 08 Aug 2026 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Rx No.</th><th>Date</th><th>Patient</th><th>Age / Sex</th><th>Prescribing Doctor</th><th class="t-center">Meds</th><th>Source</th><th>Valid Till</th><th>Status</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="rx-body"></tbody>
+          </table>
+        </div>
+        <div class="between" style="padding:14px 20px;border-top:1px solid var(--line-2)">
+          <span class="muted2" style="font-size:13px">Showing 1–10 of 486 prescriptions · Schedule H records are retained for 2 years as required by law</span>
+          <div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>49</button><button>›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var RX=[
+    ['RX-2026-0871','08 Aug 2026','PR','Priya Ramesh','+91 98410 22456','34 / F','Dr. S. Venkatesan','TN Reg. 68142 · MBBS','2','Uploaded','07 Sep 2026','Active'],
+    ['RX-2026-0870','08 Aug 2026','RS','Ramesh Subramanian','+91 94440 11208','52 / M','Dr. Meena Raghunathan','TN Reg. 51907 · MD','3','Walk-in','07 Sep 2026','Active'],
+    ['RX-2026-0869','07 Aug 2026','LN','Lakshmi Narayanan','+91 90032 88147','61 / F','Dr. Arun Prakash','TN Reg. 44210 · MD','4','Digital','06 Sep 2026','Active'],
+    ['RX-2026-0868','07 Aug 2026','AK','Anitha Krishnan','+91 98846 55012','29 / F','Dr. S. Venkatesan','TN Reg. 68142 · MBBS','2','Uploaded','06 Sep 2026','Partial'],
+    ['RX-2026-0867','06 Aug 2026','SK','Senthil Kumar','+91 89392 74410','45 / M','Dr. Kavitha Menon','TN Reg. 72338 · MBBS','1','Walk-in','05 Sep 2026','Active'],
+    ['RX-2026-0866','06 Aug 2026','VR','Vasanthi Raghavan','+91 94441 30982','58 / F','Dr. Arun Prakash','TN Reg. 44210 · MD','5','Digital','05 Sep 2026','Active'],
+    ['RX-2026-0865','05 Aug 2026','MI','Mohammed Ilyas','+91 99623 10874','37 / M','Dr. Meena Raghunathan','TN Reg. 51907 · MD','2','Uploaded','04 Sep 2026','On Hold'],
+    ['RX-2026-0864','05 Aug 2026','DS','Deepa Sundaram','+91 90809 44127','41 / F','Dr. S. Venkatesan','TN Reg. 68142 · MBBS','3','Walk-in','04 Sep 2026','Active'],
+    ['RX-2026-0863','04 Aug 2026','KM','Karthikeyan M.','+91 98404 62130','33 / M','Dr. Kavitha Menon','TN Reg. 72338 · MBBS','2','Uploaded','03 Sep 2026','Active'],
+    ['RX-2026-0851','28 Jul 2026','SS','Sri Sai Old Age Home','+91 44 2431 7788','—','Dr. Arun Prakash','TN Reg. 44210 · MD','8','Digital','27 Aug 2026','Expired']
+  ];
+  var acts='<div class="row-acts"><button title="View">'+MB.svg('<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>')+'</button><button title="Bill">'+MB.svg('<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/>')+'</button><button title="Print">'+MB.svg('<path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/>')+'</button></div>';
+  document.getElementById('rx-body').innerHTML=RX.map(function(r){
+    var st=r[11]==='Active'?'b-green':r[11]==='Partial'?'b-amber':r[11]==='Expired'?'b-red':'b-gray';
+    return '<tr>'
+      +'<td class="cell-strong num">'+r[0]+'</td>'
+      +'<td class="num muted">'+r[1]+'</td>'
+      +'<td><div class="who"><span class="av-sm">'+r[2]+'</span><div><div class="cell-strong" style="font-weight:500">'+r[3]+'</div><div class="cell-sub num">'+r[4]+'</div></div></div></td>'
+      +'<td class="num muted">'+r[5]+'</td>'
+      +'<td><div class="cell-strong" style="font-weight:500">'+r[6]+'</div><div class="cell-sub">'+r[7]+'</div></td>'
+      +'<td class="t-center num">'+r[8]+'</td>'
+      +'<td><span class="tag tag-retail">'+r[9]+'</span></td>'
+      +'<td class="num muted">'+r[10]+'</td>'
+      +'<td><span class="badge-pill '+st+'"><span class="bdot"></span>'+r[11]+'</span></td>'
+      +'<td>'+acts+'</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>

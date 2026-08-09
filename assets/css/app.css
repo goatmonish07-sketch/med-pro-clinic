@@ -330,6 +330,25 @@ table.tbl tbody tr:hover{background:var(--surface-2)}
 .right{text-align:right}
 .hide{display:none}
 
+/* ===== List-page helpers (directory screens) ====================== */
+.list-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi-row{display:flex;gap:13px;align-items:center}
+.kpi-row .ki{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi-row .ki svg{width:21px;height:21px}
+.kpi-row .kl{font-size:12.5px;color:var(--muted);font-weight:500}
+.kpi-row .kv{font-size:22px;font-weight:700;color:var(--ink);margin:2px 0 1px;letter-spacing:-.02em}
+.kpi-row .ks{font-size:11.5px;color:var(--muted-2)}
+.ic-teal{background:var(--teal-tint);color:var(--teal-deep)}
+.ic-box{background:var(--teal-tint);color:var(--teal-deep)}
+.ic-amber{background:var(--amber-bg);color:var(--amber)}
+.ic-green{background:var(--green-bg);color:var(--green)}
+.ic-red,.ic-clock{background:var(--red-bg);color:var(--red)}
+.pager{display:flex;align-items:center;gap:6px}
+.pager button{min-width:32px;height:32px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-size:12.5px;color:var(--text);cursor:pointer;font-weight:500}
+.pager button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pager button:not(.on):hover{background:var(--surface-2)}
+@media (max-width:1100px){.list-kpis{grid-template-columns:repeat(2,1fr)}}
+
 @media (max-width:1180px){
   .sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:.2s}
   body.nav-open .sidebar{transform:none;box-shadow:var(--shadow-md)}

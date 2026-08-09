@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suppliers · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-page="suppliers">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title"><h1>Suppliers</h1><p>34 active suppliers · ₹2,18,400 outstanding payable</p></div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search supplier, GSTIN, phone…"><span class="kbd">Ctrl K</span></div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/></svg>Payment Due Report</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add Supplier</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="list-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h3"/></svg></span><div><div class="kl">Total Suppliers</div><div class="kv">34</div><div class="ks">29 active · 5 inactive</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></span><div><div class="kl">Outstanding Payable</div><div class="kv">₹2,18,400</div><div class="ks">across 14 suppliers</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span><div><div class="kl">Purchases This Month</div><div class="kv">₹4,82,300</div><div class="ks">38 invoices</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><div><div class="kl">Overdue Beyond Terms</div><div class="kv">₹38,400</div><div class="ks">3 suppliers</div></div></div></div>
+      </div>
+
+      <div class="filters">
+        <div class="search" style="min-width:280px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search supplier name, GSTIN, contact person or phone…"></div>
+        <div class="select">All Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Outstanding: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">City: All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Status: Active <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Supplier</th><th>Contact Person</th><th>City</th><th class="t-right">Medicines</th><th class="t-right">Total Purchases</th><th class="t-right">Outstanding</th><th>Last Purchase</th><th>Terms</th><th>Status</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="sup-body"></tbody>
+          </table>
+        </div>
+        <div class="between" style="padding:14px 20px;border-top:1px solid var(--line-2)">
+          <span class="muted2" style="font-size:13px">Showing 1–10 of 34 suppliers</span>
+          <div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var S=[
+    ['MD','MedPlus Distributors','33AABCM1234F1Z5','Suresh Babu','+91 98404 21134','Chennai','218','18,42,600','18,420','08 Aug 2026','15 days','Active'],
+    ['AP','Apex Pharma Agencies','33AAFCA9087H1ZP','Karthik R.','+91 94441 77820','Chennai','164','12,08,450','42,528','07 Aug 2026','30 days','Active'],
+    ['SB','Sri Balaji Medicals','33AACFS4471K1ZB','Venkatesh M.','+91 90031 44560','Chennai','142','9,74,220','65,968','06 Aug 2026','21 days','Active'],
+    ['CL','Cipla Ltd. (Direct)','27AAACC1234M1ZR','Regional Desk','+91 22 6655 4000','Mumbai','86','8,12,900','0','05 Aug 2026','Advance','Active'],
+    ['KP','Kamal Pharma Traders','33AAGCK5512L1ZD','Kamalesh S.','+91 98842 30014','Chennai','98','4,66,120','0','05 Aug 2026','15 days','Active'],
+    ['SP','Sun Pharma Depot','24AAACS7896P1ZK','Depot Manager','+91 79 2656 8800','Vadodara','74','3,98,760','12,300','02 Aug 2026','30 days','Active'],
+    ['NH','Nova Health Supplies','33AABCN3320G1ZQ','Anitha P.','+91 89396 12047','Coimbatore','61','2,84,540','22,232','01 Aug 2026','15 days','Active'],
+    ['GP','GSK Pharma Distributor','33AAACG1188J1ZM','Prakash N.','+91 98410 55621','Chennai','52','2,41,880','0','31 Jul 2026','30 days','Active'],
+    ['DR',"Dr. Reddy's Depot",'36AAACD4567N1ZT','Sales Desk','+91 40 4900 2900','Hyderabad','44','1,92,310','56,952','28 Jul 2026','45 days','Active'],
+    ['VS','Vijay Surgicals','33AADFV7712R1ZH','Vijayakumar','+91 94870 22118','Madurai','18','64,200','0','12 Jun 2026','Cash','Inactive']
+  ];
+  var acts='<div class="row-acts"><button title="View">'+MB.svg('<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>')+'</button><button title="Edit">'+MB.svg('<path d="M12 20h9M4 20l1-4L16 5l3 3L8 19z"/>')+'</button><button title="More">'+MB.svg('<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>')+'</button></div>';
+  document.getElementById('sup-body').innerHTML=S.map(function(r){
+    var due=r[8]==='0'?'<span class="muted2 num">₹0</span>':'<span class="num" style="color:var(--amber);font-weight:600">₹'+r[8]+'</span>';
+    var st=r[11]==='Active'?'<span class="badge-pill b-green"><span class="bdot"></span>Active</span>':'<span class="badge-pill b-gray"><span class="bdot"></span>Inactive</span>';
+    return '<tr>'
+      +'<td><div class="who"><span class="av-sm">'+r[0]+'</span><div><div class="cell-strong">'+r[1]+'</div><div class="cell-sub num">'+r[2]+'</div></div></div></td>'
+      +'<td><div class="cell-strong" style="font-weight:500">'+r[3]+'</div><div class="cell-sub num">'+r[4]+'</div></td>'
+      +'<td class="muted">'+r[5]+'</td>'
+      +'<td class="t-right num">'+r[6]+'</td>'
+      +'<td class="t-right amt">₹'+r[7]+'</td>'
+      +'<td class="t-right">'+due+'</td>'
+      +'<td class="num muted">'+r[9]+'</td>'
+      +'<td class="muted">'+r[10]+'</td>'
+      +'<td>'+st+'</td>'
+      +'<td>'+acts+'</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>

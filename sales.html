@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales History · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .sales-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .pay-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 9px;border-radius:7px;background:var(--surface-3);color:var(--text)}
+  .pay-tag.credit{background:var(--amber-bg);color:var(--amber)}
+  .pay-tag svg{width:13px;height:13px}
+  @media (max-width:1280px){.sales-kpis{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:680px){.sales-kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-page="sales">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title"><h1>Sales History</h1><p>Every bill raised at the counter · 08 Aug 2026, 12:40 PM</p></div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search invoice or customer…"><span class="kbd">Ctrl K</span></div>
+        <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/></svg>Day Close Report</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+        <a class="btn btn-dark" href="billing.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New Bill</a>
+      </div>
+    </header>
+    <div class="content">
+      <div class="sales-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l6-6 4 4 8-8M21 7v6M15 7h6"/></svg></span><div><div class="kl">Today's Sales</div><div class="kv">₹48,620</div><div class="ks">86 bills · avg ₹565</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></span><div><div class="kl">Cash Collected</div><div class="kv">₹18,240</div><div class="ks">32 bills</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div><div class="kl">UPI Collected</div><div class="kv">₹22,180</div><div class="ks">41 bills</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg></span><div><div class="kl">On Credit</div><div class="kv">₹8,200</div><div class="ks">13 bills · unpaid</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/></svg></span><div><div class="kl">Returns Today</div><div class="kv">₹1,486</div><div class="ks">4 return notes</div></div></div></div>
+      </div>
+
+      <div class="filters">
+        <div class="search" style="min-width:280px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Invoice no., customer name or phone…"></div>
+        <div class="select"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Today · 08 Aug 2026 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">All Payments <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">All Staff <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">All Customers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="select">Amount: Any <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Invoice No.</th><th>Customer</th><th class="t-right">Items</th><th class="t-right">Subtotal</th><th class="t-right">Discount</th><th class="t-right">GST</th><th class="t-right">Total</th><th>Payment</th><th>Status</th><th>Billed By</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="sales-body"></tbody>
+          </table>
+        </div>
+        <div class="between" style="padding:14px 20px;border-top:1px solid var(--line-2)">
+          <span class="muted2" style="font-size:13px">Showing 1–12 of 86 bills for 08 Aug 2026 · Gross ₹48,620.00 · GST collected ₹4,987.20 · Discounts ₹612.00</span>
+          <div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>8</button><button>›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var SA=[
+    ['INV-2026-08-1174','11:42 AM','Priya Ramesh','+91 98410 22456','4','704.00','6.00','69.55','698.00','UPI','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1173','11:28 AM','Walk-in Customer','—','2','186.00','0.00','19.93','186.00','Cash','Paid','Lakshmi S.'],
+    ['INV-2026-08-1172','11:14 AM','Senthil Kumar','+91 89392 74410','6','1,428.00','28.00','150.00','1,400.00','Card','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1171','10:52 AM','Sri Sai Old Age Home','+91 44 2431 7788','14','8,640.00','432.00','880.29','8,208.00','Credit','Due','Lakshmi S.'],
+    ['INV-2026-08-1170','10:41 AM','Anitha Krishnan','+91 98846 55012','3','342.00','0.00','36.64','342.00','UPI','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1169','10:20 AM','Deepa Sundaram','+91 90809 44127','5','918.00','18.00','96.43','900.00','UPI','Paid','Lakshmi S.'],
+    ['INV-2026-08-1168','10:05 AM','Ramesh Subramanian','+91 94440 11208','4','512.00','0.00','54.86','512.00','Cash','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1167','09:48 AM','Vasanthi Raghavan','+91 94441 30982','8','2,180.00','80.00','225.00','2,100.00','Credit','Partial','Lakshmi S.'],
+    ['INV-2026-08-1166','09:31 AM','Walk-in Customer','—','1','88.00','0.00','4.19','88.00','Cash','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1165','09:17 AM','Mohammed Ilyas','+91 99623 10874','3','468.00','0.00','50.14','468.00','UPI','Returned','Lakshmi S.'],
+    ['INV-2026-08-1164','09:02 AM','Karthikeyan M.','+91 98404 62130','2','256.00','6.00','26.79','250.00','Card','Paid','Rajesh Kumar'],
+    ['INV-2026-08-1163','08:54 AM','Lakshmi Narayanan','+91 90032 88147','7','1,642.00','42.00','171.43','1,600.00','Credit','Due','Lakshmi S.']
+  ];
+  var payIcon={UPI:'<rect x="6" y="2" width="12" height="20" rx="2"/>',Cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>',Card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h18"/>',Credit:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>'};
+  var acts='<div class="row-acts"><button title="View">'+MB.svg('<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>')+'</button><button title="Print">'+MB.svg('<path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/>')+'</button><button title="Refund">'+MB.svg('<path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/>')+'</button><button title="More">'+MB.svg('<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>')+'</button></div>';
+  document.getElementById('sales-body').innerHTML=SA.map(function(r){
+    var stCls=r[10]==='Paid'?'b-green':r[10]==='Due'?'b-red':r[10]==='Partial'?'b-amber':'b-gray';
+    var pt='<span class="pay-tag'+(r[9]==='Credit'?' credit':'')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">'+payIcon[r[9]]+'</svg>'+r[9]+'</span>';
+    return '<tr>'
+      +'<td><div class="cell-strong num">'+r[0]+'</div><div class="cell-sub">'+r[1]+'</div></td>'
+      +'<td><div class="cell-strong" style="font-weight:500">'+r[2]+'</div><div class="cell-sub num">'+r[3]+'</div></td>'
+      +'<td class="t-right num">'+r[4]+'</td>'
+      +'<td class="t-right num">₹'+r[5]+'</td>'
+      +'<td class="t-right muted2">₹'+r[6]+'</td>'
+      +'<td class="t-right num muted">₹'+r[7]+'</td>'
+      +'<td class="t-right amt">₹'+r[8]+'</td>'
+      +'<td>'+pt+'</td>'
+      +'<td><span class="badge-pill '+stCls+'"><span class="bdot"></span>'+r[10]+'</span></td>'
+      +'<td class="muted">'+r[11]+'</td>'
+      +'<td>'+acts+'</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>

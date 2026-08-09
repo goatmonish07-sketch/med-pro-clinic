@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expiry Management · MediBill Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%235c817b'/><text x='12' y='17' font-size='13' font-family='Arial' font-weight='700' fill='%23fff' text-anchor='middle'>M+</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+  .alert{display:flex;align-items:center;gap:14px;background:var(--red-bg);border:1px solid var(--red-line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+  .alert .ai{width:36px;height:36px;border-radius:10px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .alert .at{color:var(--red);font-weight:600;font-size:14px}
+  .alert .ad{color:#a15252;font-size:12.5px;margin-top:2px}
+  .dots{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .dots .t{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:9px;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer}
+  .dots .t .c{width:7px;height:7px;border-radius:50%}
+  .dots .t.on{background:var(--surface-3);color:var(--ink);font-weight:600}
+  .drem{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:12.5px}
+  .drem svg{width:13px;height:13px}
+  .btn-clear{border:1px solid var(--amber-line);color:var(--amber);background:var(--amber-bg);border-radius:8px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .btn-ln{border:0;background:transparent;color:var(--muted);font-size:12.5px;font-weight:600;cursor:pointer;padding:5px 8px}
+  .btn-ln:hover{color:var(--ink)}
+</style>
+</head>
+<body data-page="expiry">
+<div class="app">
+  <aside id="sidebar"></aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="tb-title"><h1>Expiry Management</h1><p>₹1,64,120 of stock expiring within 90 days · act early to claim supplier credit</p></div>
+      <div class="tb-right">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search medicine or batch…"></div>
+        <button class="icon-btn"><span class="dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5h-2M8 14h8v7H8z"/></svg>Print Expiry List</button>
+        <button class="btn btn-light"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export</button>
+        <button class="btn btn-dark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v6h6M3 13a9 9 0 1 0 3-7l-3 3"/></svg>Create Purchase Return</button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="alert">
+        <span class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+        <div style="flex:1"><div class="at">14 batches have already expired and must be removed from the selling shelf</div><div class="ad">Total value ₹18,420 · 9 batches are still within the supplier return window and can be claimed for credit</div></div>
+        <button class="btn btn-sm" style="color:var(--red);background:#fff;border:1px solid var(--red-line)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Quarantine All Expired</button>
+      </div>
+
+      <div class="list-kpis">
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span><div><div class="kl">Already Expired</div><div class="kv">₹18,420</div><div class="ks">14 batches · 286 units</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><div><div class="kl">Expiring ≤ 30 days</div><div class="kv">₹32,600</div><div class="ks">22 batches · 512 units</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span><div><div class="kl">Expiring 31 – 60 days</div><div class="kv">₹48,900</div><div class="ks">31 batches · 784 units</div></div></div></div>
+        <div class="kpi"><div class="kpi-row"><span class="ki ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span><div><div class="kl">Expiring 61 – 90 days</div><div class="kv">₹64,200</div><div class="ks">44 batches · 1,120 units</div></div></div></div>
+      </div>
+
+      <div class="card card-pad between" style="flex-wrap:wrap;gap:12px;margin:16px 0">
+        <div class="dots">
+          <span class="t"><span class="c" style="background:var(--red)"></span>Expired 14</span>
+          <span class="t on"><span class="c" style="background:var(--amber)"></span>≤ 30 days 22</span>
+          <span class="t"><span class="c" style="background:var(--amber)"></span>31 – 60 days 31</span>
+          <span class="t"><span class="c" style="background:var(--muted-3)"></span>61 – 90 days 44</span>
+          <span class="t"><span class="c" style="background:var(--muted-3)"></span>All 111</span>
+        </div>
+        <div class="flex gap8">
+          <div class="select">All Suppliers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="select">All Categories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="select">Sort: Expiry ↑ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Medicine</th><th>Batch</th><th>Expiry</th><th class="t-right">Qty</th><th class="t-right">MRP</th><th class="t-right">Stock Value</th><th>Days Remaining</th><th>Rack</th><th>Supplier</th><th class="t-right">Actions</th></tr></thead>
+            <tbody id="exp-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/app.js"></script>
+<script>
+  var E=[
+    ['Azithromycin 500 Tablet','Azithromycin 500mg · Cipla','AZI7812','15 Sep 2026','18','120.00','2,160','38','A-04','Apex Pharma Agencies'],
+    ['Augmentin 625 Duo','Amoxicillin + Clav. · GSK','AUG5514','22 Sep 2026','24','196.00','4,704','45','A-11','Sri Balaji Medicals'],
+    ['Pan-D Capsule','Pantoprazole + Domp. · Alkem','PND6612','30 Aug 2026','8','165.00','1,320','22','C-08','MedPlus Distributors'],
+    ['Vitamin D3 60K Sachet','Cholecalciferol · Abbott','VTD3390','05 Sep 2026','32','103.00','3,296','28','D-08','Nova Health Supplies'],
+    ['Cetirizine 10mg Tablet',"Cetirizine HCl · Dr. Reddy's",'CET3391','18 Sep 2026','46','20.00','920','41','D-02',"Dr. Reddy's Depot"],
+    ['Metformin 500 SR','Metformin HCl · USV','MET5520','11 Sep 2026','15','32.00','480','34','C-01','Kamal Pharma Traders'],
+    ['ORS Orange Sachet','Oral Rehydration Salt · FDC','ORS1180','02 Sep 2026','64','22.00','1,408','25','E-05','MedPlus Distributors'],
+    ['Amlodipine 5mg Tablet','Amlodipine Besylate · Torrent','AML4417','26 Aug 2026','12','16.50','198','18','C-03','Apex Pharma Agencies'],
+    ['Crocin Advance 500','Paracetamol 500mg · GSK','CRO8820','20 Sep 2026','88','28.00','2,464','43','B-14','GSK Pharma Distributor'],
+    ['Paracetamol 500mg IP','Paracetamol · Micro Labs','PCM2210','08 Sep 2026','54','18.00','972','31','B-10','MedPlus Distributors']
+  ];
+  document.getElementById('exp-body').innerHTML=E.map(function(r){
+    var d=parseInt(r[7],10), col=d<=30?'var(--red)':'var(--amber)';
+    var acts='<div class="flex gap8" style="justify-content:flex-end;align-items:center">'
+      +'<button class="btn-ln">View</button><button class="btn-ln">Return</button><button class="btn-clear">Clearance</button></div>';
+    return '<tr>'
+      +'<td><div class="cell-strong">'+r[0]+'</div><div class="cell-sub">'+r[1]+'</div></td>'
+      +'<td class="num">'+r[2]+'</td>'
+      +'<td class="cell-strong" style="font-weight:500">'+r[3]+'</td>'
+      +'<td class="t-right num">'+r[4]+'</td>'
+      +'<td class="t-right amt">₹'+r[5]+'</td>'
+      +'<td class="t-right amt">₹'+r[6]+'</td>'
+      +'<td><span class="drem" style="color:'+col+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/></svg>'+d+' days</span></td>'
+      +'<td class="num muted">'+r[8]+'</td>'
+      +'<td class="muted">'+r[9]+'</td>'
+      +'<td>'+acts+'</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>
