@@ -1,20 +1,26 @@
 import { Routes, Route } from 'react-router-dom'
 import AppLayout from './layout/AppLayout'
 import Dashboard from './pages/Dashboard'
+import Patients from './pages/Patients'
+import Appointments from './pages/Appointments'
+import Queue from './pages/Queue'
+import Consultation from './pages/Consultation'
+import Prescriptions from './pages/Prescriptions'
 import Placeholder from './pages/Placeholder'
 
-// Phase 1 ships the shell + Dashboard. Remaining modules are routed to a
-// Placeholder so the whole app is navigable; each is built out in later phases.
+// Phases 1–2 ship the shell, Dashboard, and the operational core (Patients,
+// Appointments, Queue, Consultation/EMR, Prescriptions). Remaining modules are
+// routed to a Placeholder so the whole app stays navigable.
 export default function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<Dashboard />} />
-        <Route path="patients" element={<Placeholder title="Patients" icon="patients" phase="Phase 2" />} />
-        <Route path="appointments" element={<Placeholder title="Appointments" icon="calendar" phase="Phase 2" />} />
-        <Route path="queue" element={<Placeholder title="Queue" icon="queue" phase="Phase 2" />} />
-        <Route path="consultation" element={<Placeholder title="Consultation / EMR" icon="stethoscope" phase="Phase 2" />} />
-        <Route path="prescriptions" element={<Placeholder title="Prescriptions" icon="rx" phase="Phase 2" />} />
+        <Route path="patients" element={<Patients />} />
+        <Route path="appointments" element={<Appointments />} />
+        <Route path="queue" element={<Queue />} />
+        <Route path="consultation" element={<Consultation />} />
+        <Route path="prescriptions" element={<Prescriptions />} />
         <Route path="laboratory" element={<Placeholder title="Laboratory" icon="lab" phase="Phase 3" />} />
         <Route path="pharmacy" element={<Placeholder title="Pharmacy" icon="pharmacy" phase="Phase 3" />} />
         <Route path="billing" element={<Placeholder title="Billing" icon="billing" phase="Phase 3" />} />

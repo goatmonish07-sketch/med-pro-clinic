@@ -9,17 +9,28 @@ command-center layout, command palette, and clinical copilot. Light + dark theme
 
 ## Status
 
-**Phase 1 — App shell + Dashboard** (this milestone)
+**Phase 1 — App shell + Dashboard** ✅
 
-- ✅ Vite + React + Tailwind scaffold
-- ✅ Design system tokens (`src/index.css`) — single source of truth, wired into
+- Vite + React + Tailwind scaffold
+- Design system tokens (`src/index.css`) — single source of truth, wired into
   `tailwind.config.js`
-- ✅ App shell: sidebar, top bar with command palette, theme toggle (light/dark,
+- App shell: sidebar, top bar with command palette, theme toggle (light/dark,
   persisted), routing for all 16 modules
-- ✅ Dashboard: 5-KPI strip, revenue + footfall chart, today's schedule, live
+- Dashboard: 5-KPI strip, revenue + footfall chart, today's schedule, live
   queue, Clinical Copilot
-- ⏳ Remaining modules routed to a Placeholder, built out in later phases (see the
-  roadmap in the project plan)
+
+**Phase 2 — Operational core** ✅ (this milestone)
+
+- **Patients** — searchable + filterable CRM table, KPI strip, dues, tags
+- **Appointments** — week calendar grid, colour-coded per doctor + tele-visits
+- **Queue** — live "now serving" token, wait stats, waiting-list table
+- **Consultation / EMR** — 3-pane workspace: patient sidebar, tabbed SOAP notes,
+  live vitals, allergy-aware Copilot hint
+- **Prescriptions** — medication table, Rx templates, interaction safety check
+
+**Next — Phase 3 (money & stock):** Billing, Payments, Pharmacy, Laboratory,
+Inventory, Reports. Remaining modules are routed to a Placeholder so the whole
+app stays navigable.
 
 ## Getting started
 
@@ -46,12 +57,17 @@ src/
     nav.js             Nav + route definitions
   components/
     Icon.jsx           Inline SVG icon set
-    ui.jsx             PageHead, Kpi, Card, Segmented
+    ui.jsx             PageHead, Kpi, Card, Segmented, Table, Avatar, StatusBadge
     RevenueChart.jsx   Dependency-free SVG chart
   pages/
-    Dashboard.jsx      Phase 1 screen
+    Dashboard.jsx      Phase 1
+    Patients.jsx       Phase 2 — CRM table
+    Appointments.jsx   Phase 2 — week calendar
+    Queue.jsx          Phase 2 — live queue
+    Consultation.jsx   Phase 2 — EMR workspace
+    Prescriptions.jsx  Phase 2 — e-prescribe
     Placeholder.jsx    Stub for upcoming modules
-  data/mock.js         Placeholder data (swap for API in Phase 2)
+  data/mock.js         Placeholder data (swap for API in Phase 3+)
   lib/useTheme.js      Theme hook (persisted, system-aware)
 ```
 

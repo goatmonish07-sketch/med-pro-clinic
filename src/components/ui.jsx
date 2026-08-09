@@ -78,6 +78,60 @@ export function Card({ title, icon, action, children, className = '' }) {
   )
 }
 
+// Status pill — semantic tone maps kept explicit for Tailwind JIT.
+const statusTones = {
+  good: 'text-good bg-good-soft',
+  brand: 'text-brand bg-brand-soft',
+  warn: 'text-warn bg-warn-soft',
+  violet: 'text-violet bg-violet-soft',
+  cyan: 'text-cyan bg-cyan-soft',
+  crit: 'text-crit bg-crit-soft',
+}
+export function StatusBadge({ tone = 'good', children }) {
+  return (
+    <span className={`inline-block whitespace-nowrap rounded-full px-2 py-[3px] text-[10px] font-bold ${statusTones[tone]}`}>
+      {children}
+    </span>
+  )
+}
+
+export function Avatar({ initials, gradient = 'from-brand to-violet', size = 30 }) {
+  return (
+    <span
+      className={`grid flex-none place-items-center rounded-lg bg-gradient-to-br ${gradient} font-bold text-white`}
+      style={{ width: size, height: size, fontSize: size * 0.38 }}
+    >
+      {initials}
+    </span>
+  )
+}
+
+// Horizontally-scrollable table wrapper — keeps wide tables off the page body.
+export function TableWrap({ children }) {
+  return <div className="overflow-x-auto">{children}</div>
+}
+export function Table({ head, children }) {
+  return (
+    <TableWrap>
+      <table className="w-full border-collapse text-[12.5px]">
+        <thead>
+          <tr>
+            {head.map((h) => (
+              <th
+                key={h}
+                className="whitespace-nowrap border-b border-line-2 px-[15px] py-2.5 text-left text-[10.5px] font-semibold uppercase tracking-[0.06em] text-ink-3"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{children}</tbody>
+      </table>
+    </TableWrap>
+  )
+}
+
 export function Segmented({ options, value, onChange }) {
   return (
     <div className="inline-flex gap-0.5 rounded-lg border border-line-2 bg-panel-2 p-0.5">
