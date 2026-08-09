@@ -24,14 +24,22 @@ Pick one of three ways. All produce `https://med-pro-clinic.pages.dev`.
 
 1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
 2. Select this repo and the branch `claude/clinic-crm-cms-design-tt037h` (or `main`).
-3. Build settings:
+3. Build settings — **all three are required** (an empty Build command makes the
+   build skip and fail with *"Output directory dist not found"*):
    - **Project name:** `med-pro-clinic`
    - **Framework preset:** Vite
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
+   - **Root directory:** `/` (leave as default)
 4. (Optional, for live data) **Environment variables → Add** `VITE_API_URL` =
-   your API URL (e.g. `https://med-pro-clinic-api.onrender.com`).
-5. **Save and Deploy.** Done — `_redirects` (already in the repo) handles SPA routing.
+   your API URL (e.g. the Worker URL).
+5. **Save and Deploy.** `_redirects` (in the repo) handles SPA routing.
+
+> Already created the project and it failed? Open the project → **Settings →
+> Build → Build configuration → Edit** and set **Build command** `npm run build`
+> and **Build output directory** `dist`, save, then **Retry deployment**. There
+> must be no `wrangler.toml` in the repo root for Pages (it makes the wizard skip
+> the build command); it has been removed.
 
 ### B. Wrangler CLI (one command)
 
