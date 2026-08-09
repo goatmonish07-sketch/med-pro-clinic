@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { PageHead, Card, Table, Avatar, StatusBadge } from '../components/ui'
-import { settingsNav, automationSettings, users } from '../data/mock'
+import { api } from '../lib/api'
+import { useApiData } from '../lib/useApi'
+import { mapUser } from '../lib/adapters'
+import { settingsNav, automationSettings, users as mockUsers } from '../data/mock'
 
 function Toggle({ on, onClick }) {
   return (
@@ -18,6 +21,7 @@ function Toggle({ on, onClick }) {
 export default function Settings() {
   const [active, setActive] = useState('Reminders & automation')
   const [toggles, setToggles] = useState(automationSettings.map((s) => s.on))
+  const { data: users } = useApiData(() => api.listUsers().then((r) => r.data.map(mapUser)), mockUsers, [])
 
   return (
     <>

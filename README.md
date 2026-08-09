@@ -53,14 +53,26 @@ command-center layout, command palette, and clinical copilot. Light + dark theme
   prescriptions, lab, pharmacy, billing, payments, inventory, reports, users)
 - Server-side GST/invoice maths, transactional payments, atomic stock dispensing,
   aggregated analytics — verified end-to-end against a live database
-- Frontend API client ready in `src/lib/api.js` (response shapes match the mock
-  data, so wiring a page to live data is a localized change)
+- Frontend API client in `src/lib/api.js`, auth context in `src/lib/auth.jsx`,
+  fetch hook in `src/lib/useApi.js`, and shape adapters in `src/lib/adapters.js`
 
 See [`server/README.md`](server/README.md) to run the API.
 
-Remaining to fully productionize: wire each page from mock data to `src/lib/api.js`,
-and connect the external integrations the model is designed for (payment gateway,
-WhatsApp/SMS, video SDK).
+**Live-data wiring** ✅
+
+The data screens are wired to the API with a graceful demo fallback:
+
+- Sign in from the top-bar user chip (demo `admin@medpro.clinic / medpro123`).
+  A **Live / Demo** pill shows the current source.
+- When signed in and the API is reachable, **Dashboard, Patients, Queue,
+  Laboratory, Inventory, Payments, Reports and Settings** render **live data**
+  from PostgreSQL (KPIs, dues, queue, transactions, users…).
+- With no backend — or signed out — every page falls back to the mock data, so
+  the static build still runs and deploys anywhere.
+
+Remaining to fully productionize: connect the external integrations the model is
+designed for (payment gateway, WhatsApp/SMS, video SDK), and deploy the API +
+database.
 
 ## Getting started
 

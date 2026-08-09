@@ -51,16 +51,27 @@ router.get(
     if (filter === 'New') where.AND.push({ tags: { has: 'New' } })
     if (filter === 'Due') where.AND.push({ invoices: { some: { status: { in: ['UNPAID', 'PARTIAL'] } } } })
 
-    const [total, data] = await Promise.all([
+    const [total, rows] = await Promise.all([
       prisma.patient.count({ where }),
       prisma.patient.findMany({
         where,
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * pageSize,
         take: pageSize,
-        include: { doctor: { select: { name: true } } },
+        include: {
+          doctor: { select: { name: true } },
+          invoices: { where: { status: { in: ['UNPAID', 'PARTIAL'] } }, select: { total: true } },
+          appointments: { orderBy: { scheduledAt: 'desc' }, take: 1, select: { scheduledAt: true } },
+        },
       }),
     ])
+
+    // Flatten computed fields (due amount, last visit) for the list view.
+    const data = rows.map(({ invoices, appointments, ...p }) => ({
+      ...p,
+      dueAmount: invoices.reduce((s, i) => s + Number(i.total), 0),
+      lastVisit: appointments[0]?.scheduledAt ?? null,
+    }))
 
     res.json({ data, page, pageSize, total, totalPages: Math.ceil(total / pageSize) })
   })

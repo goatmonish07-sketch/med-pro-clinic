@@ -2,7 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import Icon from '../components/Icon'
 import { PageHead, Kpi, Card, Segmented } from '../components/ui'
 import RevenueChart from '../components/RevenueChart'
-import { clinic, kpis, schedule, queue, copilotInsights } from '../data/mock'
+import { api } from '../lib/api'
+import { useApiData } from '../lib/useApi'
+import { mapQueue, inr0, initialsOf, gradientFor } from '../lib/adapters'
+import { clinic, kpis as mockKpis, schedule as mockSchedule, queue as mockServing, copilotInsights } from '../data/mock'
 import { useState } from 'react'
 
 const statusStyle = {
@@ -11,23 +14,70 @@ const statusStyle = {
   wait: 'text-warn bg-warn-soft',
   video: 'text-violet bg-violet-soft',
 }
-const copilotTone = {
-  crit: 'bg-crit-soft text-crit',
-  warn: 'bg-warn-soft text-warn',
-  good: 'bg-good-soft text-good',
+const copilotTone = { crit: 'bg-crit-soft text-crit', warn: 'bg-warn-soft text-warn', good: 'bg-good-soft text-good' }
+
+// Appointment status enum → schedule row presentation.
+const APPT = {
+  DONE: { status: 'done', label: 'Done' },
+  IN_ROOM: { status: 'prog', label: 'In room' },
+  WAITING: { status: 'wait', label: 'Waiting' },
+  NO_SHOW: { status: 'wait', label: 'No-show' },
+  CANCELLED: { status: 'wait', label: 'Cancelled' },
+}
+function mapAppointment(a) {
+  const tele = a.type === 'TELE'
+  const st = a.status === 'BOOKED' ? (tele ? { status: 'video', label: 'Video' } : { status: 'wait', label: 'Booked' }) : APPT[a.status] || { status: 'wait', label: a.status }
+  return {
+    time: new Date(a.scheduledAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+    name: a.patient?.name || '—',
+    detail: [a.type?.replace('_', '-').toLowerCase(), a.doctor?.name, a.room].filter(Boolean).join(' · '),
+    initials: initialsOf(a.patient?.name || ''),
+    gradient: gradientFor(a.patient?.name || ''),
+    tele,
+    ...st,
+  }
 }
 
 export default function Dashboard() {
   const navigate = useNavigate()
   const [range, setRange] = useState('Week')
 
+  // KPIs
+  const { data: kpis } = useApiData(
+    () =>
+      api.dashboard().then(({ kpis: k }) => [
+        { key: 'appointments', label: 'Appointments', value: String(k.appointmentsToday), accent: 'brand', icon: 'calendar' },
+        { key: 'waiting', label: 'Waiting', value: String(k.waiting), accent: 'warn', icon: 'clock' },
+        { key: 'consults', label: 'Consults', value: String(k.consultsToday), accent: 'cyan', icon: 'stethoscope' },
+        { key: 'revenue', label: 'Revenue', value: inr0(k.revenueToday), accent: 'good', icon: 'rupee' },
+        { key: 'pending', label: 'Pending pay', value: inr0(k.pendingAmount), delta: `${k.pendingCount} invoices`, dir: 'dn', accent: 'violet', icon: 'payments' },
+      ]),
+    mockKpis,
+    []
+  )
+
+  // Live queue
+  const { data: queue } = useApiData(
+    () => api.getQueue().then(mapQueue),
+    { serving: { token: mockServing.serving.token, name: mockServing.serving.name, detail: mockServing.serving.detail }, next: mockServing.next },
+    []
+  )
+
+  // Today's schedule
+  const startOfDay = new Date(); startOfDay.setHours(0, 0, 0, 0)
+  const endOfDay = new Date(startOfDay); endOfDay.setDate(endOfDay.getDate() + 1)
+  const { data: schedule } = useApiData(
+    () =>
+      api
+        .listAppointments({ from: startOfDay.toISOString(), to: endOfDay.toISOString() })
+        .then((r) => r.data.map(mapAppointment)),
+    mockSchedule,
+    []
+  )
+
   return (
     <>
-      <PageHead
-        title="Command center"
-        live="Live"
-        sub={`${clinic.today} · 3 doctors on shift · 28 appointments · 6 waiting`}
-      >
+      <PageHead title="Command center" live="Live" sub={`${clinic.today} · 3 doctors on shift`}>
         <button className="btn" onClick={() => navigate('/tele')}>
           <Icon name="video" size={15} /> Tele-visit
         </button>
@@ -36,22 +86,15 @@ export default function Dashboard() {
         </button>
       </PageHead>
 
-      {/* KPI strip */}
       <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 xl:grid-cols-5">
         {kpis.map((k) => (
           <Kpi key={k.key} {...k} />
         ))}
       </div>
 
-      {/* Main grid */}
       <div className="grid grid-cols-1 items-start gap-3.5 lg:grid-cols-[1.5fr_1fr]">
-        {/* Left column */}
         <div className="flex flex-col gap-3.5">
-          <Card
-            title="Revenue & footfall"
-            icon="trend"
-            action={<Segmented options={['Day', 'Week', 'Month']} value={range} onChange={setRange} />}
-          >
+          <Card title="Revenue & footfall" icon="trend" action={<Segmented options={['Day', 'Week', 'Month']} value={range} onChange={setRange} />}>
             <RevenueChart />
           </Card>
 
@@ -64,10 +107,10 @@ export default function Dashboard() {
               </button>
             }
           >
-            {schedule.map((a) => (
-              <div key={a.time} className="flex items-center gap-2.5 border-t border-line px-[15px] py-[9px]">
+            {schedule.map((a, i) => (
+              <div key={a.time + i} className="flex items-center gap-2.5 border-t border-line px-[15px] py-[9px]">
                 <span className="num w-12 flex-none font-mono text-[11px] text-ink-2">{a.time}</span>
-                <span className={`grid h-[30px] w-[30px] flex-none place-items-center rounded-lg bg-gradient-to-br ${a.avatar} text-[11px] font-bold text-white`}>
+                <span className={`grid h-[30px] w-[30px] flex-none place-items-center rounded-lg bg-gradient-to-br ${a.gradient || a.avatar} text-[11px] font-bold text-white`}>
                   {a.initials}
                 </span>
                 <div className="min-w-0 flex-1">
@@ -77,15 +120,13 @@ export default function Dashboard() {
                   </div>
                   <div className="text-[11px] text-ink-3">{a.detail}</div>
                 </div>
-                <span className={`whitespace-nowrap rounded-full px-2 py-[3px] text-[10px] font-bold ${statusStyle[a.status]}`}>
-                  {a.statusLabel}
-                </span>
+                <span className={`whitespace-nowrap rounded-full px-2 py-[3px] text-[10px] font-bold ${statusStyle[a.status]}`}>{a.statusLabel || a.label}</span>
               </div>
             ))}
+            {schedule.length === 0 && <div className="border-t border-line px-[15px] py-8 text-center text-[12px] text-ink-3">No appointments today.</div>}
           </Card>
         </div>
 
-        {/* Right column */}
         <div className="flex flex-col gap-3.5">
           <Card
             title="Live queue"
@@ -106,7 +147,7 @@ export default function Dashboard() {
                 Call next patient →
               </button>
             </div>
-            {queue.next.map((q) => (
+            {(queue.next || []).map((q) => (
               <div key={q.token} className="flex items-center gap-2.5 border-t border-line px-[15px] py-[7px] text-[12px]">
                 <span className="num w-[38px] font-mono text-[10.5px] text-ink-3">{q.token}</span>
                 <span className="flex-1 font-medium">{q.name}</span>
