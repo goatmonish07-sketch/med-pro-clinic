@@ -1,0 +1,8 @@
+# Cloudflare Pages project config for the MED-PRO web app.
+#   Project name → med-pro-clinic  (serves at https://med-pro-clinic.pages.dev)
+#
+# Deploy from the repo root with:
+#   npm run build && npx wrangler pages deploy dist --project-name=med-pro-clinic
+name = "med-pro-clinic"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"

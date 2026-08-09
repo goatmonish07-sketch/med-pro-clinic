@@ -71,8 +71,23 @@ The data screens are wired to the API with a graceful demo fallback:
   the static build still runs and deploys anywhere.
 
 Remaining to fully productionize: connect the external integrations the model is
-designed for (payment gateway, WhatsApp/SMS, video SDK), and deploy the API +
-database.
+designed for (payment gateway, WhatsApp/SMS, video SDK).
+
+## Deployment
+
+Ready to deploy — see **[DEPLOYMENT.md](DEPLOYMENT.md)**.
+
+- **Web → Cloudflare Pages** (project `med-pro-clinic` → `med-pro-clinic.pages.dev`).
+  Config is in the repo: `wrangler.toml`, `public/_redirects` (SPA fallback), and
+  a GitHub Action (`.github/workflows/deploy-cloudflare.yml`) that auto-deploys
+  once `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` secrets are set. The static
+  site works immediately in demo mode.
+- **API + PostgreSQL** → any Node host. `render.yaml` provisions the API + managed
+  Postgres on Render in one blueprint; `Dockerfile`s + `docker-compose.prod.yml`
+  self-host the whole stack. Point the Pages app's `VITE_API_URL` at the API for
+  live data.
+- **CI** builds the web app and validates the API schema on every push
+  (`.github/workflows/ci.yml`).
 
 ## Getting started
 
