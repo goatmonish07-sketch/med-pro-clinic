@@ -5,7 +5,10 @@ Two pieces ship separately:
 | Piece | What | Where |
 | --- | --- | --- |
 | **Web** (this folder) | Static Vite SPA | **Cloudflare Pages** → `med-pro-clinic.pages.dev` |
-| **API + DB** (`server/`) | Express + Prisma + PostgreSQL | A Node host with managed Postgres (Render / Railway / Fly / any VPS) |
+| **API + DB** — all on Cloudflare (`worker/`) | Hono Worker + D1 (SQLite) | **Cloudflare Workers** → `§3` |
+| **API + DB** — alternative (`server/`) | Express + Prisma + PostgreSQL | Any Node host with managed Postgres (`§2`) |
+
+> **Everything-on-Cloudflare:** Pages (web) + Worker/D1 (API) — see §1 and §3.
 
 > The web app runs in **demo mode** with no backend, so `med-pro-clinic.pages.dev`
 > works the moment Pages finishes building. Point it at a live API (below) and
@@ -82,13 +85,29 @@ docker compose -f docker-compose.prod.yml exec api npm run db:seed   # optional
 
 ---
 
-## 3 · Fully on Cloudflare (advanced, optional)
+## 3 · Fully on Cloudflare — Worker + D1 (no external services) ✅
 
-To run the API on Cloudflare too: use a serverless Postgres (e.g. **Neon**) behind
-**Cloudflare Hyperdrive**, and adapt the API to a **Worker** using Prisma's driver
-adapters (`@prisma/adapter-pg`). This is a larger change than the static Pages
-deploy above and is best done as a follow-up — the current Node API is portable
-and runs unchanged on any Node host.
+The `worker/` folder is a complete **Cloudflare Worker (Hono) + D1** build of the
+API — everything runs on Cloudflare, no external database. Same endpoints and
+response shapes as the Node API, so the front end is unchanged.
+
+```bash
+cd worker
+npm install
+npx wrangler login
+npm run db:create        # creates D1 → paste the database_id into worker/wrangler.toml
+npm run db:migrate       # applies the schema to D1
+npx wrangler secret put JWT_SECRET
+npm run deploy           # → https://med-pro-clinic-api.<subdomain>.workers.dev
+curl -X POST https://med-pro-clinic-api.<subdomain>.workers.dev/api/dev/seed
+```
+
+Then set the Pages project's `VITE_API_URL` to the Worker URL and redeploy the
+web app. Full details in [`worker/README.md`](worker/README.md). A deploy workflow
+(`.github/workflows/deploy-worker.yml`) is included for CI-based deploys.
+
+This is the recommended path for an all-Cloudflare stack. The Node + Postgres API
+in `server/` remains available for hosts where you prefer managed Postgres.
 
 ---
 

@@ -1,0 +1,32 @@
+name: Deploy API to Cloudflare Workers
+
+# Deploys the Hono + D1 Worker. Requires:
+#   secret CLOUDFLARE_API_TOKEN   — token with Workers Scripts: Edit + D1: Edit
+#   secret CLOUDFLARE_ACCOUNT_ID  — your account id
+# One-time setup (locally): create the D1 db, paste its id into worker/wrangler.toml,
+# run `npm run db:migrate`, and `wrangler secret put JWT_SECRET`.
+
+on:
+  push:
+    branches: [main, claude/clinic-crm-cms-design-tt037h]
+    paths: ['worker/**', '.github/workflows/deploy-worker.yml']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker

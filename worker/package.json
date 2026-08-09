@@ -1,0 +1,22 @@
+{
+  "name": "med-pro-clinic-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MED-PRO Clinic OS API on Cloudflare Workers + D1 (Hono)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create medpro",
+    "db:migrate": "wrangler d1 migrations apply medpro --remote",
+    "db:migrate:local": "wrangler d1 migrations apply medpro --local",
+    "test": "node test/harness.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^11.5.0",
+    "wrangler": "^3.90.0"
+  }
+}

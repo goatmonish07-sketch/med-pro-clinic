@@ -1,0 +1,16 @@
+name = "med-pro-clinic-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# D1 database binding. Create it once with `npm run db:create` and paste the
+# returned database_id here (and into your Cloudflare dashboard secrets).
+[[d1_databases]]
+binding = "DB"
+database_name = "medpro"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+CORS_ORIGIN = "https://med-pro-clinic.pages.dev,http://localhost:5173"
+# JWT_SECRET is a secret, set it with:  wrangler secret put JWT_SECRET
+# SEED_TOKEN (optional) guards POST /api/dev/seed:  wrangler secret put SEED_TOKEN

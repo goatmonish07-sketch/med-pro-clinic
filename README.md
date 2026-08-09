@@ -82,12 +82,15 @@ Ready to deploy — see **[DEPLOYMENT.md](DEPLOYMENT.md)**.
   a GitHub Action (`.github/workflows/deploy-cloudflare.yml`) that auto-deploys
   once `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` secrets are set. The static
   site works immediately in demo mode.
-- **API + PostgreSQL** → any Node host. `render.yaml` provisions the API + managed
-  Postgres on Render in one blueprint; `Dockerfile`s + `docker-compose.prod.yml`
-  self-host the whole stack. Point the Pages app's `VITE_API_URL` at the API for
-  live data.
-- **CI** builds the web app and validates the API schema on every push
-  (`.github/workflows/ci.yml`).
+- **API — all on Cloudflare** (`worker/`) → a **Hono Worker + D1** build of the API,
+  no external database. Deploy with wrangler (`worker/README.md`) for a 100%
+  Cloudflare stack (Pages + Worker/D1). Verified end-to-end (`npm test` in `worker/`).
+- **API — alternative** (`server/`) → Node + Prisma + PostgreSQL on any Node host;
+  `render.yaml` provisions API + managed Postgres, `Dockerfile`s +
+  `docker-compose.prod.yml` self-host the whole stack.
+- Point the Pages app's `VITE_API_URL` at whichever API you deploy for live data.
+- **CI** builds the web app and validates the API on every push
+  (`.github/workflows/ci.yml`); deploy workflows for Pages and the Worker included.
 
 ## Getting started
 

@@ -19,7 +19,7 @@ jobs:
       - run: npm run build
 
   api:
-    name: API check
+    name: API check (Node/Prisma)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,3 +34,17 @@ jobs:
       - run: npm ci
       - run: npx prisma validate
       - run: npx prisma generate
+
+  worker:
+    name: Worker test (Cloudflare/D1)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm test
