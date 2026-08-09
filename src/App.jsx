@@ -6,11 +6,19 @@ import Appointments from './pages/Appointments'
 import Queue from './pages/Queue'
 import Consultation from './pages/Consultation'
 import Prescriptions from './pages/Prescriptions'
+import Laboratory from './pages/Laboratory'
+import Pharmacy from './pages/Pharmacy'
+import Billing from './pages/Billing'
+import Payments from './pages/Payments'
+import Inventory from './pages/Inventory'
+import Tele from './pages/Tele'
+import Website from './pages/Website'
+import Reports from './pages/Reports'
+import Settings from './pages/Settings'
 import Placeholder from './pages/Placeholder'
 
-// Phases 1–2 ship the shell, Dashboard, and the operational core (Patients,
-// Appointments, Queue, Consultation/EMR, Prescriptions). Remaining modules are
-// routed to a Placeholder so the whole app stays navigable.
+// All 16 clinic modules are now live routed pages in the Aurora × Cortex
+// design system. Unknown paths fall back to a friendly Placeholder.
 export default function App() {
   return (
     <Routes>
@@ -21,15 +29,15 @@ export default function App() {
         <Route path="queue" element={<Queue />} />
         <Route path="consultation" element={<Consultation />} />
         <Route path="prescriptions" element={<Prescriptions />} />
-        <Route path="laboratory" element={<Placeholder title="Laboratory" icon="lab" phase="Phase 3" />} />
-        <Route path="pharmacy" element={<Placeholder title="Pharmacy" icon="pharmacy" phase="Phase 3" />} />
-        <Route path="billing" element={<Placeholder title="Billing" icon="billing" phase="Phase 3" />} />
-        <Route path="payments" element={<Placeholder title="Payments" icon="payments" phase="Phase 3" />} />
-        <Route path="inventory" element={<Placeholder title="Inventory" icon="inventory" phase="Phase 3" />} />
-        <Route path="tele" element={<Placeholder title="Tele-consult" icon="video" phase="Phase 5" />} />
-        <Route path="website" element={<Placeholder title="Website (CMS)" icon="globe" phase="Phase 4" />} />
-        <Route path="reports" element={<Placeholder title="Reports" icon="reports" phase="Phase 3" />} />
-        <Route path="settings" element={<Placeholder title="Settings" icon="settings" phase="Phase 1" />} />
+        <Route path="laboratory" element={<Laboratory />} />
+        <Route path="pharmacy" element={<Pharmacy />} />
+        <Route path="billing" element={<Billing />} />
+        <Route path="payments" element={<Payments />} />
+        <Route path="inventory" element={<Inventory />} />
+        <Route path="tele" element={<Tele />} />
+        <Route path="website" element={<Website />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="*" element={<Placeholder title="Not found" icon="dashboard" />} />
       </Route>
     </Routes>

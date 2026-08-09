@@ -142,3 +142,125 @@ export const prescription = {
     { name: 'Hypertension', detail: 'Amlodipine · Low-salt diet' },
   ],
 }
+
+/* ============================ Phase 3 data ============================ */
+
+export const labStats = [
+  { key: 'orders', label: 'Orders today', value: '14', accent: 'brand' },
+  { key: 'ready', label: 'Results ready', value: '11', accent: 'good' },
+  { key: 'pending', label: 'Pending', value: '3', accent: 'warn' },
+  { key: 'rev', label: 'Revenue', value: '₹12.4k', accent: 'cyan' },
+]
+export const labOrders = [
+  { id: 'L-2201', patient: 'Roni Kumar', test: 'CBC, CRP', sample: 'Blood', by: 'Dr. John Doe', status: 'good', label: 'Ready' },
+  { id: 'L-2202', patient: 'Suresh Reddy', test: 'Lipid profile, HbA1c', sample: 'Blood', by: 'Dr. Smith', status: 'warn', label: 'Processing' },
+  { id: 'L-2203', patient: 'Meena Nair', test: 'TSH, T3, T4', sample: 'Blood', by: 'Dr. John Doe', status: 'good', label: 'Ready' },
+  { id: 'L-2204', patient: 'Vikram Singh', test: 'ECG, Troponin', sample: '—', by: 'Dr. Smith', status: 'cyan', label: 'Sample taken' },
+  { id: 'L-2205', patient: 'Anitha Sharma', test: 'Urine routine', sample: 'Urine', by: 'Dr. John Doe', status: 'crit', label: 'Awaiting sample' },
+]
+
+export const pharmacyDispense = {
+  patient: 'Roni Kumar', rx: 'Rx #R-5521',
+  items: [
+    { item: 'Paracetamol 500mg', batch: 'PA2291', qty: 9, rate: 2, amount: 18, stock: 'Low · 40', stockTone: 'warn' },
+    { item: 'Cetirizine 10mg', batch: 'CT8830', qty: 3, rate: 3, amount: 9, stock: '220', stockTone: 'good' },
+    { item: 'ORS sachet', batch: 'OR1120', qty: 5, rate: 12, amount: 60, stock: 'Out · 0', stockTone: 'crit' },
+  ],
+  total: 87,
+  alerts: [
+    { tone: 'crit', icon: 'alert', text: 'ORS sachet is out of stock. Auto-PO drafted to MedSupply Co.' },
+    { tone: 'warn', icon: 'box', text: 'Paracetamol, Amoxicillin below reorder level.' },
+    { tone: 'brand', icon: 'clock', text: 'Batch CT8830 (Cetirizine) expires in 45 days.' },
+  ],
+}
+
+export const invoice = {
+  no: 'INV-2026-0451', date: '09 Aug 2026', patient: 'Roni Kumar',
+  gstin: '29ABCDE1234F1Z5', address: '123 Health St · Bengaluru',
+  lines: [
+    { d: 'Consultation · Dr. John Doe', a: 500 },
+    { d: 'CBC + CRP (Lab)', a: 650 },
+    { d: 'Pharmacy (3 items)', a: 87 },
+    { d: 'Procedure · Dressing', a: 200 },
+  ],
+  subtotal: 1437,
+  taxAdj: 114.96,
+  total: 1551.96,
+}
+
+export const paymentStats = [
+  { key: 'coll', label: 'Collected today', value: '₹45.2k', delta: '▲ 15%', dir: 'up', accent: 'good' },
+  { key: 'upi', label: 'UPI', value: '₹28.1k', delta: '62%', accent: 'brand' },
+  { key: 'card', label: 'Card', value: '₹11.9k', delta: '26%', accent: 'cyan' },
+  { key: 'pend', label: 'Pending', value: '₹8.4k', delta: '▼ 4 invoices', dir: 'dn', accent: 'warn' },
+]
+export const payments = [
+  { txn: 'TXN-9921', patient: 'Roni Kumar', inv: 'INV-0451', method: 'UPI', amount: 1552, status: 'good', label: 'Paid', time: '10:24' },
+  { txn: 'TXN-9920', patient: 'Anitha Sharma', inv: 'INV-0450', method: 'Card', amount: 800, status: 'good', label: 'Paid', time: '10:02' },
+  { txn: 'TXN-9919', patient: 'Suresh Reddy', inv: 'INV-0449', method: '—', amount: 2340, status: 'warn', label: 'Pending', time: '—' },
+  { txn: 'TXN-9918', patient: 'Meena Nair', inv: 'INV-0448', method: 'Cash', amount: 1100, status: 'good', label: 'Paid', time: '09:41' },
+  { txn: 'TXN-9917', patient: 'Vikram Singh', inv: 'INV-0447', method: '—', amount: 1870, status: 'warn', label: 'Pending', time: '—' },
+]
+
+export const inventoryStats = [
+  { key: 'sku', label: 'Total SKUs', value: '642', accent: 'brand' },
+  { key: 'low', label: 'Low stock', value: '3', accent: 'warn' },
+  { key: 'exp', label: 'Expiring <60d', value: '5', accent: 'violet' },
+  { key: 'val', label: 'Stock value', value: '₹4.8L', accent: 'good' },
+]
+export const inventory = [
+  { item: 'Paracetamol 500mg', cat: 'Analgesic', batch: 'PA2291', stock: 40, reorder: 100, expiry: 'Mar 2027', supplier: 'MedSupply Co.', status: 'warn', label: 'Low' },
+  { item: 'ORS sachet', cat: 'Rehydration', batch: 'OR1120', stock: 0, reorder: 50, expiry: 'Jun 2027', supplier: 'MedSupply Co.', status: 'crit', label: 'Out' },
+  { item: 'Amoxicillin 250mg', cat: 'Antibiotic', batch: 'AM4410', stock: 28, reorder: 80, expiry: 'Jan 2027', supplier: 'PharmaWorld', status: 'warn', label: 'Low' },
+  { item: 'Cetirizine 10mg', cat: 'Antihistamine', batch: 'CT8830', stock: 220, reorder: 100, expiry: 'Sep 2026', supplier: 'PharmaWorld', status: 'violet', label: 'Expiring' },
+  { item: 'Insulin (vial)', cat: 'Hormone', batch: 'IN2201', stock: 64, reorder: 30, expiry: 'Dec 2026', supplier: 'ColdChain Ltd', status: 'good', label: 'OK' },
+]
+
+export const reportStats = [
+  { key: 'rev', label: 'Total revenue', value: '₹1.87L', delta: '▲ 10%', dir: 'up', accent: 'good' },
+  { key: 'new', label: 'New patients', value: '320', delta: '▲ 15%', dir: 'up', accent: 'brand' },
+  { key: 'con', label: 'Consultations', value: '845', delta: '▲ 8%', dir: 'up', accent: 'cyan' },
+]
+export const monthlyRevenue = [1.2, 1.35, 1.3, 1.55, 1.7, 1.87] // ₹ lakhs
+export const reportMonths = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']
+export const departmentSplit = [
+  { name: 'Consultation', pct: 60, color: 'var(--brand)' },
+  { name: 'Pharmacy', pct: 25, color: 'var(--cyan)' },
+  { name: 'Laboratory', pct: 15, color: 'var(--violet)' },
+]
+export const topDoctors = [
+  { name: 'Dr. John Doe', value: 85640, pct: 88 },
+  { name: 'Dr. Smith', value: 62450, pct: 64 },
+  { name: 'Dr. Jane Patel', value: 42330, pct: 43 },
+]
+
+/* ============================ Phase 4 data ============================ */
+
+export const teleVisit = {
+  patient: 'Priya Patel', id: 'P1004', kind: 'New patient', time: '10:30 AM', initials: 'PP',
+  elapsed: '00:14:22',
+  complaint: 'Recurring migraine, seeking teleconsult for medication review.',
+  advice: 'Hydration, sleep hygiene, follow-up in 1 week',
+  fee: 500,
+}
+
+export const siteServices = [
+  { icon: 'patients', title: 'General medicine', desc: 'Consultations & check-ups' },
+  { icon: 'lab', title: 'Diagnostics', desc: 'In-house lab & reports' },
+  { icon: 'video', title: 'Tele-medicine', desc: 'Consult from home' },
+]
+
+export const automationSettings = [
+  { title: 'WhatsApp appointment reminders', desc: 'Sent 24h & 2h before each visit', on: true },
+  { title: 'SMS confirmations', desc: 'On booking & on reschedule', on: true },
+  { title: 'No-show follow-up', desc: 'Auto-nudge patients who missed a visit', on: true },
+  { title: 'Payment reminders', desc: 'Daily at 6 PM for pending invoices', on: false },
+  { title: 'Recall campaigns', desc: 'Re-engage patients due for follow-up', on: true },
+]
+export const settingsNav = ['Clinic profile', 'Users & roles', 'Services & pricing', 'Taxes (GST)', 'Reminders & automation', 'Integrations', 'Branches', 'Audit log']
+export const users = [
+  { name: 'Dr. John Doe', initials: 'JD', role: 'Admin · Doctor', branch: 'Main', status: 'good', label: 'Active', grad: 'from-[#3a56e0] to-[#7c5cf0]' },
+  { name: 'Dr. Smith', initials: 'DS', role: 'Doctor', branch: 'Main', status: 'good', label: 'Active', grad: 'from-[#0d9aa0] to-[#3a56e0]' },
+  { name: 'Reena (Reception)', initials: 'RN', role: 'Front desk', branch: 'Main', status: 'good', label: 'Active', grad: 'from-[#d98a00] to-[#e0396b]' },
+  { name: 'Pharma Desk', initials: 'PH', role: 'Pharmacist', branch: 'Main', status: 'warn', label: 'Invited', grad: 'from-[#7c5cf0] to-[#5a72f0]' },
+]
