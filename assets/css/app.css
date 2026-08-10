@@ -398,6 +398,17 @@ table.tbl tbody tr:hover{background:var(--surface-2)}
 .dash-2>*,.detail-2>*,.pos>*,.ret>*,.np>*,.rep-2>*,.grid>*,.main>*{min-width:0}
 .tbl-wrap{max-width:100%}
 
+/* ===== Role chip + restricted state =============================== */
+.role-chip{margin:12px 4px 0;padding:6px 10px;border-radius:8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
+.role-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.role-owner{background:rgba(159,211,201,.14);color:#9fd3c9;border:1px solid rgba(159,211,201,.22)}
+.role-salesman{background:rgba(224,102,58,.16);color:#e39a7c;border:1px solid rgba(224,102,58,.28)}
+.restricted{max-width:460px;margin:7vh auto;text-align:center;background:var(--surface);border:1px solid var(--line-2);border-radius:16px;padding:40px 30px;box-shadow:var(--shadow-sm)}
+.restricted .lk{width:56px;height:56px;border-radius:15px;background:var(--surface-3);color:var(--muted);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.restricted .lk svg{width:26px;height:26px}
+.restricted h2{font-size:20px}
+.restricted p{color:var(--muted);font-size:14px;margin:10px 0 22px;line-height:1.6}
+
 /* ===== Mobile navigation drawer =================================== */
 .nav-toggle{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex-shrink:0;margin-right:2px;-webkit-tap-highlight-color:transparent}
 .nav-toggle svg{width:20px;height:20px}

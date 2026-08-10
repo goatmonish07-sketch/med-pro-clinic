@@ -37,6 +37,12 @@
   .support{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px;display:flex;align-items:center;justify-content:center;gap:6px}
   .support svg{width:14px;height:14px;stroke:var(--muted-2)}
   .license{text-align:center;font-size:11.5px;color:var(--muted-3);margin-top:12px;line-height:1.5}
+  .role-pick{display:grid;gap:9px}
+  .roleopt{text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 13px;cursor:pointer;display:block;transition:.12s}
+  .roleopt:hover{background:var(--surface-2)}
+  .roleopt .rp-t{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .roleopt .rp-d{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .roleopt.on{border-color:var(--ink);box-shadow:0 0 0 3px rgba(15,17,19,.06)}
   @media (max-width:880px){.login{grid-template-columns:1fr}.lp{display:none}}
 </style>
 </head>
@@ -75,9 +81,23 @@
 
   <!-- Form -->
   <section class="rp">
-    <form class="form" onsubmit="location.href='dashboard.html';return false;">
+    <form class="form" id="loginForm">
       <h2>Welcome back</h2>
       <p class="welcome-sub">Sign in to continue to Sri Venkateswara Medicals</p>
+
+      <div class="field">
+        <label>Sign in as</label>
+        <div class="role-pick">
+          <button type="button" class="roleopt on" data-role="owner">
+            <span class="rp-t">Owner / Admin</span>
+            <span class="rp-d">Full access — dashboard, reports, cost &amp; settings</span>
+          </button>
+          <button type="button" class="roleopt" data-role="salesman">
+            <span class="rp-t">Salesman / Billing</span>
+            <span class="rp-d">Billing counter &amp; customers only — no cost or reports</span>
+          </button>
+        </div>
+      </div>
 
       <div class="field">
         <label>Branch</label>
@@ -128,5 +148,25 @@
   </section>
 </div>
 <script src="assets/js/app.js"></script>
+<script>
+  (function () {
+    var sel = 'owner';
+    var email = document.querySelector('input[type="text"]');
+    var creds = { owner: 'rajesh@svmedicals.in', salesman: 'divya@svmedicals.in' };
+    document.querySelectorAll(".roleopt").forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll(".roleopt").forEach(function (x) { x.classList.remove('on'); });
+        b.classList.add('on');
+        sel = b.getAttribute('data-role');
+        if (email) email.value = creds[sel];
+      });
+    });
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      try { localStorage.setItem('mb_role', sel); } catch (err) {}
+      location.href = sel === 'salesman' ? 'billing.html' : 'dashboard.html';
+    });
+  })();
+</script>
 </body>
 </html>

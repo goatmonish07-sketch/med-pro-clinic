@@ -38,6 +38,19 @@ Row names in the Inventory, Customers and Suppliers tables link through to their
 detail pages; the sidebar links every module; and the A4 invoice / thermal
 receipt cross-link.
 
+## Demo roles (simulated access control)
+
+The sign-in screen lets you enter as **Owner / Admin** or **Salesman / Billing**
+to demonstrate role-based access (RBAC). It's a front-end simulation (role kept
+in `localStorage`; append `?role=owner` or `?role=salesman` to any page to force
+it) — there is no real auth yet.
+
+- **Owner / Admin** — full sidebar and every screen.
+- **Salesman / Billing** — sidebar limited to Billing/POS, Sales, Customers and
+  Prescriptions; Dashboard, Inventory, Purchases, Suppliers, Expiry, Returns,
+  Reports and Settings show a "Restricted area" screen. Cost prices and reports
+  stay owner-only, exactly as they would in production.
+
 ## Design system
 
 Extracted from the Figma file (no design variables were defined, so tokens are

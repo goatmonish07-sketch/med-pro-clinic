@@ -42,22 +42,55 @@
     ]]
   ];
 
-  function buildSidebar(active) {
+  // ---- Roles (demo RBAC, simulated client-side) ---------------------
+  var ROLES = {
+    owner:    { key:'owner',    tag:'Owner View',    name:'Rajesh Kumar',     role:'Owner · Admin',      av:'RK', home:'dashboard.html', allow:null },
+    salesman: { key:'salesman', tag:'Salesman View', name:'Divya Ramanathan', role:'Salesman · Counter', av:'DR', home:'billing.html',
+                allow:['billing','sales','customers','prescriptions'] }
+  };
+  function currentRole() {
+    var q; try { q = new URLSearchParams(location.search).get('role'); } catch (e) {}
+    if (q && ROLES[q]) { try { localStorage.setItem('mb_role', q); } catch (e) {} return ROLES[q]; }
+    var r; try { r = localStorage.getItem('mb_role'); } catch (e) {}
+    return ROLES[r] || ROLES.owner;
+  }
+  var PAGE_NAMES = { dashboard:'the Dashboard', inventory:'Inventory', expiry:'Expiry Management', returns:'Returns', purchases:'Purchases', suppliers:'Suppliers', reports:'Reports & Analytics', settings:'Settings' };
+  window.MB_ROLE = currentRole();
+
+  function buildSidebar(active, role) {
+    var allow = role.allow;
     var h = '';
     h += '<div class="brand"><div class="logo">M+</div><div><div class="b-name">MediBill Pro</div><div class="b-sub">Sri Venkateswara Medicals</div></div></div>';
+    h += '<div class="role-chip role-'+role.key+'">'+role.tag+'</div>';
     h += '<div class="branch"><span class="dot"></span><span style="flex:1">Main Branch — T. Nagar</span><span class="chev">'+svg('<path d="M6 9l6 6 6-6"/>')+'</span></div>';
     h += '<nav class="nav">';
     NAV.forEach(function (grp) {
+      var items = grp[1].filter(function (it) { return !allow || allow.indexOf(it[0]) !== -1; });
+      if (!items.length) return;
       h += '<div class="nav-label">'+grp[0]+'</div>';
-      grp[1].forEach(function (it) {
+      items.forEach(function (it) {
         var isActive = it[0] === active ? ' active' : '';
         var badge = it[3] ? '<span class="badge">'+it[3]+'</span>' : '';
         h += '<a class="'+it[0]+isActive+'" href="'+it[2]+'">'+svg(ICON[it[0]])+'<span>'+it[1]+'</span>'+badge+'</a>';
       });
     });
     h += '</nav>';
-    h += '<div class="side-user"><div class="av">RK</div><div style="flex:1"><div class="u-name">Rajesh Kumar</div><div class="u-role">Pharmacist · D.Pharm</div></div><span class="logout" title="Sign out" onclick="location.href=\'login.html\'">'+svg(ICON.logout)+'</span></div>';
+    h += '<div class="side-user"><div class="av">'+role.av+'</div><div style="flex:1"><div class="u-name">'+role.name+'</div><div class="u-role">'+role.role+'</div></div><span class="logout" title="Sign out" onclick="location.href=\'login.html\'">'+svg(ICON.logout)+'</span></div>';
     return h;
+  }
+
+  function showRestricted(page) {
+    var nm = PAGE_NAMES[page] || 'this section';
+    var content = document.querySelector('.content');
+    if (content) content.innerHTML =
+      '<div class="restricted"><div class="lk">'+svg('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>')+'</div>'
+      + '<h2>Restricted area</h2>'
+      + '<p>Your account (<b>Billing Staff</b>) doesn’t have permission to open <b>'+nm+'</b>. Cost prices, reports and settings stay visible to the owner / admin only.</p>'
+      + '<a class="btn btn-dark" href="billing.html">Go to the Billing counter</a></div>';
+    var t = document.querySelector('.tb-title h1'); if (t) t.textContent = 'Restricted';
+    var sub = document.querySelector('.tb-title p'); if (sub) sub.textContent = 'Owner / admin access only';
+    var cr = document.querySelector('.tb-title .crumb'); if (cr) cr.remove();
+    var tr = document.querySelector('.tb-right'); if (tr) tr.innerHTML = '';
   }
 
   // Expose small icon helper for pages
@@ -67,7 +100,11 @@
     var mount = document.getElementById('sidebar');
     if (mount) {
       mount.className = 'sidebar';
-      mount.innerHTML = buildSidebar(document.body.getAttribute('data-page'));
+      var role = window.MB_ROLE || currentRole();
+      var page = document.body.getAttribute('data-page');
+      mount.innerHTML = buildSidebar(page, role);
+      // Enforce the role: block pages this account can't open
+      if (role.allow && page && role.allow.indexOf(page) === -1) showRestricted(page);
 
       // Mobile: hamburger toggle + dismiss backdrop for the sidebar drawer
       var topbar = document.querySelector('.topbar');
