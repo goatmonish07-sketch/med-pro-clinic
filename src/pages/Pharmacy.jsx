@@ -45,7 +45,7 @@ export default function Pharmacy() {
           title="Stock alerts"
           icon="box"
           action={
-            <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/inventory')}>
+            <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/app/inventory')}>
               Inventory →
             </button>
           }

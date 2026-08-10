@@ -14,7 +14,7 @@ export default function Billing() {
         <button className="btn">
           <Icon name="reports" size={15} /> Print
         </button>
-        <button className="btn btn-primary" onClick={() => navigate('/payments')}>
+        <button className="btn btn-primary" onClick={() => navigate('/app/payments')}>
           <Icon name="payments" size={15} /> Collect payment
         </button>
       </PageHead>

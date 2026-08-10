@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import Landing from './pages/Landing'
 import AppLayout from './layout/AppLayout'
 import Dashboard from './pages/Dashboard'
 import Patients from './pages/Patients'
@@ -17,12 +18,12 @@ import Reports from './pages/Reports'
 import Settings from './pages/Settings'
 import Placeholder from './pages/Placeholder'
 
-// All 16 clinic modules are now live routed pages in the Aurora × Cortex
-// design system. Unknown paths fall back to a friendly Placeholder.
+// Public landing at "/"; the clinic OS app lives under "/app".
 export default function App() {
   return (
     <Routes>
-      <Route element={<AppLayout />}>
+      <Route path="/" element={<Landing />} />
+      <Route path="/app" element={<AppLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="patients" element={<Patients />} />
         <Route path="appointments" element={<Appointments />} />
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<Placeholder title="Not found" icon="dashboard" />} />
       </Route>
+      <Route path="*" element={<Landing />} />
     </Routes>
   )
 }

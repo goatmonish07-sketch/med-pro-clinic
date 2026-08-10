@@ -72,7 +72,7 @@ export default function Patients() {
           {rows.map((p) => (
             <tr
               key={p.id}
-              onClick={() => navigate('/consultation')}
+              onClick={() => navigate('/app/consultation')}
               className="cursor-pointer border-b border-line last:border-0 hover:bg-panel-2"
             >
               <td className="px-[15px] py-[11px]">

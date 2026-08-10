@@ -81,6 +81,7 @@ const paths = {
     </>
   ),
   moon: <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />,
+  menu: <path d="M4 6h16M4 12h16M4 18h16" />,
   bell: <path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0" />,
   plus: <path d="M12 5v14M5 12h14" />,
   clock: (

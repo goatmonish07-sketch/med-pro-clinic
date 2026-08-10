@@ -6,7 +6,7 @@ import { useAuth } from '../lib/auth.jsx'
 import { clinic } from '../data/mock'
 import { initialsOf } from '../lib/adapters'
 
-export default function Topbar({ crumb }) {
+export default function Topbar({ crumb, onMenu }) {
   const { toggle } = useTheme()
   const { user, authed, logout } = useAuth()
   const [showLogin, setShowLogin] = useState(false)
@@ -16,8 +16,16 @@ export default function Topbar({ crumb }) {
   const roleLine = user ? `${user.role} · ${user.branch}` : 'Demo mode · read-only'
 
   return (
-    <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-line bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] px-5 py-[11px] backdrop-blur-lg">
-      <div className="hidden whitespace-nowrap text-[12.5px] font-medium text-ink-3 sm:block">
+    <div className="sticky top-0 z-20 flex items-center gap-2 border-b border-line bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] px-3 py-[11px] backdrop-blur-lg sm:gap-3 sm:px-5">
+      {/* Mobile hamburger */}
+      <button
+        onClick={onMenu}
+        aria-label="Open menu"
+        className="grid h-9 w-9 flex-none place-items-center rounded-[10px] border border-line-2 bg-panel text-ink-2 hover:bg-panel-2 md:hidden"
+      >
+        <Icon name="menu" size={18} />
+      </button>
+      <div className="hidden whitespace-nowrap text-[12.5px] font-medium text-ink-3 lg:block">
         MED-PRO <span className="opacity-40">/</span> <b className="font-semibold text-ink">{crumb}</b>
       </div>
 

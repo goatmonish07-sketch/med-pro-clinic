@@ -13,10 +13,10 @@ export default function Tele() {
         live="Connected"
         sub={`${t.patient} · ${t.id} · ${t.kind} · ${t.time}`}
       >
-        <button className="btn" onClick={() => navigate('/prescriptions')}>
+        <button className="btn" onClick={() => navigate('/app/prescriptions')}>
           <Icon name="rx" size={15} /> e-Prescribe
         </button>
-        <button className="btn btn-primary" onClick={() => navigate('/billing')}>
+        <button className="btn btn-primary" onClick={() => navigate('/app/billing')}>
           Collect ₹{t.fee}
         </button>
       </PageHead>

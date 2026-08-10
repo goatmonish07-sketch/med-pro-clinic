@@ -78,10 +78,10 @@ export default function Dashboard() {
   return (
     <>
       <PageHead title="Command center" live="Live" sub={`${clinic.today} · 3 doctors on shift`}>
-        <button className="btn" onClick={() => navigate('/tele')}>
+        <button className="btn" onClick={() => navigate('/app/tele')}>
           <Icon name="video" size={15} /> Tele-visit
         </button>
-        <button className="btn btn-primary" onClick={() => navigate('/patients')}>
+        <button className="btn btn-primary" onClick={() => navigate('/app/patients')}>
           <Icon name="plus" size={15} /> Add patient
         </button>
       </PageHead>
@@ -102,7 +102,7 @@ export default function Dashboard() {
             title="Today's schedule"
             icon="calendar"
             action={
-              <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/appointments')}>
+              <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/app/appointments')}>
                 Open calendar →
               </button>
             }
@@ -132,7 +132,7 @@ export default function Dashboard() {
             title="Live queue"
             icon="queue"
             action={
-              <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/queue')}>
+              <button className="text-[11.5px] font-semibold text-brand" onClick={() => navigate('/app/queue')}>
                 Manage →
               </button>
             }
